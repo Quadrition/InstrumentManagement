@@ -60,6 +60,11 @@
         /// </summary>
         public virtual ICollection<ScaleAccuracyReferenceValueMeasurement> Measurements { get; set; }
 
+        /// <summary>
+        /// Gets or sets a list of <see cref="ScaleAccuracyTest"/> for the <see cref="ScaleAccuracyReferenceValue"/>
+        /// </summary> 
+        public virtual ICollection<ScaleAccuracyTest> Tests { get; set; }
+
         public static double Coefficient = 2.4f;
 
         /// <summary>
@@ -68,6 +73,7 @@
         public ScaleAccuracyReferenceValue()
         {
             Measurements = new HashSet<ScaleAccuracyReferenceValueMeasurement>();
+            Tests = new HashSet<ScaleAccuracyTest>();
         }
 
         static string[] ValidatedProperties = { "TestPeriodicity" };
@@ -182,16 +188,22 @@
         public virtual ICollection<ScaleAccuracyReferenceValueMeasurementResult> Results { get; set; }
 
         /// <summary>
+        /// Gets or sets a list of <see cref="TestMeasurement"/> for the <see cref="AccRefValMeasurement"/>
+        /// </summary>
+        public virtual ICollection<ScaleAccuracyTestMeasurement> TestMeasurements { get; set; }
+
+        /// <summary>
         /// Gets or sets a list of <see cref="Weight"/> used for the <see cref="ScaleAccuracyReferenceValueMeasurement"/>
         /// </summary>
         public virtual ICollection<Weight> Weights { get; set; }
 
         /// <summary>
-        /// Initializes a new instance of <see cref="TestMeasurement"/> class
+        /// Initializes a new instance of <see cref="ScaleAccuracyReferenceValueMeasurement"/> class
         /// </summary>
         public ScaleAccuracyReferenceValueMeasurement()
         {
             Results = new HashSet<ScaleAccuracyReferenceValueMeasurementResult>();
+            TestMeasurements = new HashSet<ScaleAccuracyTestMeasurement>();
             Weights = new HashSet<Weight>();
         }
 
