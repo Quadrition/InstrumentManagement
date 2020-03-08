@@ -1,5 +1,6 @@
 ﻿namespace InstrumentManagement.Data.Scales.Calibration
 {
+    using InstrumentManagement.Data.Scales.Repeatability;
     using InstrumentManagement.Windows;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
@@ -13,6 +14,8 @@
         private short numberOfRepeats;
         private double nominalMass;
         private double standardDeviation;
+
+        private ScaleRepeatabilityReferenceValue referenceValue;
 
         /// <summary>
         /// Gets or sets an identification and a key to which the <see cref="ScaleCalibrationRepeatability"/> belongs
@@ -73,9 +76,25 @@
         }
 
         /// <summary>
-        /// Gets or sets a <see cref="Scales.Calibration.Calibration"/> to which the <see cref="ScaleCalibrationRepeatability"/> belongs
+        /// Gets or sets a <see cref="ScaleCalibration"/> to which the <see cref="ScaleCalibrationRepeatability"/> belongs
         /// </summary>
         public virtual ScaleCalibration Calibration { get; set; }
+
+        /// <summary>
+        /// Gets or sets a <see cref="ScaleRepeatabilityReferenceValue"/> for the <see cref="ScaleRepeatabilityReferenceValue"/>
+        /// </summary>
+        public virtual ScaleRepeatabilityReferenceValue ReferenceValue
+        {
+            get
+            {
+                return referenceValue;
+            }
+            set
+            {
+                referenceValue = value;
+                NotifyPropertyChanged(nameof(ReferenceValue));
+            }
+        }
 
         /// <summary>
         /// Initializes a new instance of <see cref="ScaleCalibrationRepeatability"/> class
