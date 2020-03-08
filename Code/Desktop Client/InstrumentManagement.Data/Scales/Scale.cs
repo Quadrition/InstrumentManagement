@@ -9,12 +9,18 @@
     public class Scale : Instrument
     {
         /// <summary>
+        /// Gets or sets a list of <see cref="ScaleRange"/> that are related to the <see cref="Scale"/>
+        /// </summary>
+        public virtual ICollection<ScaleRange> Ranges { get; set; }
+
+        /// <summary>
         /// Gets or sets a list of <see cref="User"/> who have an access to the <see cref="Scale"/>
         /// </summary>
         public virtual ICollection<User> Users { get; set; }
 
         public Scale()
         {
+            Ranges = new HashSet<ScaleRange>();
             Users = new HashSet<User>();
         }
 
@@ -26,6 +32,9 @@
         {
             get
             {
+                if (Ranges.Count == 0)
+                    return false;
+
                 return base.IsValid;
             }
         }
