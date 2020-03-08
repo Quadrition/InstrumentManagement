@@ -1,5 +1,6 @@
 ﻿namespace InstrumentManagement.Data.Scales
 {
+    using InstrumentManagement.Data.Scales.Accuracy;
     using InstrumentManagement.Data.Scales.Repeatability;
     using InstrumentManagement.Windows;
     using System.ComponentModel.DataAnnotations;
@@ -102,6 +103,22 @@
                 NotifyPropertyChanged(nameof(NominalMass));
             }
         }
+
+        [ForeignKey("RepeatabilityReferenceValue")]
+        public int? RepeatabilityReferenceValueId { get; set; }
+
+        /// <summary>
+        /// Gets or sets a <see cref="ScaleRepeatabilityReferenceValue"/> to which the <see cref="Weight"/> belongs
+        /// </summary>
+        public virtual ScaleRepeatabilityReferenceValue RepeatabilityReferenceValue { get; set; }
+
+        [ForeignKey("AccuracyReferenceValueMeasurement")]
+        public int? AccuracyReferenceValueMeasurementId { get; set; }
+
+        /// <summary>
+        /// Gets or sets a <see cref="ScaleAccuracyReferenceValueMeasurement"/> to which the <see cref="Weight"/> belongs
+        /// </summary>
+        public virtual ScaleAccuracyReferenceValueMeasurement AccuracyReferenceValueMeasurement { get; set; }
 
         /// <summary>
         /// Initializes a new instance of <see cref="Weight"/> class
