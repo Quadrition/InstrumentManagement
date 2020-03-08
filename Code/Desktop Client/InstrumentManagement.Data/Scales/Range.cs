@@ -4,6 +4,8 @@
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using InstrumentManagement.Windows;
+    using System.Collections.Generic;
+    using InstrumentManagement.Data.Scales.Calibration;
 
     /// <summary>
     /// Represents the units used for the weighting purposes
@@ -92,11 +94,16 @@
         public virtual Scale Scale { get; set; }
 
         /// <summary>
+        /// Gets or sets a list of <see cref="ScaleCalibration"/> which are related to the <see cref="ScaleRange"/>
+        /// </summary>
+        public virtual ICollection<ScaleCalibration> Calibrations { get; set; }
+
+        /// <summary>
         /// Initializes a new instance of <see cref="ScaleRange"/> class
         /// </summary>
         public ScaleRange()
         {
-
+            Calibrations = new HashSet<ScaleCalibration>();
         }
 
         /// <summary>
