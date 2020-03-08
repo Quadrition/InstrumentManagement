@@ -98,6 +98,16 @@
         public virtual ScaleVerification Verification { get; set; }
 
         /// <summary>
+        /// Gets or sets a <see cref="ScaleCalibrationRepeatability"/> that is related to the <see cref="ScaleCalibration"/>
+        /// </summary>
+        public virtual ScaleCalibrationRepeatability Repeatability { get; set; }
+
+        /// <summary>
+        /// Gets or sets a <see cref="ScaleCalibrationAccuracy"/> that is related to the <see cref="ScaleCalibration"/>
+        /// </summary>
+        public virtual ScaleCalibrationAccuracy Accuracy { get; set; }
+
+        /// <summary>
         /// Initializes a new instance of <see cref="ScaleCalibration"/> class
         /// </summary>
         public ScaleCalibration()
@@ -115,7 +125,7 @@
         {
             get
             {
-                return Verification.IsValid && ValidatedProperties.FirstOrDefault(perp => OnValidate(perp) != null) == null;
+                return Verification.IsValid && Repeatability.IsValid && Accuracy.IsValid && ValidatedProperties.FirstOrDefault(perp => OnValidate(perp) != null) == null;
             }
         }
     }
