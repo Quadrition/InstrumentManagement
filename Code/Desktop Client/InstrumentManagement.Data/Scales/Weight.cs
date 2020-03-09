@@ -10,7 +10,7 @@
     /// <summary>
     /// Represents a weight used for the <see cref="Scale"/> tests
     /// </summary>
-    public class Weight : Model
+    public class ScaleWeight : Model
     {
         private string manufacturer;
         private string weightClass;
@@ -19,7 +19,7 @@
         private double nominalMass;
 
         /// <summary>
-        /// Gets or sets a manufacturer for the <see cref="Weight"/>
+        /// Gets or sets a manufacturer for the <see cref="ScaleWeight"/>
         /// </summary>
         [StringLength(32, ErrorMessage = "Proizvođač može imati najviše 32 karaktera")]
         public string Manufacturer
@@ -36,7 +36,7 @@
         }
 
         /// <summary>
-        /// Get sor sets a class for the <see cref="Weight"/>
+        /// Get sor sets a class for the <see cref="ScaleWeight"/>
         /// </summary>
         [StringLength(32, ErrorMessage = "Klasa može imati najviše 32 karaktera")]
         public string WeightClass
@@ -53,7 +53,7 @@
         }
 
         /// <summary>
-        /// Gets or sets a calibration for the <see cref="Weight"/>
+        /// Gets or sets a calibration for the <see cref="ScaleWeight"/>
         /// </summary>
         [StringLength(32, ErrorMessage = "Uverenje može imati najviše 32 karaktera")]
         public string Calibration
@@ -70,9 +70,9 @@
         }
 
         /// <summary>
-        /// Gets or sets a serial number for the <see cref="Weight"/>
+        /// Gets or sets a serial number for the <see cref="ScaleWeight"/>
         /// </summary>
-        [Index("IX_SerialNumber", IsUnique = true)]
+        [Index("IX_WeightSerialNumber", IsUnique = true)]
         [StringLength(32, ErrorMessage = "Serijski broj može imati najviše 32 karaktera")]
         public string SerialNumber
         {
@@ -88,7 +88,7 @@
         }
 
         /// <summary>
-        /// Gets or sets a nominal mass for the <see cref="Weight"/>
+        /// Gets or sets a nominal mass for the <see cref="ScaleWeight"/>
         /// </summary>
         [Range(0, double.MaxValue, ErrorMessage = "Nominalna masa je neispravna")]
         public double NominalMass
@@ -108,7 +108,7 @@
         public int? RepeatabilityReferenceValueId { get; set; }
 
         /// <summary>
-        /// Gets or sets a <see cref="ScaleRepeatabilityReferenceValue"/> to which the <see cref="Weight"/> belongs
+        /// Gets or sets a <see cref="ScaleRepeatabilityReferenceValue"/> to which the <see cref="ScaleWeight"/> belongs
         /// </summary>
         public virtual ScaleRepeatabilityReferenceValue RepeatabilityReferenceValue { get; set; }
 
@@ -116,14 +116,14 @@
         public int? AccuracyReferenceValueMeasurementId { get; set; }
 
         /// <summary>
-        /// Gets or sets a <see cref="ScaleAccuracyReferenceValueMeasurement"/> to which the <see cref="Weight"/> belongs
+        /// Gets or sets a <see cref="ScaleAccuracyReferenceValueMeasurement"/> to which the <see cref="ScaleWeight"/> belongs
         /// </summary>
         public virtual ScaleAccuracyReferenceValueMeasurement AccuracyReferenceValueMeasurement { get; set; }
 
         /// <summary>
-        /// Initializes a new instance of <see cref="Weight"/> class
+        /// Initializes a new instance of <see cref="ScaleWeight"/> class
         /// </summary>
-        public Weight()
+        public ScaleWeight()
         {
 
         }
@@ -131,7 +131,7 @@
         static readonly string[] ValidatedProperties = { "Manufacturer", "WeightClass", "Calibration", "SerialNumber", "NominalMass" };
 
         /// <summary>
-        /// Checks if all <see cref="Weight"/>'s properties are valid
+        /// Checks if all <see cref="ScaleWeight"/>'s properties are valid
         /// </summary>
         /// <returns>True if all properties is valid, otherwise false</returns>
         public override bool IsValid

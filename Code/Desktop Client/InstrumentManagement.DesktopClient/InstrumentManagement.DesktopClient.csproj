@@ -93,5 +93,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\InstrumentManagement.Data\InstrumentManagement.Data.csproj">
+      <Project>{8B3C4775-7166-4A0D-9CA0-3ACC942312F1}</Project>
+      <Name>InstrumentManagement.Data</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

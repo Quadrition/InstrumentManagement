@@ -20,7 +20,7 @@
         /// <summary>
         /// Gets or sets a number for the <see cref="ScaleRepeatabilityTest"/>
         /// </summary>
-        [Required(ErrorMessage = "Broj testa je obavezan"), Index("IX_NumberAndReferenceValueId", 1, IsUnique = true)]
+        [Required(ErrorMessage = "Broj testa je obavezan"), Index("IX_ScaleRepeatabilityTestNumberAndReferenceValueId", 1, IsUnique = true)]
         [Range(1, short.MaxValue, ErrorMessage = "Broj testa je neispravan")]
         public short Number
         {
@@ -88,13 +88,12 @@
         /// </summary>
         public virtual Account Account { get; set; }
 
-        [Required, ForeignKey("ReferenceValue")]
+        [Required, ForeignKey("ReferenceValue"), Index("IX_ScaleRepeatabilityTestNumberAndReferenceValueId", 2, IsUnique = true)]
         public int ReferenceValueId { get; set; }
 
         /// <summary>
         /// Gets or sets a <see cref="ScaleRepeatabilityReferenceValue"/> to which the <see cref="ScaleRepeatabilityTest"/> belongs
         /// </summary>
-        [Index("IX_NumberAndReferenceValueId", 2, IsUnique = true)]
         public virtual ScaleRepeatabilityReferenceValue ReferenceValue { get; set; }
 
         /// <summary>

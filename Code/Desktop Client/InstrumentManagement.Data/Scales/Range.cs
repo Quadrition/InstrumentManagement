@@ -28,7 +28,7 @@
         /// <summary>
         /// Gets or sets an upper range value for the <see cref="ScaleRange"/>
         /// </summary>
-        [Required(ErrorMessage = "Gornja granica opsega je obavezna"), Index("IX_UpperRangeAndScaleId", 1, IsUnique = true)]
+        [Required(ErrorMessage = "Gornja granica opsega je obavezna"), Index("IX_ScaleRangeUpperRangeAndScaleId", 1, IsUnique = true)]
         [Range(0, double.MaxValue, ErrorMessage = "Gornja granica opsega je neispravna")]
         public double UpperValue
         {
@@ -85,7 +85,7 @@
         [Required(ErrorMessage = "Merna jedinica je obavezna")]
         public WeightUnit WeightUnit { get; set; }
 
-        [Required, ForeignKey("Scale"), Index("IX_UpperRangeAndScaleId", 2, IsUnique = true)]
+        [Required, ForeignKey("Scale"), Index("IX_ScaleRangeUpperRangeAndScaleId", 2, IsUnique = true)]
         public int ScaleId { get; set; }
 
         /// <summary>

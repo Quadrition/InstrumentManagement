@@ -47,7 +47,7 @@
         /// <summary>
         /// Gets or sets a check point for the <see cref="ScaleCalibrationAccuracyMeasurement"/>
         /// </summary>
-        [Required(ErrorMessage = "Tačka provere je obavezna"), Index("IX_CheckPointAndAccuracyId", 1, IsUnique = true)]
+        [Required(ErrorMessage = "Tačka provere je obavezna"), Index("IX_ScaleCalibrationAccuracyMeasurementCheckPointAndAccuracyId", 1, IsUnique = true)]
         [Range(0, double.MaxValue, ErrorMessage = "Tačka provere je neispravna")]
         public double CheckPoint
         {
@@ -79,7 +79,7 @@
             }
         }
 
-        [Required, ForeignKey("Accuracy"), Index("IX_CheckPointAndAccuracyId", 2, IsUnique = true)]
+        [Required, ForeignKey("Accuracy"), Index("IX_ScaleCalibrationAccuracyMeasurementCheckPointAndAccuracyId", 2, IsUnique = true)]
         public int AccuracyId { get; set; }
 
         /// <summary>

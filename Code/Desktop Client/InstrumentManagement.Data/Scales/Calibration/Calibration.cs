@@ -19,7 +19,7 @@
         /// <summary>
         /// Gets or sets a number for the <see cref="ScaleCalibration"/>
         /// </summary>
-        [Required(ErrorMessage = "Broj etaloniranja je obavezan"), Index("IX_NumberAndRangeId", 1, IsUnique = true)]
+        [Required(ErrorMessage = "Broj etaloniranja je obavezan"), Index("IX_ScaleCalibrationNumberAndRangeId", 1, IsUnique = true)]
         [Range(1, short.MaxValue, ErrorMessage = "Broj etaloniranja je neispravan")]
         public short Number
         {
@@ -84,7 +84,7 @@
             }
         }
 
-        [Required, ForeignKey("Range"), Index("IX_NumberAndRangeId", 2, IsUnique = true)]
+        [Required, ForeignKey("Range"), Index("IX_ScaleCalibrationNumberAndRangeId", 2, IsUnique = true)]
         public int RangeId { get; set; }
 
         /// <summary>

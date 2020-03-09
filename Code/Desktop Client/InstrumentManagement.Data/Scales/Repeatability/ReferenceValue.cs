@@ -131,9 +131,9 @@
         public virtual ICollection<ScaleRepeatabilityTest> Tests { get; set; }
 
         /// <summary>
-        /// Gets or sets a list of <see cref="Weight"/> used for the <see cref="Tests"/>
+        /// Gets or sets a list of <see cref="ScaleWeight"/> used for the <see cref="Tests"/>
         /// </summary>
-        public virtual ICollection<Weight> Weights { get; set; }
+        public virtual ICollection<ScaleWeight> Weights { get; set; }
 
         /// <summary>
         /// Initializes a new instance of <see cref="ScaleRepeatabilityReferenceValue"/> class
@@ -142,7 +142,7 @@
         {
             Measurements = new HashSet<ScaleRepeatabilityReferenceValueMeasurement>();
             Tests = new HashSet<ScaleRepeatabilityTest>();
-            Weights = new HashSet<Weight>();
+            Weights = new HashSet<ScaleWeight>();
         }
 
         /// <summary>

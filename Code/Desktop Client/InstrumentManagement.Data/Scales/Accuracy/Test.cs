@@ -19,7 +19,7 @@
         /// <summary>
         /// Gets or sets a number for the <see cref="ScaleAccuracyTest"/>
         /// </summary>
-        [Required(ErrorMessage = "Broj testa je obavezan"), Index("IX_NumberAndReferenceValueId", 1, IsUnique = true)]
+        [Required(ErrorMessage = "Broj testa je obavezan"), Index("IX_ScaleAccuracyTestNumberAndReferenceValueId", 1, IsUnique = true)]
         [Range(1, short.MaxValue, ErrorMessage = "Broj testa je neispravan")]
         public short Number
         {
@@ -70,13 +70,12 @@
         /// </summary>
         public virtual Account Account { get; set; }
 
-        [Required, ForeignKey("ReferenceValue"), Index("IX_NumberAndReferenceValueId", 2, IsUnique = true)]
+        [Required, ForeignKey("ReferenceValue"), Index("IX_ScaleAccuracyTestNumberAndReferenceValueId", 2, IsUnique = true)]
         public int ReferenceValueId { get; set; }
 
         /// <summary>
         /// Gets or sets a <see cref="ScaleAccuracyReferenceValue"/> to which the <see cref="ScaleAccuracyTest"/> belongs
         /// </summary>
-        //[Index("IX_NumberAndReferenceValueId", 2, IsUnique = true)]
         public virtual ScaleAccuracyReferenceValue ReferenceValue { get; set; }
 
         /// <summary>

@@ -16,7 +16,7 @@
         /// <summary>
         /// Gets or sets a username for the <see cref="Account"/>
         /// </summary>
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Korisničko ime je obavezno"), Index("IX_Username", IsUnique = true)]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Korisničko ime je obavezno"), Index("IX_AccountUsername", IsUnique = true)]
         [StringLength(32, ErrorMessage = "Korisničko ime može imati najviše 32 karaktera")]
         public string Username
         {

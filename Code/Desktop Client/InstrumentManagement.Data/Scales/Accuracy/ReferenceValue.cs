@@ -109,7 +109,7 @@
         /// <summary>
         /// Gets or sets a check point for the <see cref="ScaleAccuracyReferenceValueMeasurement"/>
         /// </summary>
-        [Required(ErrorMessage = "Tačka provere je obavezna"), Index("IX_CheckPointAndAccuracyReferenceValueId", 1, IsUnique = true)]
+        [Required(ErrorMessage = "Tačka provere je obavezna"), Index("IX_ScaleAccuracyReferenceValueMeasurementCheckPointAndAccuracyReferenceValueId", 1, IsUnique = true)]
         [Range(0, double.MaxValue, ErrorMessage = "Tačka provere je neispravna")]
         public double CheckPoint
         {
@@ -174,7 +174,7 @@
             }
         }
 
-        [Required, ForeignKey("AccuracyReferenceValue"), Index("IX_CheckPointAndAccuracyReferenceValueId", 2, IsUnique = true)]
+        [Required, ForeignKey("AccuracyReferenceValue"), Index("IX_ScaleAccuracyReferenceValueMeasurementCheckPointAndAccuracyReferenceValueId", 2, IsUnique = true)]
         public int AccuracyReferenceValueId { get; set; }
 
         /// <summary>
@@ -193,9 +193,9 @@
         public virtual ICollection<ScaleAccuracyTestMeasurement> TestMeasurements { get; set; }
 
         /// <summary>
-        /// Gets or sets a list of <see cref="Weight"/> used for the <see cref="ScaleAccuracyReferenceValueMeasurement"/>
+        /// Gets or sets a list of <see cref="ScaleWeight"/> used for the <see cref="ScaleAccuracyReferenceValueMeasurement"/>
         /// </summary>
-        public virtual ICollection<Weight> Weights { get; set; }
+        public virtual ICollection<ScaleWeight> Weights { get; set; }
 
         /// <summary>
         /// Initializes a new instance of <see cref="ScaleAccuracyReferenceValueMeasurement"/> class
@@ -204,7 +204,7 @@
         {
             Results = new HashSet<ScaleAccuracyReferenceValueMeasurementResult>();
             TestMeasurements = new HashSet<ScaleAccuracyTestMeasurement>();
-            Weights = new HashSet<Weight>();
+            Weights = new HashSet<ScaleWeight>();
         }
 
         /// <summary>

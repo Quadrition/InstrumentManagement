@@ -56,7 +56,7 @@
         /// <summary>
         /// Gets or sets a serial number for the <see cref="Instrument"/>
         /// </summary>
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Serijski broj je obavezan"), Index("IX_SerialNumber", IsUnique = true)]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Serijski broj je obavezan"), Index("IX_InstrumentSerialNumber", IsUnique = true)]
         [StringLength(32, ErrorMessage = "Serijski broj može imati najviše 32 karaktera")]
         public string SerialNumber
         {
