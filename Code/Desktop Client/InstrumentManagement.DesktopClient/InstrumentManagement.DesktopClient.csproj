@@ -64,6 +64,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ViewModels\Main\MainWindow.cs" />
     <Compile Include="Views\Main\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
@@ -107,9 +108,12 @@
       <Project>{8B3C4775-7166-4A0D-9CA0-3ACC942312F1}</Project>
       <Name>InstrumentManagement.Data</Name>
     </ProjectReference>
+    <ProjectReference Include="..\InstrumentManagement.Windows\InstrumentManagement.Windows.csproj">
+      <Project>{7ce976ad-55c1-4f5b-8fff-8ca01469d476}</Project>
+      <Name>InstrumentManagement.Windows</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="ViewModels\" />
     <Folder Include="Views\Administration\" />
     <Folder Include="Views\Scales\" />
   </ItemGroup>
