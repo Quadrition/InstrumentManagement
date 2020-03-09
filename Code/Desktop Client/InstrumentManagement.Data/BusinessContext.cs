@@ -32,11 +32,6 @@
             }
         }
 
-        public ICollection<Account> GetAccounts()
-        {
-            return context.Accounts.OrderBy(prop => prop.Id).ToArray();
-        }
-
         #region IDisposable Members
 
         /// <summary>
