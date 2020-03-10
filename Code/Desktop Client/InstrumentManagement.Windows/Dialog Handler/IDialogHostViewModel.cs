@@ -1,4 +1,4 @@
-﻿namespace InstrumentManagement.Windows
+﻿namespace InstrumentManagement.Windows.DialogHandler
 {
     using MaterialDesignThemes.Wpf;
 

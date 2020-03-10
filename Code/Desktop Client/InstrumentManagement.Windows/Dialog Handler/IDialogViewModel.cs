@@ -1,4 +1,4 @@
-﻿namespace InstrumentManagement.Windows
+﻿namespace InstrumentManagement.Windows.DialogHandler
 {
     /// <summary>
     /// Represents an interface with basic dialog functionalities
