@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:InstrumentManagement.DesktopClient.Views.Main"
         mc:Ignorable="d"
         Title="MainWindow" Height="720" Width="1280" WindowState="Maximized">
     <materialDesign:DialogHost IsOpen="{Binding IsDialogOpened}" DialogContent="{Binding DialogContent}" SnackbarMessageQueue="{Binding ElementName=MainWindowSnackBar, Path=MessageQueue}">
@@ -74,7 +75,7 @@
 
                 <materialDesign:TransitionerSlide>
                     <materialDesign:TransitioningContent>
-                        <!--<local:ScalesTab />-->
+                        <local:ScalesTab />
                     </materialDesign:TransitioningContent>
                 </materialDesign:TransitionerSlide>
             </materialDesign:Transitioner>

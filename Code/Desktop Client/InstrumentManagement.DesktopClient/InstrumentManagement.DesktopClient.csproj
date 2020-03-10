@@ -46,6 +46,8 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -64,10 +66,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ViewModels\Administration\AdministrationDialog.cs" />
+    <Compile Include="ViewModels\Administration\NewAccountDialog.cs" />
     <Compile Include="ViewModels\Main\EditInfoDialog.cs" />
     <Compile Include="ViewModels\Main\LoginDialog.cs" />
     <Compile Include="ViewModels\Main\MainWindow.cs" />
     <Compile Include="ViewModels\Main\ScalesTab.cs" />
+    <Compile Include="Views\Administration\AdministrationDialog.xaml.cs">
+      <DependentUpon>AdministrationDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Administration\NewAccountDialog.xaml.cs">
+      <DependentUpon>NewAccountDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Main\EditInfoDialog.xaml.cs">
       <DependentUpon>EditInfoDialog.xaml</DependentUpon>
     </Compile>
@@ -84,6 +94,14 @@
     <Compile Include="Views\Main\ScalesTab.xaml.cs">
       <DependentUpon>ScalesTab.xaml</DependentUpon>
     </Compile>
+    <Page Include="Views\Administration\AdministrationDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Administration\NewAccountDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Main\EditInfoDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -138,7 +156,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Views\Administration\" />
     <Folder Include="Views\Scales\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

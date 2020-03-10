@@ -40,6 +40,7 @@
       <HintPath>..\..\..\Dependecies\MaterialDesignThemes.Wpf.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -55,6 +56,7 @@
     <Compile Include="Calculations.cs" />
     <Compile Include="Clear Handler\ClearRequestedEventArgs.cs" />
     <Compile Include="Clear Handler\IRequestClear.cs" />
+    <Compile Include="Converters\EmptyValue.cs" />
     <Compile Include="Dialog Handler\IDialogHostViewModel.cs" />
     <Compile Include="Dialog Handler\IDialogViewModel.cs" />
     <Compile Include="Focus Handler\FocusRequestedEventArgs.cs" />

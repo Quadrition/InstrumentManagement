@@ -3,6 +3,7 @@
     using InstrumentManagement.Data;
     using InstrumentManagement.Data.Accounts;
     using InstrumentManagement.Data.Scales;
+    using InstrumentManagement.DesktopClient.ViewModels.Administration;
     using InstrumentManagement.Windows;
     using InstrumentManagement.Windows.DialogHandler;
     using MaterialDesignThemes.Wpf;
@@ -53,6 +54,8 @@
         public MainWindowViewModel(BusinessContext context)
         {
             this.context = context;
+
+            ScalesDataGridRowDetailsVisibility = DataGridRowDetailsVisibilityMode.Collapsed;
 
             MessageQueue = new SnackbarMessageQueue();
 
@@ -370,6 +373,36 @@
 
                 NotifyPropertyChanged(nameof(LoggedAccount));
             }
+        }
+
+        #endregion
+
+        #region Administration Commands
+
+        /// <summary>
+        /// Gets an <see cref="ICommand"/> for showing a <see cref="Views.Administration.AdministrationDialog"/>
+        /// </summary>
+        public ICommand ShowAdministrationDialogCommand
+        {
+            get
+            {
+                return new ActionCommand(a => ShowAdministrationDialog(), p => LoggedAccount is Administrator);
+            }
+        }
+
+        /// <summary>
+        /// Shows the <see cref="Views.Administration.AdministrationDialog"/>
+        /// </summary>
+        private void ShowAdministrationDialog()
+        {
+            DialogViewModel = new AdministrationDialogViewModel(this.context, this);
+
+            DialogContent = new Views.Administration.AdministrationDialog()
+            {
+                DataContext = DialogViewModel
+            };
+
+            IsDialogOpened = true;
         }
 
         #endregion
