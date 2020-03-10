@@ -88,6 +88,7 @@
             if (SelectedAccount.Password == Password)
             {
                 DialogResult = true;
+                DialogHostViewModel.MessageQueue.Enqueue("Uspešno ste se ulogovali");
             }
             else
             {

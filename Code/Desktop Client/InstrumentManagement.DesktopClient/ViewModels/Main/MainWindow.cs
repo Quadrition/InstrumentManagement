@@ -86,6 +86,26 @@
             {
                 isDialogOpened = value;
                 NotifyPropertyChanged(nameof(IsDialogOpened));
+
+                if (!isDialogOpened && DialogViewModel != null)
+                {
+                    if (DialogViewModel.DialogResult == true)
+                    {
+                        switch (DialogViewModel)
+                        {
+                            case LoginDialogViewModel loginDialogViewModel:
+                                LoggedAccount = loginDialogViewModel.SelectedAccount;
+                                break;
+
+                            case EditInfoDialogViewModel editMainWindowInfoDialogViewModel:
+                                Info = editMainWindowInfoDialogViewModel.Info;
+                                break;
+                        }
+                    }
+
+                    DialogViewModel = null;
+                    DialogContent = null;
+                }
             }
         }
 
@@ -223,6 +243,32 @@
                 info = value;
                 NotifyPropertyChanged(nameof(Info));
             }
+        }
+
+        /// <summary>
+        /// Gets an <see cref="ICommand"/> for opening a <see cref="Views.Main.EditInfoDialog"/>
+        /// </summary>
+        public ICommand EditInfoCommand
+        {
+            get
+            {
+                return new ActionCommand(a => OpenEditInfoDialog(), p => LoggedAccount is Administrator);
+            }
+        }
+
+        /// <summary>
+        /// Opens a <see cref="Views.Main.EditInfoDialog"/>
+        /// </summary>
+        private void OpenEditInfoDialog()
+        {
+            DialogViewModel = new EditInfoDialogViewModel(Info, this);
+
+            DialogContent = new Views.Main.EditInfoDialog()
+            {
+                DataContext = DialogViewModel
+            };
+
+            IsDialogOpened = true;
         }
 
         #endregion
