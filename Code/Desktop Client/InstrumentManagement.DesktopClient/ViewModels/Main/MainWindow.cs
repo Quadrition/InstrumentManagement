@@ -2,9 +2,13 @@
 {
     using InstrumentManagement.Data;
     using InstrumentManagement.Data.Accounts;
+    using InstrumentManagement.Data.Scales;
     using InstrumentManagement.Windows;
+    using InstrumentManagement.Windows.DialogHandler;
     using MaterialDesignThemes.Wpf;
     using System;
+    using System.Collections.ObjectModel;
+    using System.Linq;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Input;
@@ -218,6 +222,107 @@
             {
                 info = value;
                 NotifyPropertyChanged(nameof(Info));
+            }
+        }
+
+        #endregion
+
+        #region Login/Logout Commands
+
+        #region Login Members
+
+        /// <summary>
+        /// Gets an <see cref="ICommand"/> for showing a <see cref="Views.Main.LoginDialog"/>
+        /// </summary>
+        public ICommand LoginCommand
+        {
+            get
+            {
+                return new ActionCommand(a => ShowLoginDialog(), p => LoggedAccount == null);
+            }
+        }
+
+        /// <summary>
+        /// Shows a <see cref="Views.Main.LoginDialog"/>
+        /// </summary>
+        private void ShowLoginDialog()
+        {
+            DialogViewModel = new LoginDialogViewModel(this.context.GetAccounts(), this);
+
+            DialogContent = new Views.Main.LoginDialog()
+            {
+                DataContext = DialogViewModel
+            };
+
+            IsDialogOpened = true;
+        }
+
+        #endregion
+
+        #region Logout Members
+
+        /// <summary>
+        /// Gets an <see cref="ICommand"/> for logging out an <see cref="LoggedAccount"/>
+        /// </summary>
+        public ICommand LogoutCommand
+        {
+            get
+            {
+                return new ActionCommand(a => Logout(), p => LoggedAccount != null);
+            }
+        }
+
+        /// <summary>
+        /// Logs out user and displays an info message
+        /// </summary>
+        private void Logout()
+        {
+            LoggedAccount = null;
+
+            MessageQueue.Enqueue("Uspešno ste se izlogovali");
+        }
+
+        #endregion
+
+        private Account loggedAccount;
+
+        /// <summary>
+        /// Represents an <see cref="Account"/> that is currently logged in
+        /// </summary>
+        public Account LoggedAccount
+        {
+            get
+            {
+                return loggedAccount;
+            }
+            set
+            {
+                loggedAccount = value;
+
+                if (value == null)
+                {
+                    Scales = null;
+                    SubMenuAndTransitionerVisibility = Visibility.Collapsed;
+                }
+                else
+                {
+                    SubMenuAndTransitionerVisibility = Visibility.Visible;
+
+                    switch (value)
+                    {
+                        case Administrator administrator:
+                            Scales = new ObservableCollection<Scale>(this.context.GetAllScales());
+                            break;
+
+                        case User user:
+                            Scales = new ObservableCollection<Scale>(user.Scales);
+                            break;
+                    }
+
+                    SelectedScale = Scales.FirstOrDefault();
+                }
+
+                NotifyPropertyChanged(nameof(LoggedAccount));
             }
         }
 

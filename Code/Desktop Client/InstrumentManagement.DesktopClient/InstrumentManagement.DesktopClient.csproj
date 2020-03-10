@@ -66,6 +66,9 @@
     </ApplicationDefinition>
     <Compile Include="ViewModels\Main\MainWindow.cs" />
     <Compile Include="ViewModels\Main\ScalesTab.cs" />
+    <Compile Include="Views\Main\LoginDialog.xaml.cs">
+      <DependentUpon>LoginDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Main\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
@@ -76,6 +79,10 @@
     <Compile Include="Views\Main\ScalesTab.xaml.cs">
       <DependentUpon>ScalesTab.xaml</DependentUpon>
     </Compile>
+    <Page Include="Views\Main\LoginDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Main\MainWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

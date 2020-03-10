@@ -53,8 +53,12 @@
   <ItemGroup>
     <Compile Include="ActionCommand.cs" />
     <Compile Include="Calculations.cs" />
-    <Compile Include="Dialogs\IDialogHostViewModel.cs" />
-    <Compile Include="Dialogs\IDialogViewModel.cs" />
+    <Compile Include="Clear Handler\ClearRequestedEventArgs.cs" />
+    <Compile Include="Clear Handler\IRequestClear.cs" />
+    <Compile Include="Dialog Handler\IDialogHostViewModel.cs" />
+    <Compile Include="Dialog Handler\IDialogViewModel.cs" />
+    <Compile Include="Focus Handler\FocusRequestedEventArgs.cs" />
+    <Compile Include="Focus Handler\IRequestFocus.cs" />
     <Compile Include="Model.cs" />
     <Compile Include="ObservableObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
