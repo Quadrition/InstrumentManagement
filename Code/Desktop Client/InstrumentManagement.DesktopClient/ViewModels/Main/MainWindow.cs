@@ -103,6 +103,11 @@
                             case EditInfoDialogViewModel editMainWindowInfoDialogViewModel:
                                 Info = editMainWindowInfoDialogViewModel.Info;
                                 break;
+
+                            case NewScaleDialogViewModel newScaleDialogViewModel:
+                                this.context.AddNewScale(newScaleDialogViewModel.NewScale);
+                                Scales.Add(newScaleDialogViewModel.NewScale);
+                                break;
                         }
                     }
 
@@ -406,5 +411,43 @@
         }
 
         #endregion
+
+        #region New Instruments Members
+
+        /// <summary>
+        /// Gets an <see cref="ICommand"/> for showing a <see cref="Views.Main.NewScaleDialog"/>
+        /// </summary>
+        public ICommand ShowNewScaleDialogCommand
+        {
+            get
+            {
+                return new ActionCommand(a => ShowNewScaleDialog(), p => LoggedAccount is Administrator);
+            }
+        }
+
+        /// <summary>
+        /// Show a <see cref="Views.Main.NewScaleDialog"/>
+        /// </summary>
+        private void ShowNewScaleDialog()
+        {
+            //if (Scales.Count >= MaxScaleCount)
+            //{
+            //    MessageQueue.Enqueue("Uneli ste maksimalan broj vaga");
+            //    return;
+            //}
+            //TODO VRATI OVO POSLE
+
+            DialogViewModel = new NewScaleDialogViewModel(this.context.GetAllScales(), this);
+
+            DialogContent = new Views.Main.NewScaleDialog()
+            {
+                DataContext = DialogViewModel
+            };
+
+            IsDialogOpened = true;
+        }
+
+        #endregion
+
     }
 }

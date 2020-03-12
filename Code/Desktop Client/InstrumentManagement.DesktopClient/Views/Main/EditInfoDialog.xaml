@@ -4,7 +4,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:converters="clr-namespace:InstrumentManagement.Windows.Converters;assembly=InstrumentManagement.Windows"
              mc:Ignorable="d">
+    <UserControl.Resources>
+        <converters:EmptyValueConverter x:Key="EmptyValueConverter"/>
+    </UserControl.Resources>
     <Grid Margin="20 20 20 10">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -16,7 +20,7 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <TextBox Grid.Row="1" Grid.ColumnSpan="2" Text="{Binding Info}" Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}" Margin="10" VerticalAlignment="Top" Height="250" Width="500" AcceptsReturn="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto">
+        <TextBox Grid.Row="1" Grid.ColumnSpan="2" Text="{Binding Info, Converter={StaticResource EmptyValueConverter}}" Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}" Margin="10" VerticalAlignment="Top" Height="250" Width="500" AcceptsReturn="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto">
             <materialDesign:HintAssist.Hint>
                 <StackPanel Orientation="Horizontal">
                     <materialDesign:PackIcon Kind="Edit" Width="10" VerticalAlignment="Center" Height="10" Margin="0 0 5 0" />

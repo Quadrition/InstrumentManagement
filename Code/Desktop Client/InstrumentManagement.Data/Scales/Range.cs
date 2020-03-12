@@ -28,7 +28,7 @@
         /// <summary>
         /// Gets or sets an upper range value for the <see cref="ScaleRange"/>
         /// </summary>
-        [Required(ErrorMessage = "Gornja granica opsega je obavezna"), Index("IX_ScaleRangeUpperRangeAndScaleId", 1, IsUnique = true)]
+        [Required(ErrorMessage = "Gornja granica je obavezna"), Index("IX_ScaleRangeUpperRangeAndScaleId", 1, IsUnique = true)]
         [Range(0, double.MaxValue, ErrorMessage = "Gornja granica opsega je neispravna")]
         public double UpperValue
         {
@@ -46,7 +46,7 @@
         /// <summary>
         /// Gets or sets a lower range value for the <see cref="ScaleRange"/>
         /// </summary>
-        [Required(ErrorMessage = "Donja granica opsega je obavezna")]
+        [Required(ErrorMessage = "Donja granica je obavezna")]
         [Range(0, double.MaxValue, ErrorMessage = "Donja granica opsega je neispravna")]
         public double LowerValue
         {
@@ -117,12 +117,12 @@
             {
                 if (propertyName == "UpperValue" && UpperValue == 0)
                 {
-                    return "Gornja granica opsega ne može biti 0";
+                    return "Gornja granica ne može biti 0";
                 }
 
                 if (UpperValue <= LowerValue + Graduate)
                 {
-                    return "Gornja granica opsega mora biti veća od donje granice opsega";
+                    return "Gornja granica mora biti veća od donje granice";
                 }
             }
             else if (propertyName == "Graduate")
