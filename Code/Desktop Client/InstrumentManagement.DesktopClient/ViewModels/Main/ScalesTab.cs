@@ -1,6 +1,7 @@
 ﻿namespace InstrumentManagement.DesktopClient.ViewModels.Main
 {
     using InstrumentManagement.Data.Scales;
+    using InstrumentManagement.DesktopClient.ViewModels.Scales.Main;
     using InstrumentManagement.Windows;
     using System.Collections.Generic;
     using System.Windows;
@@ -53,6 +54,32 @@
                 selectedScale = value;
                 NotifyPropertyChanged(nameof(SelectedScale));
             }
+        }
+
+        /// <summary>
+        /// Gets an <see cref="ICommand"/> for showing a scale window
+        /// </summary>
+        public ICommand ShowScaleWindowCommand
+        {
+            get
+            {
+                return new ActionCommand(a => ShowScaleWindow(), p => SelectedScale != null);
+            }
+        }
+
+        /// <summary>
+        /// Shows a <see cref="Views.Scales.Main.ScaleWindow"/>
+        /// </summary>
+        private void ShowScaleWindow()
+        {
+            var viewModel = new ScaleWindowViewModel(SelectedScale, LoggedAccount, this.context);
+
+            var view = new Views.Scales.Main.ScaleWindow()
+            {
+                DataContext = viewModel
+            };
+
+            view.ShowDialog();
         }
 
         private Visibility showScalesVisibility;

@@ -11,6 +11,7 @@
     {
         protected override void OnStartup(StartupEventArgs e)
         {
+            //TODO izmeni title od svakog window
             base.OnStartup(e);
 
             var window = new MainWindow();

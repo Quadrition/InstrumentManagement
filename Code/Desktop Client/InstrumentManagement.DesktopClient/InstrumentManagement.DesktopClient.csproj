@@ -74,6 +74,7 @@
     <Compile Include="ViewModels\Main\NewScaleDialog.cs" />
     <Compile Include="ViewModels\Main\NewScaleRangeDialog.cs" />
     <Compile Include="ViewModels\Main\ScalesTab.cs" />
+    <Compile Include="ViewModels\Scales\Main\Main.cs" />
     <Compile Include="Views\Administration\AdministrationDialog.xaml.cs">
       <DependentUpon>AdministrationDialog.xaml</DependentUpon>
     </Compile>
@@ -101,6 +102,9 @@
     </Compile>
     <Compile Include="Views\Main\ScalesTab.xaml.cs">
       <DependentUpon>ScalesTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Scales\Main\ScaleWindow.xaml.cs">
+      <DependentUpon>ScaleWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="Views\Administration\AdministrationDialog.xaml">
       <SubType>Designer</SubType>
@@ -131,6 +135,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Main\ScalesTab.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Scales\Main\ScaleWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -171,8 +179,6 @@
       <Name>InstrumentManagement.Windows</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Views\Scales\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
