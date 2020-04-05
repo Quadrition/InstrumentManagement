@@ -6,7 +6,6 @@
     using InstrumentManagement.Windows;
     using InstrumentManagement.Windows.DialogHandler;
     using MaterialDesignThemes.Wpf;
-    using System.Collections.ObjectModel;
     using System.Linq;
     using System.Windows.Controls;
     using System.Windows.Input;
@@ -108,7 +107,7 @@
 
             MessageQueue = new SnackbarMessageQueue();
 
-            //TODO calibrations initialization
+            //TODO calibrations initia lization
 
             Account = account;
         }
@@ -137,10 +136,7 @@
                 {
                     if (DialogViewModel.DialogResult.HasValue && DialogViewModel.DialogResult == true)
                     {
-                        switch (DialogViewModel)
-                        {
-                            //TODO dialog closing events
-                        }
+                        //TODO dialog closing events
 
                         context.UpdateScale(Scale);
                     }
@@ -196,6 +192,36 @@
 
         #endregion
 
-        //TODO edit scale and user acccesses memebers
+        #region Edit Scale Members
+
+        /// <summary>
+        /// Gets an <see cref="ICommand"/> for opening an <see cref="Views.Scales.EditScaleDialog"/>
+        /// </summary>
+        public ICommand OpenEditScaleDialogCommand
+        {
+            get
+            {
+                return new ActionCommand(a => OpenEditScaleDialog(), p => Account is Administrator);
+            }
+        }
+
+        /// <summary>
+        /// Opnes an <see cref="Views.Scales.EditScaleDialog"/>
+        /// </summary>
+        private void OpenEditScaleDialog()
+        {
+            DialogViewModel = new EditScaleDialogViewModel(Scale, this);
+
+            DialogContent = new Views.Scales.EditScaleDialog()
+            {
+                DataContext = DialogViewModel
+            };
+
+            IsDialogOpened = true;
+        }
+
+        #endregion
+
+        //TODO user acccesses memebers
     }
 }

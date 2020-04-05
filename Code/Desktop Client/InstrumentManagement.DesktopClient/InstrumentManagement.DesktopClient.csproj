@@ -48,6 +48,7 @@
       <HintPath>..\..\..\Dependecies\MaterialDesignThemes.Wpf.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.SQLite">
       <HintPath>..\..\..\Dependecies\System.Data.SQLite.dll</HintPath>
@@ -83,6 +84,7 @@
     <Compile Include="ViewModels\Main\NewScaleDialog.cs" />
     <Compile Include="ViewModels\Main\NewScaleRangeDialog.cs" />
     <Compile Include="ViewModels\Main\ScalesTab.cs" />
+    <Compile Include="ViewModels\Scales\EditScaleDialog.cs" />
     <Compile Include="ViewModels\Scales\Main\Main.cs" />
     <Compile Include="Views\Administration\AdministrationDialog.xaml.cs">
       <DependentUpon>AdministrationDialog.xaml</DependentUpon>
@@ -111,6 +113,9 @@
     </Compile>
     <Compile Include="Views\Main\ScalesTab.xaml.cs">
       <DependentUpon>ScalesTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Scales\EditScaleDialog.xaml.cs">
+      <DependentUpon>EditScaleDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Scales\Main\ScaleWindow.xaml.cs">
       <DependentUpon>ScaleWindow.xaml</DependentUpon>
@@ -144,6 +149,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Main\ScalesTab.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Scales\EditScaleDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
