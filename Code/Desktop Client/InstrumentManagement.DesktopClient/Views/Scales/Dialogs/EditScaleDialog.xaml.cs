@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace InstrumentManagement.DesktopClient.Views.Scales
+namespace InstrumentManagement.DesktopClient.Views.Scales.Dialogs
 {
     /// <summary>
     /// Interaction logic for EditScaleDialog.xaml

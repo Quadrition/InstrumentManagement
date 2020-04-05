@@ -107,7 +107,7 @@
 
             MessageQueue = new SnackbarMessageQueue();
 
-            //TODO calibrations initia lization
+            //TODO calibrations initialization
 
             Account = account;
         }
@@ -212,7 +212,7 @@
         {
             DialogViewModel = new EditScaleDialogViewModel(Scale, this);
 
-            DialogContent = new Views.Scales.EditScaleDialog()
+            DialogContent = new Views.Scales.Dialogs.EditScaleDialog()
             {
                 DataContext = DialogViewModel
             };
