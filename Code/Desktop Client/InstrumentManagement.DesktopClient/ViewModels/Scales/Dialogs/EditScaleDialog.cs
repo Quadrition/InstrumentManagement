@@ -1,4 +1,4 @@
-﻿namespace InstrumentManagement.DesktopClient.ViewModels.Scales
+﻿namespace InstrumentManagement.DesktopClient.ViewModels.Scales.Dialogs
 {
     using InstrumentManagement.Data.Scales;
     using InstrumentManagement.Windows;

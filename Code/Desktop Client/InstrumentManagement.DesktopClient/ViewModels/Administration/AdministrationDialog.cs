@@ -342,15 +342,41 @@
             }
         }
 
+        private ICollection<Scale> unallowedScales;
+
         /// <summary>
         /// Gets or sets a list of <see cref="Scale"/> that are unallowed to the <see cref="SelectedAccount"/>
         /// </summary>
-        public ICollection<Scale> UnallowedScales { get; set; }
+        public ICollection<Scale> UnallowedScales
+        {
+            get
+            {
+                return unallowedScales;
+            }
+            set
+            {
+                unallowedScales = value;
+                NotifyPropertyChanged(nameof(UnallowedScales));
+            }
+        }
+
+        private ICollection<Scale> allowedScales;
 
         /// <summary>
         /// Gets or sets a list of <see cref="Scale"/> that are allowed to the <see cref="SelectedAccount"/>
         /// </summary>
-        public ICollection<Scale> AllowedScales { get; set; }
+        public ICollection<Scale> AllowedScales
+        {
+            get
+            {
+                return allowedScales;
+            }
+            set
+            {
+                allowedScales = value;
+                NotifyPropertyChanged(nameof(AllowedScales));
+            }
+        }
 
         /// <summary>
         /// Gets an <see cref="ICommand"/> for adding an access for the <see cref="User"/> to the <see cref="SelectedUnallowedScale"/>

@@ -3,6 +3,7 @@
     using InstrumentManagement.Data;
     using InstrumentManagement.Data.Accounts;
     using InstrumentManagement.Data.Scales;
+    using InstrumentManagement.DesktopClient.ViewModels.Scales.Dialogs;
     using InstrumentManagement.Windows;
     using InstrumentManagement.Windows.DialogHandler;
     using MaterialDesignThemes.Wpf;
@@ -222,6 +223,34 @@
 
         #endregion
 
-        //TODO user acccesses memebers
+        #region User Accesses Members
+
+        /// <summary>
+        /// Gets an <see cref="ICommand"/> for opening a <see cref="Views.Scales.Dialogs.UserAccessesDialog"/>
+        /// </summary>
+        public ICommand OpenUserAccessesDialogCommand
+        {
+            get
+            {
+                return new ActionCommand(a => OpenUserAccessesDialog(), p => Account is Administrator);
+            }
+        }
+
+        /// <summary>
+        /// Opens a <see cref="Views.Scales.Dialogs.UserAccessesDialog"/>
+        /// </summary>
+        private void OpenUserAccessesDialog()
+        {
+            DialogViewModel = new UserAccessesDialogViewModel(context.GetUsers(), Scale, this, context);
+
+            DialogContent = new Views.Scales.Dialogs.UserAccessesDialog()
+            {
+                DataContext = DialogViewModel
+            };
+
+            IsDialogOpened = true;
+        }
+
+        #endregion
     }
 }
