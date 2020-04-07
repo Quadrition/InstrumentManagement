@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InstrumentManagement.DesktopClient.Views.Scales.Main"
+        xmlns:repeatability="clr-namespace:InstrumentManagement.DesktopClient.Views.Scales.Main.Repeatability"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         Title="ScaleWindow" Height="720" Width="1280" WindowState="Maximized">
@@ -129,7 +130,7 @@
                 </materialDesign:TransitionerSlide>
                 <materialDesign:TransitionerSlide>
                     <materialDesign:TransitioningContent>
-                        <!--<local:RepeatabilityTab />-->
+                        <repeatability:Tab />
                     </materialDesign:TransitioningContent>
                 </materialDesign:TransitionerSlide>
                 <materialDesign:TransitionerSlide>
