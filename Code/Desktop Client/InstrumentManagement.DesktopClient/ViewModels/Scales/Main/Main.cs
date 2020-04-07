@@ -3,10 +3,12 @@
     using InstrumentManagement.Data;
     using InstrumentManagement.Data.Accounts;
     using InstrumentManagement.Data.Scales;
+    using InstrumentManagement.Data.Scales.Calibration;
     using InstrumentManagement.DesktopClient.ViewModels.Scales.Dialogs;
     using InstrumentManagement.Windows;
     using InstrumentManagement.Windows.DialogHandler;
     using MaterialDesignThemes.Wpf;
+    using System.Collections.ObjectModel;
     using System.Linq;
     using System.Windows.Controls;
     using System.Windows.Input;
@@ -52,7 +54,14 @@
                 selectedRange = value;
                 NotifyPropertyChanged(nameof(SelectedRange));
 
-                //TODO on value change event
+                if (value.Calibrations.Count == 0)
+                {
+                    TransitionerCalibrationSelectedIndex = 0;
+                }
+                else
+                {
+                    TransitionerCalibrationSelectedIndex = 1;
+                }
             }
         }
 
@@ -108,7 +117,8 @@
 
             MessageQueue = new SnackbarMessageQueue();
 
-            //TODO calibrations initialization
+            Calibrations = new ObservableCollection<ScaleCalibration>(SelectedRange.Calibrations);
+            SelectedCalibration = SelectedRange.Calibrations.LastOrDefault();
 
             Account = account;
         }
@@ -137,7 +147,19 @@
                 {
                     if (DialogViewModel.DialogResult.HasValue && DialogViewModel.DialogResult == true)
                     {
-                        //TODO dialog closing events
+                        switch (DialogViewModel)
+                        {
+                            case NewCalibrationDialogViewModel calibrationDialogViewModel:
+                                SelectedRange.Calibrations.Add(calibrationDialogViewModel.NewCalibration);
+                                Calibrations.Add(calibrationDialogViewModel.NewCalibration);
+                                SelectedCalibration = Calibrations.Last();
+
+                                if (TransitionerCalibrationSelectedIndex == 0)
+                                    TransitionerCalibrationSelectedIndex = 1;
+                                break;
+
+                            //TODO dialog closing events
+                        }
 
                         context.UpdateScale(Scale);
                     }

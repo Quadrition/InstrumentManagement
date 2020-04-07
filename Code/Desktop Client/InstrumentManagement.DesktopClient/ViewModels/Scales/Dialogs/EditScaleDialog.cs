@@ -14,7 +14,7 @@
         private Scale scale;
 
         /// <summary>
-        /// Gets or sets a <see cref="Data.Scale"/> which needs to be edited
+        /// Gets or sets a <see cref="Data.Scales.Scale"/> which needs to be edited
         /// </summary>
         public Scale Scale
         {

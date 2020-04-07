@@ -124,7 +124,7 @@
             <materialDesign:Transitioner SelectedIndex="{Binding TransitionerSelectedIndex}" Margin="10" Grid.Row="2" Grid.ColumnSpan="2">
                 <materialDesign:TransitionerSlide>
                     <materialDesign:TransitioningContent>
-                        <!--<local:CalibrationsTab />-->
+                        <local:CalibrationsTab />
                     </materialDesign:TransitioningContent>
                 </materialDesign:TransitionerSlide>
                 <materialDesign:TransitionerSlide>

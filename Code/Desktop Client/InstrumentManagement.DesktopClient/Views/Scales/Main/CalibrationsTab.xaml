@@ -1,0 +1,80 @@
+﻿<UserControl x:Class="InstrumentManagement.DesktopClient.Views.Scales.Main.CalibrationsTab"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d">
+    <materialDesign:Transitioner SelectedIndex="{Binding TransitionerCalibrationSelectedIndex}">
+        <materialDesign:TransitionerSlide>
+            <materialDesign:TransitioningContent>
+                <StackPanel VerticalAlignment="Center">
+                    <TextBlock Style="{StaticResource MaterialDesignDisplay1TextBlock}" Margin="0 0 0 30" HorizontalAlignment="Center">
+                        Niste uneli ni jedno etaloniranje!
+                    </TextBlock>
+                    <Button Style="{StaticResource MaterialDesignRaisedAccentButton}" Width="100" Command="{Binding OpenNewScaleCalibrationDialogCommand}">
+                        Unesi
+                    </Button>
+                </StackPanel>
+            </materialDesign:TransitioningContent>
+        </materialDesign:TransitionerSlide>
+        <materialDesign:TransitionerSlide>
+            <materialDesign:TransitioningContent>
+                <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="2*" />
+                        <ColumnDefinition Width="2*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <TextBlock VerticalAlignment="Center" Style="{StaticResource MaterialDesignSubheadingTextBlock}" Margin="0 15 25 15" FontWeight="Bold" Text="Broj uverenja:" />
+                    <TextBlock VerticalAlignment="Center" Style="{StaticResource MaterialDesignSubheadingTextBlock}" Margin="0 15 25 15" FontWeight="Bold" Text="Datum etaloniranja:" Grid.Row="1" />
+                    <TextBlock VerticalAlignment="Center" Style="{StaticResource MaterialDesignSubheadingTextBlock}" Margin="0 15 25 15" Text="{Binding SelectedCalibration.Verification.NumberOfVerification}" Grid.Column="1" />
+                    <TextBlock VerticalAlignment="Center" Style="{StaticResource MaterialDesignSubheadingTextBlock}" Margin="0 15 25 15" Text="{Binding SelectedCalibration.DateOfCalibration}" Grid.Column="1" Grid.Row="1" />
+                    <TextBlock VerticalAlignment="Center" Style="{StaticResource MaterialDesignSubheadingTextBlock}" Margin="0 15 25 15" FontWeight="Bold" Text="Laboratorija:" Grid.Row="2" />
+                    <TextBlock VerticalAlignment="Center" Style="{StaticResource MaterialDesignSubheadingTextBlock}" Margin="0 15 25 15" FontWeight="Bold" Text="Period etaloniranja:" Grid.Row="3" />
+                    <TextBlock VerticalAlignment="Center" Style="{StaticResource MaterialDesignSubheadingTextBlock}" Margin="0 15 25 15" Text="{Binding SelectedCalibration.Laboratory}" Grid.Column="1" Grid.Row="2" />
+                    <TextBlock VerticalAlignment="Center" Style="{StaticResource MaterialDesignSubheadingTextBlock}" Margin="0 15 25 15" Text="{Binding SelectedCalibration.ValidFor}" Grid.Column="1" Grid.Row="3" />
+
+                    <GroupBox Grid.Column="2" Grid.RowSpan="4" Header="Ponovljivost" Margin="15 0 15 0">
+                        <Grid Margin="5">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock VerticalAlignment="Center" FontWeight="Bold" Text="Broj ponavljanja:" />
+                            <TextBlock VerticalAlignment="Center" FontWeight="Bold" Text="Nomilana masa:" Grid.Row="1" />
+                            <TextBlock VerticalAlignment="Center" Margin="10" Text="{Binding SelectedCalibration.Repeatability.NumberOfRepeats}" Grid.Column="1" />
+                            <TextBlock VerticalAlignment="Center" Margin="10" Text="{Binding SelectedCalibration.Repeatability.NominalMass}" Grid.Column="1" Grid.Row="1" />
+                            <TextBlock VerticalAlignment="Center" FontWeight="Bold" Text="Standardna devijacija:" Grid.Row="2" />
+                            <TextBlock VerticalAlignment="Center" Margin="10" Text="{Binding SelectedCalibration.Repeatability.StandardDeviation}" Grid.Column="1" Grid.Row="2" />
+                        </Grid>
+                    </GroupBox>
+
+                    <GroupBox Grid.Column="3" Grid.RowSpan="4" Header="Tačnost" Margin="5 0 0 0">
+                        <ListView Margin="0" ItemsSource="{Binding SelectedCalibration.Accuracy.Measurements}" TextElement.FontSize="10" SelectionMode="Single">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn DisplayMemberBinding="{Binding CheckPoint}" Header="Tačka provere" />
+                                    <GridViewColumn DisplayMemberBinding="{Binding Deviation}" Header="Odstupanje" />
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </GroupBox>
+                </Grid>
+            </materialDesign:TransitioningContent>
+        </materialDesign:TransitionerSlide>
+    </materialDesign:Transitioner>
+</UserControl>

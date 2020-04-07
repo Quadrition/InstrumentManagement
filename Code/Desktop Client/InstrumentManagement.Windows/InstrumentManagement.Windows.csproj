@@ -66,6 +66,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Validation Rules\EmptyInteger.cs" />
     <Compile Include="Validation Rules\Float.cs" />
+    <Compile Include="Validation Rules\Integer.cs" />
     <Compile Include="ViewModel.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
