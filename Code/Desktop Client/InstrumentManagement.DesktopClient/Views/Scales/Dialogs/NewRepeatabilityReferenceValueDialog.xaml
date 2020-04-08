@@ -1,0 +1,128 @@
+﻿<UserControl x:Class="InstrumentManagement.DesktopClient.Views.Scales.Dialogs.NewRepeatabilityReferenceValueDialog"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:InstrumentManagement.DesktopClient.Views.Scales.Dialogs"
+             xmlns:converters="clr-namespace:InstrumentManagement.Windows.Converters;assembly=InstrumentManagement.Windows"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:validationRules="clr-namespace:InstrumentManagement.Windows.ValidationRules;assembly=InstrumentManagement.Windows"
+             mc:Ignorable="d">
+    <UserControl.Resources>
+        <converters:EmptyValueConverter x:Key="EmptyValueConverter" />
+        <converters:InvertBooleanConverter x:Key="InvertBooleanConverter" />
+    </UserControl.Resources>
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <materialDesign:Card Grid.ColumnSpan="2" materialDesign:ShadowAssist.ShadowDepth="Depth2" Background="{DynamicResource PrimaryHueMidBrush}" Foreground="{DynamicResource MaterialDesignPaper}" Margin="0 0 0 5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+            <StackPanel Margin="10" Grid.ColumnSpan="2" Orientation="Horizontal" VerticalAlignment="Center">
+                <materialDesign:PackIcon Kind="Plus" Width="35" Height="35" Margin="0 0 10 0" VerticalAlignment="Center" />
+                <TextBlock VerticalAlignment="Center" Style="{StaticResource MaterialDesignHeadlineTextBlock}">
+                    Unos referentne vrednosti
+                </TextBlock>
+            </StackPanel>
+        </materialDesign:Card>
+        <TextBox Name="NominalMassTextBox" Width="150" materialDesign:HintAssist.Hint="Ukupna nominalna masa" Margin="25 15 25 15" Grid.Row="2" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintTextBox}">
+            <Binding Path="ReferenceValue.NominalMass" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged" Mode="OneWayToSource">
+                <Binding.ValidationRules>
+                    <validationRules:FloatValidationRule />
+                </Binding.ValidationRules>
+            </Binding>
+        </TextBox>
+        <Border BorderThickness="1" Margin="15 15 15 15" Grid.Column="0" Grid.Row="1" BorderBrush="{StaticResource MaterialDesignDivider}">
+            <Grid Margin="5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Margin="5" Grid.ColumnSpan="2">
+                    Broj merenja
+                </TextBlock>
+
+                <RadioButton Margin="5 5 15 5" Grid.Row="1" Command="{Binding ChangeTo6MeasurementsCommand}" IsChecked="True" Style="{StaticResource MaterialDesignRadioButton}">
+                    6
+                </RadioButton>
+                <RadioButton Margin="5 5 15 5" Grid.Row="1" Command="{Binding ChangeTo10MeasurementsCommand}" Grid.Column="1" Style="{StaticResource MaterialDesignRadioButton}">
+                    10
+                </RadioButton>
+            </Grid>
+        </Border>
+        <Border BorderThickness="1" BorderBrush="{DynamicResource PrimaryHueMidBrush}" Margin="5" Grid.RowSpan="4" Grid.Row="1"  Grid.Column="1" ClipToBounds="True">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <DataGrid ItemsSource="{Binding Measurements}" MinWidth="200" Height="260" x:Name="MeasurementsDataGrid" ScrollViewer.CanContentScroll="False" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False">
+                    <DataGrid.Columns>
+                        <materialDesign:MaterialDataGridTextColumn IsReadOnly="True" Binding="{Binding RelativeSource={RelativeSource AncestorType= DataGridRow}, Converter={converters:DataGridRowToIndexConverter}}" Width="*" Header="Broj merenja"  />
+                        <materialDesign:MaterialDataGridTextColumn CanUserSort="False" Width="*" Header="Rezultat" EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}">
+                            <materialDesign:MaterialDataGridTextColumn.Binding>
+                                <Binding Path="Result" ValidatesOnDataErrors="True" NotifyOnValidationError="True" UpdateSourceTrigger="LostFocus" Converter="{StaticResource EmptyValueConverter}">
+                                    <Binding.ValidationRules>
+                                        <validationRules:EmptyFloatValidationRule />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </materialDesign:MaterialDataGridTextColumn.Binding>
+                        </materialDesign:MaterialDataGridTextColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+                <materialDesign:ColorZone Mode="PrimaryMid" Grid.Row="1" Effect="{StaticResource MaterialDesignShadowDepth5}">
+                    <TextBlock Margin="10"> 
+                        Rezultati merenja
+                    </TextBlock>
+                </materialDesign:ColorZone>
+            </Grid>
+        </Border>
+        <CheckBox VerticalAlignment="Bottom" Grid.Row="3" Unchecked="ManualReferenceValueCheckBox_Unchecked" Margin="25 15 25 0" x:Name="ManualReferenceValueCheckBox" IsChecked="{Binding IsManualReferenceValue}">
+            Ručno
+        </CheckBox>
+        <TextBox x:Name="ReferenceValueTextBox" Grid.Row="4" Margin="25 5 25 10" materialDesign:ValidationAssist.Suppress="{Binding Path=IsChecked, ElementName=ManualReferenceValueCheckBox, Converter={StaticResource InvertBooleanConverter}}" VerticalAlignment="Center" Width="150" materialDesign:HintAssist.Hint="Referentna vrednost" IsEnabled="{Binding Path=IsChecked, ElementName=ManualReferenceValueCheckBox}" Style="{StaticResource MaterialDesignFloatingHintTextBox}">
+            <Binding Path="ManualReferenceValue" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged" Mode="OneWayToSource" Converter="{StaticResource EmptyValueConverter}">
+                <Binding.ValidationRules>
+                    <validationRules:FloatValidationRule />
+                </Binding.ValidationRules>
+            </Binding>
+        </TextBox>
+        <Button Margin="5" Width="100" Grid.Row="5" x:Name="confirmButton" Command="{Binding ConfirmCommand}" MouseEnter="ConfirmButton_MouseEnter">
+            <Button.Style>
+                <Style BasedOn="{StaticResource MaterialDesignRaisedAccentButton}" TargetType="Button">
+                    <Setter Property="IsEnabled" Value="True"/>
+                    <Style.Triggers>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Path=IsChecked, ElementName=ManualReferenceValueCheckBox}" Value="True"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=ReferenceValueTextBox}" Value="True"/>
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="IsEnabled" Value="False"/>
+                        </MultiDataTrigger>
+                        <DataTrigger Binding="{Binding Path=(Validation.HasError), ElementName=NominalMassTextBox}" Value="True">
+                            <Setter Property="IsEnabled" Value="False"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+            Unesi
+        </Button>
+        <Button Style="{StaticResource MaterialDesignRaisedAccentButton}" Margin="5" Width="100" Grid.Column="1" Grid.Row="5" Command="{Binding CancelCommand}">
+            Otkaži
+        </Button>
+        <materialDesign:Snackbar MessageQueue="{Binding MessageQueue}" Grid.Row="6" Grid.ColumnSpan="2" />
+    </Grid>
+</UserControl>

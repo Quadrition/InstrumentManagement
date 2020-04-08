@@ -3,6 +3,7 @@
     using InstrumentManagement.Windows;
     using System.Windows.Input;
     using InstrumentManagement.Data.Scales.Repeatability;
+    using InstrumentManagement.DesktopClient.ViewModels.Scales.Dialogs;
 
     public partial class ScaleWindowViewModel
     {
@@ -74,5 +75,31 @@
         }
 
         #endregion 
+
+        /// <summary>
+        /// Gets an <see cref="ICommand"/> for opening a <see cref="Views.Scales.Dialogs.NewRepeatabilityReferenceValueDialog"/>
+        /// </summary>
+        public ICommand ShowNewScaleRepeatabilityReferenceValueDialogCommand
+        {
+            get
+            {
+                return new ActionCommand(a => ShowNewScaleRepeatabilityReferenceValueDialog(), p => IsLastCalibration == true);
+            }
+        }
+
+        /// <summary>
+        /// Opens a <see cref="Views.Scales.NewScaleRepeatabilityReferenceValueDialog"/>
+        /// </summary>
+        private void ShowNewScaleRepeatabilityReferenceValueDialog()
+        {
+            DialogViewModel = new NewRepeatabilityReferenceValueDialogViewModel(SelectedCalibration.Repeatability, this);
+
+            DialogContent = new Views.Scales.Dialogs.NewRepeatabilityReferenceValueDialog()
+            {
+                DataContext = DialogViewModel
+            };
+
+            IsDialogOpened = true;
+        }
     }
 }

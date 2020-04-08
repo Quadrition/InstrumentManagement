@@ -158,7 +158,12 @@
                                     TransitionerCalibrationSelectedIndex = 1;
                                 break;
 
-                            //TODO dialog closing events
+                            case NewRepeatabilityReferenceValueDialogViewModel repeatabilityReferenceValueDialogViewModel:
+                                TransitionerRepeatabilitySelectedIndex = 1;
+                                SelectedCalibration.Repeatability.ReferenceValue = repeatabilityReferenceValueDialogViewModel.ReferenceValue;
+                                //RepeatabilityTests = new ObservableCollection<Data.Scales.Repeatability.RepTest>(SelectedCalibration.Repeatability.ReferenceValue.Tests);
+                                break;
+                                //TODO dialog closing events
                         }
 
                         context.UpdateScale(Scale);
