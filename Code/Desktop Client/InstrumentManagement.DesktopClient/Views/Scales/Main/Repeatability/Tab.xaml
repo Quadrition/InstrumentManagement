@@ -35,7 +35,7 @@
             </materialDesign:TransitionerSlide>
             <materialDesign:TransitionerSlide>
                 <materialDesign:TransitioningContent>
-                    <!--<local:RepeatabilityReferenceValue />-->
+                    <local:ReferenceValue />
                 </materialDesign:TransitioningContent>
             </materialDesign:TransitionerSlide>
             <materialDesign:TransitionerSlide>

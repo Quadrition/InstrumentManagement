@@ -37,7 +37,14 @@
 
                 if (value != null)
                 {
-                    // Calibration change events
+                    if (SelectedCalibration.Repeatability.ReferenceValue == null)
+                    {
+                        TransitionerRepeatabilitySelectedIndex = 0;
+                    }
+                    else
+                    {
+                        TransitionerRepeatabilitySelectedIndex = 1;
+                    }
                 }
 
                 #endregion

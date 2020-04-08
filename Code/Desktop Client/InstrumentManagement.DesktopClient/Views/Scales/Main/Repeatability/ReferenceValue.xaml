@@ -1,0 +1,86 @@
+﻿<UserControl x:Class="InstrumentManagement.DesktopClient.Views.Scales.Main.Repeatability.ReferenceValue"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <TextBlock VerticalAlignment="Center" Margin="10" FontWeight="Bold">
+                                                    Ukupna nominalna masa:
+            </TextBlock>
+            <TextBlock Margin="10" VerticalAlignment="Center" Grid.Column="1" Text="{Binding SelectedCalibration.Repeatability.ReferenceValue.NominalMass}" />
+            <TextBlock Margin="10" VerticalAlignment="Center" Grid.Row="1" FontWeight="Bold">
+                                                    Broj merenja:
+            </TextBlock>
+            <TextBlock Margin="10" VerticalAlignment="Center" Grid.Column="1" Grid.Row="1" Text="{Binding SelectedCalibration.Repeatability.ReferenceValue.NumberOfMeasurements}" />
+            <TextBlock Margin="10" VerticalAlignment="Center" Grid.Row="2" FontWeight="Bold">
+                                                    Standardna devijacija:
+            </TextBlock>
+            <TextBlock Margin="10" VerticalAlignment="Center" Grid.Column="1" Grid.Row="2" Text="{Binding SelectedCalibration.Repeatability.ReferenceValue.StandardDeviation}" />
+            <TextBlock Margin="10" VerticalAlignment="Center" Grid.Row="3" FontWeight="Bold">
+                                                    Referentna vrednost:
+            </TextBlock>
+            <TextBlock Margin="10" VerticalAlignment="Center" Grid.Column="1" Grid.Row="3" Text="{Binding SelectedCalibration.Repeatability.ReferenceValue.ReferenceValue}" />
+            <Border BorderThickness="1" BorderBrush="{StaticResource PrimaryHueMidBrush}" Grid.Column="2" Grid.RowSpan="4" ClipToBounds="True">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <ListBox ItemsSource="{Binding SelectedCalibration.Repeatability.ReferenceValue.Measurements}" Margin="10" MaxHeight="200" DisplayMemberPath="Result" ScrollViewer.CanContentScroll="False" />
+                    <materialDesign:ColorZone Mode="PrimaryMid" Grid.Row="1" Effect="{StaticResource MaterialDesignShadowDepth5}">
+                        <TextBlock Margin="10">
+                                                                Rezultati merenja
+                        </TextBlock>
+                    </materialDesign:ColorZone>
+                </Grid>
+            </Border>
+            <Border BorderThickness="1" Grid.Row="5" Grid.ColumnSpan="3" Margin="5" BorderBrush="{StaticResource PrimaryHueMidBrush}" ClipToBounds="True">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <ListView ItemsSource="{Binding RepeatabilityWeights}" MinHeight="75" Margin="5 0 0 20" ScrollViewer.CanContentScroll="False" SelectionMode="Single" SelectedItem="{Binding SelectedRepeatabilityWeight}">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn DisplayMemberBinding="{Binding Manufacturer}" Header="Proizvodjac" />
+                                <GridViewColumn DisplayMemberBinding="{Binding WeightClass}" Header="Klasa" />
+                                <GridViewColumn DisplayMemberBinding="{Binding Calibration}" Header="Uverenje" />
+                                <GridViewColumn DisplayMemberBinding="{Binding SerialNumber}" Header="Serijski broj" />
+                                <GridViewColumn DisplayMemberBinding="{Binding NominalMass}" Header="Nominalna masa" />
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    <materialDesign:ColorZone Mode="PrimaryMid" Grid.Row="1" Effect="{StaticResource MaterialDesignShadowDepth5}">
+                        <TextBlock Margin="10"> 
+                                                                Tegovi
+                        </TextBlock>
+                    </materialDesign:ColorZone>
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0 0 10 -15">
+                        <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Width="30" Height="30" Margin="0 0 10 0" Command="{Binding ShowNewScaleRepeatabilityWeightDialogCommand}">
+                            <materialDesign:PackIcon Kind="Plus" Height="15" Width="15" />
+                        </Button>
+                        <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Width="30" Height="30" Margin="0 0 10 0" Command="{Binding RemoveScaleRepeatabilityWeightDialogCommand}">
+                            <materialDesign:PackIcon Kind="Minus" Height="15" Width="15" />
+                        </Button>
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </Grid>
+    </ScrollViewer>
+</UserControl>

@@ -91,6 +91,7 @@
     <Compile Include="ViewModels\Scales\Dialogs\UserAccessesDialog.cs" />
     <Compile Include="ViewModels\Scales\Main\CalibrationsTab.cs" />
     <Compile Include="ViewModels\Scales\Main\Main.cs" />
+    <Compile Include="ViewModels\Scales\Main\Repeatability\ReferenceValue.cs" />
     <Compile Include="ViewModels\Scales\Main\Repeatability\Tab.cs" />
     <Compile Include="Views\Administration\AdministrationDialog.xaml.cs">
       <DependentUpon>AdministrationDialog.xaml</DependentUpon>
@@ -137,6 +138,9 @@
     </Compile>
     <Compile Include="Views\Scales\Main\CalibrationsTab.xaml.cs">
       <DependentUpon>CalibrationsTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Scales\Main\Repeatability\ReferenceValue.xaml.cs">
+      <DependentUpon>ReferenceValue.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Scales\Main\Repeatability\Tab.xaml.cs">
       <DependentUpon>Tab.xaml</DependentUpon>
@@ -197,6 +201,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Scales\Main\CalibrationsTab.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Scales\Main\Repeatability\ReferenceValue.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
