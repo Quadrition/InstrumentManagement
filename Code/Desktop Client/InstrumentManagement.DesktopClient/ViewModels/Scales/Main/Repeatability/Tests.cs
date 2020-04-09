@@ -202,7 +202,20 @@
         /// </summary>
         public void PrintRepeatabilityDataGrid(DataGrid dataGrid)
         {
-            
+            if (PrintRepeatabilityDataGridStartTest <= 0 || PrintRepeatabilityDataGridEndTest <= 0)
+            {
+                MessageQueue.Enqueue("Morate uneti pozivitve brojeve");
+                return;
+            }
+
+            if (PrintRepeatabilityDataGridEndTest - PrintRepeatabilityDataGridStartTest < 0)
+            {
+                MessageQueue.Enqueue("Morate izabrati opseg od bar 1 testa");
+                return;
+            }
+
+            PrintDG.Print<ScaleRepeatabilityTest>(dataGrid, "Tabelarni prikaz testova ponovljivosti vage", string.Format("Vaga: {0}/{1}/{2}", Scale.Manufacturer, Scale.Type, Scale.SerialNumber), string.Format("Opseg: {0}/{1}/{2} | Jedinica: {3}", SelectedRange.UpperValue, SelectedRange.LowerValue, SelectedRange.Graduate, SelectedRange.WeightUnit), string.Format("Broj etaloniranja: {0} | Broj uverenja: {1}", SelectedCalibration.Number, SelectedCalibration.Verification.NumberOfVerification));
+
         }
     }
 }

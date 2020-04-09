@@ -69,6 +69,7 @@
     <Compile Include="Focus Handler\IRequestFocus.cs" />
     <Compile Include="Model.cs" />
     <Compile Include="ObservableObject.cs" />
+    <Compile Include="PrintDG.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Validation Rules\EmptyFloat.cs" />
     <Compile Include="Validation Rules\EmptyInteger.cs" />
