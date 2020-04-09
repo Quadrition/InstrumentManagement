@@ -165,7 +165,16 @@
 
                                 RepeatabilityTests = new ObservableCollection<ScaleRepeatabilityTest>(SelectedCalibration.Repeatability.ReferenceValue.Tests);
                                 break;
-                                //TODO dialog closing events
+                            //TODO dialog closing events
+
+                            case NewRepeatabilityTestDialogViewModel repeatabilityTestDialogViewModel:
+                                SelectedCalibration.Repeatability.ReferenceValue.Tests.Add(repeatabilityTestDialogViewModel.Test);
+                                RepeatabilityTests.Add(repeatabilityTestDialogViewModel.Test);
+                                
+                                //TODO sredi chart
+       
+                                PrintRepeatabilityDataGridEndTest++;
+                                break;
 
                             case NewWeightDialogViewModel newScaleWeightDialogViewModel:
                                 if (TransitionerSelectedIndex == 1)

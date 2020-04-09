@@ -88,6 +88,7 @@
     <Compile Include="ViewModels\Scales\Dialogs\NewCalibrationAccuracyMeasurementDialog.cs" />
     <Compile Include="ViewModels\Scales\Dialogs\NewCalibrationDialog.cs" />
     <Compile Include="ViewModels\Scales\Dialogs\NewRepeatabilityReferenceValueDialog.cs" />
+    <Compile Include="ViewModels\Scales\Dialogs\NewRepeatabilityTest.cs" />
     <Compile Include="ViewModels\Scales\Dialogs\NewWeightDialog.cs" />
     <Compile Include="ViewModels\Scales\Dialogs\UserAccessesDialog.cs" />
     <Compile Include="ViewModels\Scales\Main\CalibrationsTab.cs" />
@@ -134,6 +135,9 @@
     </Compile>
     <Compile Include="Views\Scales\Dialogs\NewRepeatabilityReferenceValueDialog.xaml.cs">
       <DependentUpon>NewRepeatabilityReferenceValueDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Scales\Dialogs\NewRepeatabilityTestDialog.xaml.cs">
+      <DependentUpon>NewRepeatabilityTestDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Scales\Dialogs\NewWeightDialog.xaml.cs">
       <DependentUpon>NewWeightDialog.xaml</DependentUpon>
@@ -201,6 +205,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Scales\Dialogs\NewRepeatabilityReferenceValueDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Scales\Dialogs\NewRepeatabilityTestDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

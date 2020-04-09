@@ -1,8 +1,8 @@
 ﻿namespace InstrumentManagement.DesktopClient.ViewModels.Scales.Main
 {
     using InstrumentManagement.Data.Scales.Repeatability;
+    using InstrumentManagement.DesktopClient.ViewModels.Scales.Dialogs;
     using InstrumentManagement.Windows;
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Windows.Controls;
@@ -46,6 +46,90 @@
                 selectedRepeatabilityTest = value;
                 NotifyPropertyChanged(nameof(SelectedRepeatabilityTest));
             }
+        }
+
+        /// <summary>
+        /// Gets an <see cref="ICommand"/> for opening a <see cref="Views.Scales.NewScaleRepeatabilityTestDialog"/>
+        /// </summary>
+        public ICommand ShowNewScaleRepeatabilityTestDialogCommand
+        {
+            get
+            {
+                return new ActionCommand(a => ShowNewScaleRepeatabilityTestDialog(), p => IsLastCalibration == true);
+            }
+        }
+
+        /// <summary>
+        /// Opens a <see cref="Views.Scales.Dialogs.NewRepeatabilityTestDialog"/>
+        /// </summary>
+        private void ShowNewScaleRepeatabilityTestDialog()
+        {
+            //for (int i = 0; i < 20; i++)
+            //{
+            //    RepTest test = new RepTest()
+            //    {
+            //        Account = Account,
+            //        Date = DateTime.Now,
+            //        Number = (short)RepeatabilityTests.Count,
+            //        ReferenceValue = SelectedCalibration.Repeatability.ReferenceValue,
+            //        Status = true,
+            //        Measurements = new HashSet<RepTest.Measurement>()
+            //    {
+            //        new RepTest.Measurement()
+            //        {
+            //            Result = 200.02f
+            //        },
+            //        new RepTest.Measurement()
+            //        {
+            //            Result = 200.02f
+            //        },
+            //        new RepTest.Measurement()
+            //        {
+            //            Result = 200.02f
+            //        },
+            //        new RepTest.Measurement()
+            //        {
+            //            Result = 200.02f
+            //        },
+            //        new RepTest.Measurement()
+            //        {
+            //            Result = 200.02f
+            //        },
+            //        new RepTest.Measurement()
+            //        {
+            //            Result = 200.02f
+            //        },
+            //        new RepTest.Measurement()
+            //        {
+            //            Result = 200.02f
+            //        },
+            //        new RepTest.Measurement()
+            //        {
+            //            Result = 200.02f
+            //        },
+            //        new RepTest.Measurement()
+            //        {
+            //            Result = 200.02f
+            //        },
+            //        new RepTest.Measurement()
+            //        {
+            //            Result = 200.02f
+            //        },
+            //    }
+            //    };
+            //    SelectedCalibration.Repeatability.ReferenceValue.Tests.Add(test);
+            //    RepeatabilityTests.Add(test);
+            //}
+            //TODO skloni ovo
+
+            DialogViewModel = new NewRepeatabilityTestDialogViewModel(SelectedCalibration.Repeatability.ReferenceValue, Account, this);
+
+            DialogContent = new Views.Scales.Dialogs.NewRepeatabilityTestDialog()
+            {
+                DataContext = DialogViewModel
+            };
+
+            IsDialogOpened = true;
         }
 
         private bool isRepeatabilityPopupDataGridPrintingOpen;
