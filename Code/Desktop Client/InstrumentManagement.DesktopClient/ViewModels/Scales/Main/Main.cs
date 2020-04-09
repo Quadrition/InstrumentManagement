@@ -184,7 +184,8 @@
                                 }
                                 else if (TransitionerSelectedIndex == 2)
                                 {
-                                    //TODO add accuracy weights
+                                    AccuracyWeights.Add(newScaleWeightDialogViewModel.NewScaleWeight);
+                                    SelectedAccuracyReferenceValueMeasurement.Weights.Add(newScaleWeightDialogViewModel.NewScaleWeight);
                                 }
                                 else
                                 {

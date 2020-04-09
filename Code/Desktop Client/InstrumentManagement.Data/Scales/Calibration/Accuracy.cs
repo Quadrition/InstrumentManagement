@@ -1,5 +1,6 @@
 ﻿namespace InstrumentManagement.Data.Scales.Calibration
 {
+    using InstrumentManagement.Data.Scales.Accuracy;
     using InstrumentManagement.Windows;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
@@ -11,6 +12,8 @@
     /// </summary>
     public class ScaleCalibrationAccuracy : Model
     {
+        private ScaleAccuracyReferenceValue referenceValue;
+
         /// <summary>
         /// Gets or sets an identification and key to which the <see cref="ScaleCalibrationAccuracy"/> belongs
         /// </summary>
@@ -26,6 +29,22 @@
         /// Gets or sets a list of <see cref="ScaleCalibrationAccuracyMeasurement"/> for the <see cref="ScaleCalibrationAccuracy"/>
         /// </summary>
         public virtual ICollection<ScaleCalibrationAccuracyMeasurement> Measurements { get; set; }
+
+        /// <summary>
+        /// Gets or sets the <see cref="ScaleAccuracyReferenceValue"/> for the <see cref="ScaleCalibrationAccuracy"/>
+        /// </summary>
+        public virtual ScaleAccuracyReferenceValue ReferenceValue
+        {
+            get
+            {
+                return referenceValue;
+            }
+            set
+            {
+                referenceValue = value;
+                NotifyPropertyChanged(nameof(ReferenceValue));
+            }
+        }
 
         /// <summary>
         /// Initializes a new instance of <see cref="ScaleCalibrationAccuracy"/> class

@@ -47,15 +47,26 @@
                     }
                     else
                     {
-                        TransitionerRepeatabilitySelectedIndex = 1;
+                        TransitionerRepeatabilitySelectedIndex = 2;
+
+                        RepeatabilityWeights = new ObservableCollection<ScaleWeight>(SelectedCalibration.Repeatability.ReferenceValue.Weights);
+
+                        RepeatabilityTests = new ObservableCollection<ScaleRepeatabilityTest>(SelectedCalibration.Repeatability.ReferenceValue.Tests);
+
+                        PrintRepeatabilityDataGridStartTest = 1;
+                        PrintRepeatabilityDataGridEndTest = RepeatabilityTests.Count;
                     }
 
-                    RepeatabilityWeights = new ObservableCollection<ScaleWeight>(SelectedCalibration.Repeatability.ReferenceValue.Weights);
+                    if (SelectedCalibration.Accuracy.ReferenceValue == null)
+                    {
+                        TransitionerAccuracySelectedIndex = 0;
+                    }
+                    else
+                    {
+                        TransitionerAccuracySelectedIndex = 2;
 
-                    RepeatabilityTests = new ObservableCollection<ScaleRepeatabilityTest>(SelectedCalibration.Repeatability.ReferenceValue.Tests);
-
-                    PrintRepeatabilityDataGridStartTest = 1;
-                    PrintRepeatabilityDataGridEndTest = RepeatabilityTests.Count;
+                        SelectedAccuracyReferenceValueMeasurement = SelectedCalibration.Accuracy.ReferenceValue.Measurements.First();
+                    }
                 }
 
                 #endregion
