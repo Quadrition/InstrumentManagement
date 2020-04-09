@@ -49,7 +49,7 @@
         }
 
         /// <summary>
-        /// Gets an <see cref="ICommand"/> for opening a <see cref="Views.Scales.NewScaleRepeatabilityTestDialog"/>
+        /// Gets an <see cref="ICommand"/> for opening a <see cref="Views.Scales.Dialogs.NewRepeatabilityTestDialog"/>
         /// </summary>
         public ICommand ShowNewScaleRepeatabilityTestDialogCommand
         {
@@ -133,7 +133,7 @@
         }
 
         private bool isRepeatabilityPopupDataGridPrintingOpen;
-
+        //TODO add test edit
         /// <summary>
         /// Gets or sets if popup for data grid repeatability printing is opened
         /// </summary>

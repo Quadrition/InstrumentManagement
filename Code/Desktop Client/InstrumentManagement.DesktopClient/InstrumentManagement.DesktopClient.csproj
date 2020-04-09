@@ -91,6 +91,7 @@
     <Compile Include="ViewModels\Scales\Dialogs\NewRepeatabilityTest.cs" />
     <Compile Include="ViewModels\Scales\Dialogs\NewWeightDialog.cs" />
     <Compile Include="ViewModels\Scales\Dialogs\UserAccessesDialog.cs" />
+    <Compile Include="ViewModels\Scales\Main\Accuracy\Tab.cs" />
     <Compile Include="ViewModels\Scales\Main\CalibrationsTab.cs" />
     <Compile Include="ViewModels\Scales\Main\Main.cs" />
     <Compile Include="ViewModels\Scales\Main\Repeatability\ReferenceValue.cs" />
@@ -144,6 +145,9 @@
     </Compile>
     <Compile Include="Views\Scales\Dialogs\UserAccessesDialog.xaml.cs">
       <DependentUpon>UserAccessesDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Scales\Main\Accuracy\Tab.xaml.cs">
+      <DependentUpon>Tab.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Scales\Main\CalibrationsTab.xaml.cs">
       <DependentUpon>CalibrationsTab.xaml</DependentUpon>
@@ -220,6 +224,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Scales\Main\Accuracy\Tab.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Scales\Main\CalibrationsTab.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -285,8 +293,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ViewModels\Scales\Main\Accuracy\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

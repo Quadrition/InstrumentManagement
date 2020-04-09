@@ -1,0 +1,53 @@
+﻿<UserControl x:Class="InstrumentManagement.DesktopClient.Views.Scales.Main.Accuracy.Tab"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:local="clr-namespace:InstrumentManagement.DesktopClient.Views.Scales.Main.Accuracy"
+             mc:Ignorable="d" >
+    <DockPanel>
+        <materialDesign:ColorZone DockPanel.Dock="Right" VerticalAlignment="Stretch" Padding="5" Mode="PrimaryMid" Margin="10" CornerRadius="30">
+            <StackPanel>
+                <Button Style="{StaticResource MaterialDesignFloatingActionAccentButton}" ToolTip="Referentna vrednost" Command="{Binding ShowAccuracyReferenceValueCommand}" ToolTipService.Placement="Left" Margin="5 20 5 10" Width="40" Height="40">
+                    <materialDesign:PackIcon Kind="CardBulleted" Width="20" Height="20" />
+                </Button>
+                <Button Style="{StaticResource MaterialDesignFloatingActionAccentButton}" ToolTip="Testovi" Command="{Binding ShowAccuracyTestsCommand}" ToolTipService.Placement="Left" Width="40" Margin="5 10 5 10" Height="40">
+                    <materialDesign:PackIcon Kind="Scale" Width="20" Height="20" />
+                </Button>
+                <Button Style="{StaticResource MaterialDesignFloatingActionAccentButton}" ToolTip="Grafik" Command="{Binding ShowAccuracyChartCommand}" ToolTipService.Placement="Left" Width="40" Margin="5 10 5 5" Height="40">
+                    <materialDesign:PackIcon Kind="ChartLine" Width="20" Height="20" />
+                </Button>
+            </StackPanel>
+        </materialDesign:ColorZone>
+        <materialDesign:Transitioner SelectedIndex="{Binding TransitionerAccuracySelectedIndex}">
+            <materialDesign:TransitionerSlide>
+                <materialDesign:TransitioningContent>
+                    <StackPanel VerticalAlignment="Center">
+                        <TextBlock Style="{StaticResource MaterialDesignDisplay1TextBlock}" Margin="0 0 0 30" HorizontalAlignment="Center">
+                                                Niste uneli referentnu vrednost!
+                        </TextBlock>
+                        <Button Style="{StaticResource MaterialDesignRaisedAccentButton}" Width="100" Command="{Binding ShowNewScaleAccuracyReferenceValueDialogCommand}">
+                            Unesi
+                        </Button>
+                    </StackPanel>
+                </materialDesign:TransitioningContent>
+            </materialDesign:TransitionerSlide>
+            <materialDesign:TransitionerSlide>
+                <materialDesign:TransitioningContent>
+                    <!--<local:ReferenceValue />-->
+                </materialDesign:TransitioningContent>
+            </materialDesign:TransitionerSlide>
+            <materialDesign:TransitionerSlide>
+                <materialDesign:TransitioningContent>
+                    <!--<local:Tests />-->
+                </materialDesign:TransitioningContent>
+            </materialDesign:TransitionerSlide>
+            <materialDesign:TransitionerSlide>
+                <materialDesign:TransitioningContent>
+                    <!--<local:Chart />-->
+                </materialDesign:TransitioningContent>
+            </materialDesign:TransitionerSlide>
+        </materialDesign:Transitioner>
+    </DockPanel>
+</UserControl>
