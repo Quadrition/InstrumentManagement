@@ -58,9 +58,11 @@
     <Compile Include="Calculations.cs" />
     <Compile Include="Clear Handler\ClearRequestedEventArgs.cs" />
     <Compile Include="Clear Handler\IRequestClear.cs" />
+    <Compile Include="Converters\BoolTranslation.cs" />
     <Compile Include="Converters\DataGridRowToIndex.cs" />
     <Compile Include="Converters\EmptyValue.cs" />
     <Compile Include="Converters\InvertBoolean.cs" />
+    <Compile Include="Converters\NullToVisibility.cs" />
     <Compile Include="Dialog Handler\IDialogHostViewModel.cs" />
     <Compile Include="Dialog Handler\IDialogViewModel.cs" />
     <Compile Include="Focus Handler\FocusRequestedEventArgs.cs" />

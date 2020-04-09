@@ -34,8 +34,7 @@
                 transitionerRepeatabilitySelectedIndex = value;
                 NotifyPropertyChanged(nameof(TransitionerRepeatabilitySelectedIndex));
 
-                //IsPopupRepeatabilityDataGridPrintingOpen = false;
-                //TODO add pop up remove
+                IsPopupRepeatabilityDataGridPrintingOpen = false;
             }
         }
 

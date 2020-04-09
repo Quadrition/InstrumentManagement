@@ -40,7 +40,7 @@
             </materialDesign:TransitionerSlide>
             <materialDesign:TransitionerSlide>
                 <materialDesign:TransitioningContent>
-                    <!--<local:RepeatabilityTests />-->
+                    <local:Tests />
                 </materialDesign:TransitioningContent>
             </materialDesign:TransitionerSlide>
             <materialDesign:TransitionerSlide>

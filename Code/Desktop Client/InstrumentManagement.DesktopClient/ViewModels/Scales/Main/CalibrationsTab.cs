@@ -2,9 +2,11 @@
 {
     using InstrumentManagement.Data.Accounts;
     using InstrumentManagement.Data.Scales.Calibration;
+    using InstrumentManagement.Data.Scales.Repeatability;
     using InstrumentManagement.DesktopClient.ViewModels.Scales.Dialogs;
     using InstrumentManagement.Windows;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Linq;
     using System.Windows.Input;
 
@@ -34,6 +36,7 @@
                 #region Change Calibration actions
 
                 TransitionerSelectedIndex = 0;
+                //TODO proveri kad menjas opsege pa sta se desi
 
                 if (value != null)
                 {
@@ -45,6 +48,11 @@
                     {
                         TransitionerRepeatabilitySelectedIndex = 1;
                     }
+
+                    RepeatabilityTests = new ObservableCollection<ScaleRepeatabilityTest>(SelectedCalibration.Repeatability.ReferenceValue.Tests);
+
+                    PrintRepeatabilityDataGridStartTest = 1;
+                    PrintRepeatabilityDataGridEndTest = RepeatabilityTests.Count;
                 }
 
                 #endregion

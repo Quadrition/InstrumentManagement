@@ -1,0 +1,109 @@
+﻿<UserControl x:Class="InstrumentManagement.DesktopClient.Views.Scales.Main.Repeatability.Tests"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:converters="clr-namespace:InstrumentManagement.Windows.Converters;assembly=InstrumentManagement.Windows"
+             xmlns:validationRules="clr-namespace:InstrumentManagement.Windows.ValidationRules;assembly=InstrumentManagement.Windows"
+             mc:Ignorable="d">
+    <UserControl.Resources>
+        <converters:BoolTranslationConverter x:Key="BoolTranslationConverter" />
+        <converters:EmptyValueConverter x:Key="EmptyValueConverter" />
+        <converters:NullToVisibilityConverter x:Key="NullToVisibilityConverter" />
+    </UserControl.Resources>
+    <Grid Margin="100 25 100 25">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <DataGrid ItemsSource="{Binding RepeatabilityTests}" Name="RepeatabilityDataGrid" IsReadOnly="True" Margin="0 0 50 0" AutoGenerateColumns="False" SelectionUnit="FullRow" SelectedItem="{Binding SelectedRepeatabilityTest}">
+            <DataGrid.Columns>
+                <materialDesign:MaterialDataGridTextColumn Binding="{Binding Number}" Width="*" Header="Redni broj" />
+                <materialDesign:MaterialDataGridTextColumn Binding="{Binding Date, StringFormat=d}" Width="*" Header="Datum" />
+                <materialDesign:MaterialDataGridTextColumn Binding="{Binding Account.Username}" Width="*" Header="Korisnik" />
+                <materialDesign:MaterialDataGridTextColumn Binding="{Binding StandardDeviation}" Width="*" Header="Standardna devijacija" />
+                <materialDesign:MaterialDataGridTextColumn Binding="{Binding Status, Converter={StaticResource BoolTranslationConverter}}" Width="*" Header="Status" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Right">
+            <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" ToolTipService.Placement="Top" ToolTip="Novi test" Width="40" Height="40" Margin="0 -50 10 0"  Command="{Binding ShowNewScaleRepeatabilityTestDialogCommand}">
+                <materialDesign:PackIcon Kind="Plus" Height="20" Width="20" />
+            </Button>
+            <materialDesign:PopupBox PlacementMode="TopAndAlignLeftEdges" IsPopupOpen="{Binding IsPopupRepeatabilityDataGridPrintingOpen}" StaysOpen="True">
+                <materialDesign:PopupBox.ToggleContent>
+                    <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" ToolTipService.Placement="Top" ToolTip="Štampa" Width="40" Height="40" Margin="0 -50 55 0" Command="{Binding OpenPopupRepeatabilityDataGridPrinting}">
+                        <materialDesign:PackIcon Kind="Printer" Height="20" Width="20" />
+                    </Button>
+                </materialDesign:PopupBox.ToggleContent>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.ColumnSpan="2" Margin="10 5 10 0" Style="{StaticResource MaterialDesignSubheadingTextBlock}">
+                        Broj testova
+                    </TextBlock>
+                    <TextBox Margin="10" Grid.Row="1" HorizontalAlignment="Center" Name="StartRepeatabilityDataGridPrintTextBox" VerticalAlignment="Center" Width="50" materialDesign:HintAssist.Hint="Od" Style="{StaticResource MaterialDesignFloatingHintTextBox}">
+                        <TextBox.Text>
+                            <Binding Path="PrintRepeatabilityDataGridStartTest" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged" Converter="{StaticResource EmptyValueConverter}">
+                                <Binding.ValidationRules>
+                                    <validationRules:IntegerValidationRule/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                    <TextBox Margin="10" Grid.Row="1" Grid.Column="1" Name="EndRepeatabilityDataGridPrintTextBox" HorizontalAlignment="Center" VerticalAlignment="Center" Width="50" materialDesign:HintAssist.Hint="Do" Style="{StaticResource MaterialDesignFloatingHintTextBox}">
+                        <TextBox.Text>
+                            <Binding Path="PrintRepeatabilityDataGridEndTest" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged" Converter="{StaticResource EmptyValueConverter}">
+                                <Binding.ValidationRules>
+                                    <validationRules:IntegerValidationRule/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                    <Button Grid.Row="2" Margin="10 0 10 0" Click="Button_Click">
+                        <Button.Style>
+                            <Style BasedOn="{StaticResource MaterialDesignFlatButton}" TargetType="Button">
+                                <Setter Property="IsEnabled" Value="False"/>
+                                <Style.Triggers>
+                                    <MultiDataTrigger>
+                                        <MultiDataTrigger.Conditions>
+                                            <Condition Binding="{Binding Path=(Validation.HasError), ElementName=StartRepeatabilityDataGridPrintTextBox}" Value="False"/>
+                                            <Condition Binding="{Binding Path=(Validation.HasError), ElementName=EndRepeatabilityDataGridPrintTextBox}" Value="False"/>
+                                        </MultiDataTrigger.Conditions>
+                                        <Setter Property="IsEnabled" Value="True"/>
+                                    </MultiDataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                        Štampaj
+                    </Button>
+                </Grid>
+            </materialDesign:PopupBox>
+        </StackPanel>
+        <Border BorderThickness="1" BorderBrush="{StaticResource PrimaryHueMidBrush}" Visibility="{Binding SelectedRepeatabilityTest, Converter={StaticResource NullToVisibilityConverter}}" ClipToBounds="True" Grid.Column="1" VerticalAlignment="Center">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <ListView ItemsSource="{Binding SelectedRepeatabilityTest.Measurements}" Margin="10" DisplayMemberPath="Result" ScrollViewer.CanContentScroll="False" />
+                <materialDesign:ColorZone Mode="PrimaryMid" Grid.Row="1" Effect="{StaticResource MaterialDesignShadowDepth5}">
+                    <TextBlock Margin="10">
+                        Rezultati merenja
+                    </TextBlock>
+                </materialDesign:ColorZone>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>
