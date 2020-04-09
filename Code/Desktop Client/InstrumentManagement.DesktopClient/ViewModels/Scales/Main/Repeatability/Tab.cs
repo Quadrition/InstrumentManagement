@@ -87,7 +87,7 @@
         }
 
         /// <summary>
-        /// Opens a <see cref="Views.Scales.NewScaleRepeatabilityReferenceValueDialog"/>
+        /// Opens a <see cref="Views.Scales.Dialogs.NewRepeatabilityReferenceValueDialog"/>
         /// </summary>
         private void ShowNewScaleRepeatabilityReferenceValueDialog()
         {

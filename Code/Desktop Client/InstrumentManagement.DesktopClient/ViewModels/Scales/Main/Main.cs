@@ -4,6 +4,7 @@
     using InstrumentManagement.Data.Accounts;
     using InstrumentManagement.Data.Scales;
     using InstrumentManagement.Data.Scales.Calibration;
+    using InstrumentManagement.Data.Scales.Repeatability;
     using InstrumentManagement.DesktopClient.ViewModels.Scales.Dialogs;
     using InstrumentManagement.Windows;
     using InstrumentManagement.Windows.DialogHandler;
@@ -161,9 +162,26 @@
                             case NewRepeatabilityReferenceValueDialogViewModel repeatabilityReferenceValueDialogViewModel:
                                 TransitionerRepeatabilitySelectedIndex = 1;
                                 SelectedCalibration.Repeatability.ReferenceValue = repeatabilityReferenceValueDialogViewModel.ReferenceValue;
-                                //RepeatabilityTests = new ObservableCollection<Data.Scales.Repeatability.RepTest>(SelectedCalibration.Repeatability.ReferenceValue.Tests);
+
+                                RepeatabilityTests = new ObservableCollection<ScaleRepeatabilityTest>(SelectedCalibration.Repeatability.ReferenceValue.Tests);
                                 break;
                                 //TODO dialog closing events
+
+                            case NewWeightDialogViewModel newScaleWeightDialogViewModel:
+                                if (TransitionerSelectedIndex == 1)
+                                {
+                                    RepeatabilityWeights.Add(newScaleWeightDialogViewModel.NewScaleWeight);
+                                    SelectedCalibration.Repeatability.ReferenceValue.Weights.Add(newScaleWeightDialogViewModel.NewScaleWeight);
+                                }
+                                else if (TransitionerSelectedIndex == 2)
+                                {
+                                    //TODO add accuracy weights
+                                }
+                                else
+                                {
+                                    throw new System.Exception();
+                                }
+                                break;
                         }
 
                         context.UpdateScale(Scale);

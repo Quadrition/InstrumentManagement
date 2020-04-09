@@ -1,6 +1,7 @@
 ﻿namespace InstrumentManagement.DesktopClient.ViewModels.Scales.Main
 {
     using InstrumentManagement.Data.Accounts;
+    using InstrumentManagement.Data.Scales;
     using InstrumentManagement.Data.Scales.Calibration;
     using InstrumentManagement.Data.Scales.Repeatability;
     using InstrumentManagement.DesktopClient.ViewModels.Scales.Dialogs;
@@ -48,6 +49,8 @@
                     {
                         TransitionerRepeatabilitySelectedIndex = 1;
                     }
+
+                    RepeatabilityWeights = new ObservableCollection<ScaleWeight>(SelectedCalibration.Repeatability.ReferenceValue.Weights);
 
                     RepeatabilityTests = new ObservableCollection<ScaleRepeatabilityTest>(SelectedCalibration.Repeatability.ReferenceValue.Tests);
 
