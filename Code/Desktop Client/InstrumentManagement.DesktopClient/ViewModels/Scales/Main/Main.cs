@@ -176,6 +176,13 @@
                                 PrintRepeatabilityDataGridEndTest++;
                                 break;
 
+                            case NewAccuracyReferenceValueDialogViewModel scaleAccuracyReferenceValueDialogViewModel:
+                                TransitionerAccuracySelectedIndex = 1;
+                                SelectedCalibration.Accuracy.ReferenceValue = scaleAccuracyReferenceValueDialogViewModel.ReferenceValue;
+
+                                //AccuracyTests = new ObservableCollection<Data.Scales.Accuracy.AccTest>(SelectedCalibration.Accuracy.ReferenceValue.Tests);
+                                break;
+
                             case NewWeightDialogViewModel newScaleWeightDialogViewModel:
                                 if (TransitionerSelectedIndex == 1)
                                 {

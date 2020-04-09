@@ -85,6 +85,8 @@
     <Compile Include="ViewModels\Main\NewScaleRangeDialog.cs" />
     <Compile Include="ViewModels\Main\ScalesTab.cs" />
     <Compile Include="ViewModels\Scales\Dialogs\EditScaleDialog.cs" />
+    <Compile Include="ViewModels\Scales\Dialogs\NewAccuracyReferenceValueDialog.cs" />
+    <Compile Include="ViewModels\Scales\Dialogs\NewAccuracyReferenceValueMeasurementDialog.cs" />
     <Compile Include="ViewModels\Scales\Dialogs\NewCalibrationAccuracyMeasurementDialog.cs" />
     <Compile Include="ViewModels\Scales\Dialogs\NewCalibrationDialog.cs" />
     <Compile Include="ViewModels\Scales\Dialogs\NewRepeatabilityReferenceValueDialog.cs" />
@@ -128,6 +130,12 @@
     </Compile>
     <Compile Include="Views\Scales\Dialogs\EditScaleDialog.xaml.cs">
       <DependentUpon>EditScaleDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Scales\Dialogs\NewAccuracyReferenceValueDialog.xaml.cs">
+      <DependentUpon>NewAccuracyReferenceValueDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Scales\Dialogs\NewAccuracyReferenceValueMeasurementDialog.xaml.cs">
+      <DependentUpon>NewAccuracyReferenceValueMeasurementDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Scales\Dialogs\NewCalibrationAccuracyMeasurementDialog.xaml.cs">
       <DependentUpon>NewCalibrationAccuracyMeasurementDialog.xaml</DependentUpon>
@@ -201,6 +209,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Scales\Dialogs\EditScaleDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Scales\Dialogs\NewAccuracyReferenceValueDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Scales\Dialogs\NewAccuracyReferenceValueMeasurementDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -82,7 +82,7 @@
                         <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Width="30" Height="30" Margin="0 0 10 0" Command="{Binding ShowNewScaleAccuracyWeightDialogCommand}">
                             <materialDesign:PackIcon Kind="Plus" Height="15" Width="15" />
                         </Button>
-                        <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Width="30" Height="30" Margin="0 0 10 0" Command="{Binding }">
+                        <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Width="30" Height="30" Margin="0 0 10 0" Command="{Binding RemoveScaleAccuracyWeightDialogCommand}">
                             <materialDesign:PackIcon Kind="Minus" Height="15" Width="15" />
                         </Button>
                     </StackPanel>

@@ -3,6 +3,7 @@
     using InstrumentManagement.Windows;
     using System.Windows.Input;
     using InstrumentManagement.Data.Scales.Accuracy;
+    using InstrumentManagement.DesktopClient.ViewModels.Scales.Dialogs;
 
     public partial class ScaleWindowViewModel
     {
@@ -35,6 +36,32 @@
 
                 //TODO popups close
             }
+        }
+
+        /// <summary>
+        /// Gets an <see cref="ICommand"/> for opening a <see cref="Views.Scales.Dialogs.NewAccuracyReferenceValueDialog"/>
+        /// </summary>
+        public ICommand ShowNewScaleAccuracyReferenceValueDialogCommand
+        {
+            get
+            {
+                return new ActionCommand(a => ShowNewScaleAccuracyReferenceValueDialog(), p => IsLastCalibration == true);
+            }
+        }
+
+        /// <summary>
+        /// Opens a <see cref="Views.Scales.Dialogs.NewAccuracyReferenceValueDialog"/>
+        /// </summary>
+        private void ShowNewScaleAccuracyReferenceValueDialog()
+        {
+            DialogViewModel = new NewAccuracyReferenceValueDialogViewModel(SelectedCalibration.Accuracy, this);
+
+            DialogContent = new Views.Scales.Dialogs.NewAccuracyReferenceValueDialog()
+            {
+                DataContext = DialogViewModel
+            };
+
+            IsDialogOpened = true;
         }
 
         #region Side Menu Commands
