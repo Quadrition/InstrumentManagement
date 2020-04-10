@@ -1,6 +1,7 @@
 ﻿namespace InstrumentManagement.DesktopClient.ViewModels.Scales.Main
 {
     using InstrumentManagement.Data.Scales.Accuracy;
+    using InstrumentManagement.DesktopClient.ViewModels.Scales.Dialogs;
     using InstrumentManagement.Windows;
     using System.Collections.Generic;
     using System.Windows.Controls;
@@ -24,6 +25,32 @@
                 accuracyTests = value;
                 NotifyPropertyChanged(nameof(AccuracyTests));
             }
+        }
+
+        /// <summary>
+        /// Gets a command for opening a <see cref="Views.Scales.Dialogs.NewAccuracyTestDialog"/>
+        /// </summary>
+        public ICommand ShowNewScaleAccuracyTestDialogCommand
+        {
+            get
+            {
+                return new ActionCommand(a => ShowNewScaleAccuracyTestDialog(), p => IsLastCalibration == true);
+            }
+        }
+
+        /// <summary>
+        /// Opens a <see cref="Views.Scales.Dialogs.NewAccuracyTestDialog"/>
+        /// </summary>
+        private void ShowNewScaleAccuracyTestDialog()
+        {
+            DialogViewModel = new NewAccuracyTestDialogViewModel(SelectedCalibration.Accuracy.ReferenceValue, Account, this);
+
+            DialogContent = new Views.Scales.Dialogs.NewAccuracyTestDialog()
+            {
+                DataContext = DialogViewModel
+            };
+
+            IsDialogOpened = true;
         }
 
         private DataGridRowDetailsVisibilityMode accuracyTestsDataGridRowDetailsVisibility;
@@ -203,7 +230,7 @@
 
             if (singlePoint)
             {
-                PrintDG.Print<ScaleAccuracyTest>(dataGrid, "Tabelarni prikaz testova tačnosti vage", string.Format("Vaga: {0}/{1}/{2}", Scale.Manufacturer, Scale.Type, Scale.SerialNumber), string.Format("Opseg: {0}/{1}/{2} | Jedinica: {3}", SelectedRange.UpperValue, SelectedRange.LowerValue, SelectedRange.Graduate, SelectedRange.WeightUnit), string.Format("Broj etaloniranja: {0} | Broj uverenja: {1}", SelectedCalibration.Number, SelectedCalibration.Verification.NumberOfVerification), string.Format("Tačka provere: {0}", SelectedAccuracyReferenceValueMeasurement.CheckPoint));
+                PrintDG.Print<ScaleAccuracyTestMeasurement>(dataGrid, "Tabelarni prikaz testova tačnosti vage", string.Format("Vaga: {0}/{1}/{2}", Scale.Manufacturer, Scale.Type, Scale.SerialNumber), string.Format("Opseg: {0}/{1}/{2} | Jedinica: {3}", SelectedRange.UpperValue, SelectedRange.LowerValue, SelectedRange.Graduate, SelectedRange.WeightUnit), string.Format("Broj etaloniranja: {0} | Broj uverenja: {1}", SelectedCalibration.Number, SelectedCalibration.Verification.NumberOfVerification), string.Format("Tačka provere: {0}", SelectedAccuracyReferenceValueMeasurement.CheckPoint));
             }
             else
             {

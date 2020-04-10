@@ -3,6 +3,7 @@
     using InstrumentManagement.Data;
     using InstrumentManagement.Data.Accounts;
     using InstrumentManagement.Data.Scales;
+    using InstrumentManagement.Data.Scales.Accuracy;
     using InstrumentManagement.Data.Scales.Calibration;
     using InstrumentManagement.Data.Scales.Repeatability;
     using InstrumentManagement.DesktopClient.ViewModels.Scales.Dialogs;
@@ -165,7 +166,6 @@
 
                                 RepeatabilityTests = new ObservableCollection<ScaleRepeatabilityTest>(SelectedCalibration.Repeatability.ReferenceValue.Tests);
                                 break;
-                            //TODO dialog closing events
 
                             case NewRepeatabilityTestDialogViewModel repeatabilityTestDialogViewModel:
                                 SelectedCalibration.Repeatability.ReferenceValue.Tests.Add(repeatabilityTestDialogViewModel.Test);
@@ -180,7 +180,16 @@
                                 TransitionerAccuracySelectedIndex = 1;
                                 SelectedCalibration.Accuracy.ReferenceValue = scaleAccuracyReferenceValueDialogViewModel.ReferenceValue;
 
-                                //AccuracyTests = new ObservableCollection<Data.Scales.Accuracy.AccTest>(SelectedCalibration.Accuracy.ReferenceValue.Tests);
+                                AccuracyTests = new ObservableCollection<ScaleAccuracyTest>(SelectedCalibration.Accuracy.ReferenceValue.Tests);
+                                break;
+
+                            case NewAccuracyTestDialogViewModel scaleAccuracyTestDialogViewModel:
+                                SelectedCalibration.Accuracy.ReferenceValue.Tests.Add(scaleAccuracyTestDialogViewModel.Test);
+                                AccuracyTests.Add(scaleAccuracyTestDialogViewModel.Test);
+
+                                //TODO sredi cahrt
+                                
+                                PrintAccuracyDataGridEndTest++;
                                 break;
 
                             case NewWeightDialogViewModel newScaleWeightDialogViewModel:

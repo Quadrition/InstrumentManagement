@@ -87,6 +87,7 @@
     <Compile Include="ViewModels\Scales\Dialogs\EditScaleDialog.cs" />
     <Compile Include="ViewModels\Scales\Dialogs\NewAccuracyReferenceValueDialog.cs" />
     <Compile Include="ViewModels\Scales\Dialogs\NewAccuracyReferenceValueMeasurementDialog.cs" />
+    <Compile Include="ViewModels\Scales\Dialogs\NewAccuracyTestDialog.cs" />
     <Compile Include="ViewModels\Scales\Dialogs\NewCalibrationAccuracyMeasurementDialog.cs" />
     <Compile Include="ViewModels\Scales\Dialogs\NewCalibrationDialog.cs" />
     <Compile Include="ViewModels\Scales\Dialogs\NewRepeatabilityReferenceValueDialog.cs" />
@@ -137,6 +138,9 @@
     </Compile>
     <Compile Include="Views\Scales\Dialogs\NewAccuracyReferenceValueMeasurementDialog.xaml.cs">
       <DependentUpon>NewAccuracyReferenceValueMeasurementDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Scales\Dialogs\NewAccuracyTestDialog.xaml.cs">
+      <DependentUpon>NewAccuracyTestDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Scales\Dialogs\NewCalibrationAccuracyMeasurementDialog.xaml.cs">
       <DependentUpon>NewCalibrationAccuracyMeasurementDialog.xaml</DependentUpon>
@@ -221,6 +225,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Scales\Dialogs\NewAccuracyReferenceValueMeasurementDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Scales\Dialogs\NewAccuracyTestDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
