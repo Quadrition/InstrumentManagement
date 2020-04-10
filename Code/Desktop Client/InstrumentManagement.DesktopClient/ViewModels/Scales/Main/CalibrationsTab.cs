@@ -2,6 +2,7 @@
 {
     using InstrumentManagement.Data.Accounts;
     using InstrumentManagement.Data.Scales;
+    using InstrumentManagement.Data.Scales.Accuracy;
     using InstrumentManagement.Data.Scales.Calibration;
     using InstrumentManagement.Data.Scales.Repeatability;
     using InstrumentManagement.DesktopClient.ViewModels.Scales.Dialogs;
@@ -65,7 +66,13 @@
                     {
                         TransitionerAccuracySelectedIndex = 2;
 
+                        AccuracyTests = new ObservableCollection<ScaleAccuracyTest>(SelectedCalibration.Accuracy.ReferenceValue.Tests);
+
                         SelectedAccuracyReferenceValueMeasurement = SelectedCalibration.Accuracy.ReferenceValue.Measurements.First();
+                        SelectedAccuracyTestMeasurement = SelectedCalibration.Accuracy.ReferenceValue.Measurements.First();
+
+                        PrintAccuracyDataGridStartTest = 1;
+                        PrintAccuracyDataGridEndTest = AccuracyTests.Count;
                     }
                 }
 

@@ -1,0 +1,247 @@
+﻿<UserControl x:Class="InstrumentManagement.DesktopClient.Views.Scales.Main.Accuracy.Tests"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:converters="clr-namespace:InstrumentManagement.Windows.Converters;assembly=InstrumentManagement.Windows"
+             xmlns:validationRules="clr-namespace:InstrumentManagement.Windows.ValidationRules;assembly=InstrumentManagement.Windows"
+             mc:Ignorable="d">
+    <UserControl.Resources>
+        <converters:BoolTranslationConverter x:Key="BoolTranslationConverter" />
+        <converters:BoolToIntegerConverter x:Key="BoolToIntegerConverter" />
+        <converters:EmptyValueConverter x:Key="EmptyValueConverter" />
+    </UserControl.Resources>
+    <DockPanel>
+        <StackPanel DockPanel.Dock="Top" Margin="30 10 10 10" Orientation="Horizontal">
+            <TextBlock Style="{StaticResource MaterialDesignTitleTextBlock}">
+                                                    Sve tačke provere
+            </TextBlock>
+            <ToggleButton Style="{StaticResource MaterialDesignSwitchToggleButton}" Name="AccuracyTestToggleButton" Margin="10 8 10 10">
+                <materialDesign:PackIcon Kind="ArrowLeft" />
+                <materialDesign:ToggleButtonAssist.OnContent>
+                    <materialDesign:PackIcon Kind="ArrowRight" />
+                </materialDesign:ToggleButtonAssist.OnContent>
+            </ToggleButton>
+            <TextBlock Style="{StaticResource MaterialDesignTitleTextBlock}">
+                                                    Pojedinačna tačka provere
+            </TextBlock>
+        </StackPanel>
+        <materialDesign:Transitioner SelectedIndex="{Binding Path=IsChecked, ElementName=AccuracyTestToggleButton, Converter={StaticResource BoolToIntegerConverter}}">
+            <materialDesign:TransitionerSlide>
+                <materialDesign:TransitioningContent>
+                    <Grid Margin="20 0 100 25">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <DataGrid ItemsSource="{Binding AccuracyTests}" IsReadOnly="True" Margin="0 0 50 0" ScrollViewer.CanContentScroll="False" Name="AccuracyDataGrid" AutoGenerateColumns="False" RowDetailsVisibilityMode="{Binding AccuracyTestsGridRowDetailsVisibility}">
+                            <DataGrid.Columns>
+                                <DataGridTemplateColumn>
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Button Command="{Binding Path=DataContext.AccuracyTestsGridRowDetailVisibilityCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" Style="{StaticResource MaterialDesignToolForegroundButton}">
+                                                <materialDesign:PackIcon Kind="Plus"/>
+                                            </Button>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <materialDesign:MaterialDataGridTextColumn Binding="{Binding Number}" Width="*" Header="Redni broj">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style>
+                                            <Setter Property="TextBlock.VerticalAlignment" Value="Center"/>
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </materialDesign:MaterialDataGridTextColumn>
+                                <materialDesign:MaterialDataGridTextColumn Binding="{Binding Date, StringFormat=d}" Width="*" Header="Datum">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style>
+                                            <Setter Property="TextBlock.VerticalAlignment" Value="Center"/>
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </materialDesign:MaterialDataGridTextColumn>
+                                <materialDesign:MaterialDataGridTextColumn Binding="{Binding Account.Username}" Width="*" Header="Korisnik">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style>
+                                            <Setter Property="TextBlock.VerticalAlignment" Value="Center"/>
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </materialDesign:MaterialDataGridTextColumn>
+                                <materialDesign:MaterialDataGridTextColumn Binding="{Binding Status, Converter={StaticResource BoolTranslationConverter}}" Width="*" Header="Status">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style>
+                                            <Setter Property="TextBlock.VerticalAlignment" Value="Center"/>
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </materialDesign:MaterialDataGridTextColumn>
+                            </DataGrid.Columns>
+                            <DataGrid.RowDetailsTemplate>
+                                <DataTemplate>
+                                    <Border BorderThickness="1" BorderBrush="{StaticResource PrimaryHueMidBrush}" HorizontalAlignment="Center" Margin="15">
+                                        <StackPanel Orientation="Vertical">
+                                            <materialDesign:ColorZone Mode="PrimaryMid">
+                                                <StackPanel Margin="2" Orientation="Horizontal">
+                                                    <RadioButton Style="{StaticResource MaterialDesignTabRadioButton}" Margin="5" IsChecked="True" Content="Tačke provere" />
+                                                </StackPanel>
+                                            </materialDesign:ColorZone>
+                                            <DataGrid ItemsSource="{Binding Measurements}" SelectionMode="Single" Margin="7" Width="400" IsReadOnly="True" AutoGenerateColumns="False" Background="Transparent" SelectionUnit="FullRow">
+                                                <DataGrid.Columns>
+                                                    <materialDesign:MaterialDataGridTextColumn Width="*" Binding="{Binding ReferenceValueMeasurement.CheckPoint}" Header="Gornja granica" />
+                                                    <materialDesign:MaterialDataGridTextColumn Width="*" Binding="{Binding Result}" Header="Rezultat merenja" />
+                                                    <materialDesign:MaterialDataGridTextColumn Width="*" Binding="{Binding Status, Converter={StaticResource BoolTranslationConverter}}" Header="Status" />
+                                                </DataGrid.Columns>
+                                            </DataGrid>
+                                        </StackPanel>
+                                    </Border>
+                                </DataTemplate>
+                            </DataGrid.RowDetailsTemplate>
+                        </DataGrid>
+                        <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Right">
+                            <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" ToolTipService.Placement="Top" ToolTip="Novi test" Width="40" Height="40" Margin="0 -50 10 0"  Command="{Binding ShowNewScaleAccuracyTestDialogCommand}">
+                                <materialDesign:PackIcon Kind="Plus" Height="20" Width="20" />
+                            </Button>
+                            <materialDesign:PopupBox PlacementMode="TopAndAlignLeftEdges" IsPopupOpen="{Binding IsPopupAccuracyDataGridPrintingOpen}" StaysOpen="True">
+                                <materialDesign:PopupBox.ToggleContent>
+                                    <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" ToolTipService.Placement="Top" ToolTip="Štampa" Width="40" Height="40" Margin="0 -50 55 0"  Command="{Binding OpenPopupAccuracyDataGridPrinting}">
+                                        <materialDesign:PackIcon Kind="Printer" Height="20" Width="20" />
+                                    </Button>
+                                </materialDesign:PopupBox.ToggleContent>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
+                                    <TextBlock Grid.ColumnSpan="2" Margin="10 5 10 0" Style="{StaticResource MaterialDesignSubheadingTextBlock}">
+                                        Broj testova
+                                    </TextBlock>
+                                    <TextBox Margin="10" Grid.Row="1" HorizontalAlignment="Center" Name="StartAccuracyDataGridPrintTextBox" VerticalAlignment="Center" Width="50" materialDesign:HintAssist.Hint="Od" Style="{StaticResource MaterialDesignFloatingHintTextBox}">
+                                        <TextBox.Text>
+                                            <Binding Path="PrintAccuracyDataGridStartTest" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged" Converter="{StaticResource EmptyValueConverter}">
+                                                <Binding.ValidationRules>
+                                                    <validationRules:IntegerValidationRule/>
+                                                </Binding.ValidationRules>
+                                            </Binding>
+                                        </TextBox.Text>
+                                    </TextBox>
+                                    <TextBox Margin="10" Grid.Row="1" Grid.Column="1" Name="EndAccuracyDataGridPrintTextBox" HorizontalAlignment="Center" VerticalAlignment="Center" Width="50" materialDesign:HintAssist.Hint="Do" Style="{StaticResource MaterialDesignFloatingHintTextBox}">
+                                        <TextBox.Text>
+                                            <Binding Path="PrintAccuracyDataGridEndTest" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged" Converter="{StaticResource EmptyValueConverter}">
+                                                <Binding.ValidationRules>
+                                                    <validationRules:IntegerValidationRule/>
+                                                </Binding.ValidationRules>
+                                            </Binding>
+                                        </TextBox.Text>
+                                    </TextBox>
+                                    <Button Grid.Row="2" Margin="10 0 10 0" Click="Button_Click">
+                                        <Button.Style>
+                                            <Style BasedOn="{StaticResource MaterialDesignFlatButton}" TargetType="Button">
+                                                <Setter Property="IsEnabled" Value="False"/>
+                                                <Style.Triggers>
+                                                    <MultiDataTrigger>
+                                                        <MultiDataTrigger.Conditions>
+                                                            <Condition Binding="{Binding Path=(Validation.HasError), ElementName=StartAccuracyDataGridPrintTextBox}" Value="False"/>
+                                                            <Condition Binding="{Binding Path=(Validation.HasError), ElementName=EndAccuracyDataGridPrintTextBox}" Value="False"/>
+                                                        </MultiDataTrigger.Conditions>
+                                                        <Setter Property="IsEnabled" Value="True"/>
+                                                    </MultiDataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Button.Style>
+                                        Štampaj
+                                    </Button>
+                                </Grid>
+                            </materialDesign:PopupBox>
+                        </StackPanel>
+                    </Grid>
+                </materialDesign:TransitioningContent>
+            </materialDesign:TransitionerSlide>
+            <materialDesign:TransitionerSlide>
+                <materialDesign:TransitioningContent>
+                    <Grid Margin="20 0 100 25">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <ComboBox materialDesign:HintAssist.Hint="Tačka provere" Style="{StaticResource MaterialDesignFloatingHintComboBox}" ItemsSource="{Binding SelectedCalibration.Accuracy.ReferenceValue.Measurements}" DisplayMemberPath="CheckPoint" SelectedItem="{Binding SelectedAccuracyTestMeasurement}" HorizontalAlignment="Left" Margin="20 5 0 15" />
+                        <DataGrid ItemsSource="{Binding SelectedAccuracyTestMeasurement.TestMeasurements}" Name="SinglePointAccuracyDataGrid" IsReadOnly="True" Grid.Row="1" Margin="0 0 50 0" ScrollViewer.CanContentScroll="False" AutoGenerateColumns="False">
+                            <DataGrid.Columns>
+                                <materialDesign:MaterialDataGridTextColumn Binding="{Binding Test.Number}" Width="*" Header="Redni broj" />
+                                <materialDesign:MaterialDataGridTextColumn Binding="{Binding Test.Date, StringFormat=d}" Width="*" Header="Datum" />
+                                <materialDesign:MaterialDataGridTextColumn Binding="{Binding Test.Account.Username}" Width="*" Header="Korisnik" />
+                                <materialDesign:MaterialDataGridTextColumn Binding="{Binding Result}" Width="*" Header="Rezultat" />
+                                <materialDesign:MaterialDataGridTextColumn Binding="{Binding Status, Converter={StaticResource BoolTranslationConverter}}" Width="*" Header="Status" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Right">
+                            <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" ToolTipService.Placement="Top" ToolTip="Novi test" Width="40" Height="40" Margin="0 -50 10 0" Command="{Binding ShowNewScaleAccuracyTestDialogCommand}">
+                                <materialDesign:PackIcon Kind="Plus" Height="20" Width="20" />
+                            </Button>
+                            <materialDesign:PopupBox PlacementMode="TopAndAlignLeftEdges" IsPopupOpen="{Binding IsPopupAccuracySinglePointDataGridPrintingOpen}" StaysOpen="True">
+                                <materialDesign:PopupBox.ToggleContent>
+                                    <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" ToolTipService.Placement="Top" ToolTip="Štampa" Width="40" Height="40" Margin="0 -50 55 0" Command="{Binding OpenPopupAccuracySinglePointDataGridPrinting}">
+                                        <materialDesign:PackIcon Kind="Printer" Height="20" Width="20" />
+                                    </Button>
+                                </materialDesign:PopupBox.ToggleContent>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
+                                    <TextBlock Grid.ColumnSpan="2" Margin="10 5 10 0" Style="{StaticResource MaterialDesignSubheadingTextBlock}">
+                                                                            Broj testova
+                                    </TextBlock>
+                                    <TextBox Margin="10" Grid.Row="1" HorizontalAlignment="Center" Name="StartSinglePointAccuracyDataGridPrintTextBox" VerticalAlignment="Center" Width="50" materialDesign:HintAssist.Hint="Od" Style="{StaticResource MaterialDesignFloatingHintTextBox}">
+                                        <TextBox.Text>
+                                            <Binding Path="PrintAccuracyDataGridStartTest" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged" Converter="{StaticResource EmptyValueConverter}">
+                                                <Binding.ValidationRules>
+                                                    <validationRules:IntegerValidationRule/>
+                                                </Binding.ValidationRules>
+                                            </Binding>
+                                        </TextBox.Text>
+                                    </TextBox>
+                                    <TextBox Margin="10" Grid.Row="1" Grid.Column="1" Name="EndSinglePointAccuracyDataGridPrintTextBox" HorizontalAlignment="Center" VerticalAlignment="Center" Width="50" materialDesign:HintAssist.Hint="Do" Style="{StaticResource MaterialDesignFloatingHintTextBox}">
+                                        <TextBox.Text>
+                                            <Binding Path="PrintAccuracyDataGridEndTest" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged" Converter="{StaticResource EmptyValueConverter}">
+                                                <Binding.ValidationRules>
+                                                    <validationRules:IntegerValidationRule/>
+                                                </Binding.ValidationRules>
+                                            </Binding>
+                                        </TextBox.Text>
+                                    </TextBox>
+                                    <Button Grid.Row="2" Margin="10 0 10 0" Click="Button_Click_1">
+                                        <Button.Style>
+                                            <Style BasedOn="{StaticResource MaterialDesignFlatButton}" TargetType="Button">
+                                                <Setter Property="IsEnabled" Value="False"/>
+                                                <Style.Triggers>
+                                                    <MultiDataTrigger>
+                                                        <MultiDataTrigger.Conditions>
+                                                            <Condition Binding="{Binding Path=(Validation.HasError), ElementName=StartSinglePointAccuracyDataGridPrintTextBox}" Value="False"/>
+                                                            <Condition Binding="{Binding Path=(Validation.HasError), ElementName=EndSinglePointAccuracyDataGridPrintTextBox}" Value="False"/>
+                                                        </MultiDataTrigger.Conditions>
+                                                        <Setter Property="IsEnabled" Value="True"/>
+                                                    </MultiDataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Button.Style>
+                                        Štampaj
+                                    </Button>
+                                </Grid>
+                            </materialDesign:PopupBox>
+                        </StackPanel>
+                    </Grid>
+                </materialDesign:TransitioningContent>
+            </materialDesign:TransitionerSlide>
+        </materialDesign:Transitioner>
+    </DockPanel>
+</UserControl>

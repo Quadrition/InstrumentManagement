@@ -58,6 +58,7 @@
     <Compile Include="Calculations.cs" />
     <Compile Include="Clear Handler\ClearRequestedEventArgs.cs" />
     <Compile Include="Clear Handler\IRequestClear.cs" />
+    <Compile Include="Converters\BoolToInteger.cs" />
     <Compile Include="Converters\BoolTranslation.cs" />
     <Compile Include="Converters\DataGridRowToIndex.cs" />
     <Compile Include="Converters\EmptyValue.cs" />

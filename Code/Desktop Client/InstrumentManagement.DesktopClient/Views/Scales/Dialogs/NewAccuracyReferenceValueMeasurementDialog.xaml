@@ -15,6 +15,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -69,9 +70,9 @@
             </Button.Style>
             Unesi
         </Button>
-        <Button Style="{StaticResource MaterialDesignRaisedAccentButton}" Margin="5" Width="100" Grid.Column="1" Grid.Row="5" Command="{Binding CancelCommand}">
+        <Button Style="{StaticResource MaterialDesignRaisedAccentButton}" Margin="5" Width="100" Grid.Column="1" Grid.Row="1" Command="{Binding CancelCommand}">
             Otkaži
         </Button>
-        <materialDesign:Snackbar MessageQueue="{Binding MessageQueue}" Grid.Row="1" Grid.ColumnSpan="2" />
+        <materialDesign:Snackbar MessageQueue="{Binding MessageQueue}" Grid.Row="2" Grid.ColumnSpan="2" />
     </Grid>
 </UserControl>
