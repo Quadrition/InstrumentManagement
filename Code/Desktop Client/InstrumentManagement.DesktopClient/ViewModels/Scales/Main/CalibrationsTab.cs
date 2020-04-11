@@ -7,10 +7,13 @@
     using InstrumentManagement.Data.Scales.Repeatability;
     using InstrumentManagement.DesktopClient.ViewModels.Scales.Dialogs;
     using InstrumentManagement.Windows;
+    using LiveCharts;
+    using LiveCharts.Configurations;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
     using System.Windows.Input;
+    using System.Windows.Media;
 
     public partial class ScaleWindowViewModel
     {
@@ -53,6 +56,10 @@
                         RepeatabilityWeights = new ObservableCollection<ScaleWeight>(SelectedCalibration.Repeatability.ReferenceValue.Weights);
 
                         RepeatabilityTests = new ObservableCollection<ScaleRepeatabilityTest>(SelectedCalibration.Repeatability.ReferenceValue.Tests);
+
+                        RepeatabilityChartValues = new ChartValues<double>(SelectedCalibration.Repeatability.ReferenceValue.Tests.Select(test => test.StandardDeviation));
+                        RepeatabilityChartLabels = new ObservableCollection<string>(SelectedCalibration.Repeatability.ReferenceValue.Tests.Select(test => test.Date.ToString("MMM yy")));
+                        RepeatabilityChartMapper = Mappers.Xy<double>().X((item, index) => index).Y(item => item).Fill(item => item > SelectedCalibration.Repeatability.ReferenceValue.MaxValidValue ? new SolidColorBrush(Color.FromRgb(238, 83, 80)) : null).Stroke(item => item > SelectedCalibration.Repeatability.ReferenceValue.MaxValidValue ? new SolidColorBrush(Color.FromRgb(238, 83, 80)) : null);
 
                         PrintRepeatabilityDataGridStartTest = 1;
                         PrintRepeatabilityDataGridEndTest = RepeatabilityTests.Count;

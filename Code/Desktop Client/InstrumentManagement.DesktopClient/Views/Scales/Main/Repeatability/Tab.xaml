@@ -45,7 +45,7 @@
             </materialDesign:TransitionerSlide>
             <materialDesign:TransitionerSlide>
                 <materialDesign:TransitioningContent>
-                    <!--<local:RepeatabilityChart />-->
+                    <local:Chart />
                 </materialDesign:TransitioningContent>
             </materialDesign:TransitionerSlide>
         </materialDesign:Transitioner>

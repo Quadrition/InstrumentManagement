@@ -170,9 +170,10 @@
                             case NewRepeatabilityTestDialogViewModel repeatabilityTestDialogViewModel:
                                 SelectedCalibration.Repeatability.ReferenceValue.Tests.Add(repeatabilityTestDialogViewModel.Test);
                                 RepeatabilityTests.Add(repeatabilityTestDialogViewModel.Test);
-                                
+
+                                RepeatabilityChartValues.Add(repeatabilityTestDialogViewModel.Test.StandardDeviation);
+                                RepeatabilityChartLabels.Add(repeatabilityTestDialogViewModel.Test.Date.ToString("MMM yy"));
                                 //TODO sredi chart
-       
                                 PrintRepeatabilityDataGridEndTest++;
                                 break;
 

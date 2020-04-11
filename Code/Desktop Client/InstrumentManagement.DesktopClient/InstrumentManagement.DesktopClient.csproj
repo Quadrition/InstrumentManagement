@@ -107,6 +107,7 @@
     <Compile Include="ViewModels\Scales\Main\Accuracy\Tests.cs" />
     <Compile Include="ViewModels\Scales\Main\CalibrationsTab.cs" />
     <Compile Include="ViewModels\Scales\Main\Main.cs" />
+    <Compile Include="ViewModels\Scales\Main\Repeatability\Chart.cs" />
     <Compile Include="ViewModels\Scales\Main\Repeatability\ReferenceValue.cs" />
     <Compile Include="ViewModels\Scales\Main\Repeatability\Tab.cs" />
     <Compile Include="ViewModels\Scales\Main\Repeatability\Tests.cs" />
@@ -179,6 +180,12 @@
     </Compile>
     <Compile Include="Views\Scales\Main\CalibrationsTab.xaml.cs">
       <DependentUpon>CalibrationsTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Scales\Main\Repeatability\Chart.xaml.cs">
+      <DependentUpon>Chart.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Scales\Main\Repeatability\ChartLegend.xaml.cs">
+      <DependentUpon>ChartLegend.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Scales\Main\Repeatability\ReferenceValue.xaml.cs">
       <DependentUpon>ReferenceValue.xaml</DependentUpon>
@@ -277,6 +284,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Scales\Main\CalibrationsTab.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Scales\Main\Repeatability\Chart.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Scales\Main\Repeatability\ChartLegend.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
