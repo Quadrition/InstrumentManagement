@@ -102,6 +102,7 @@
     <Compile Include="ViewModels\Scales\Dialogs\NewRepeatabilityTest.cs" />
     <Compile Include="ViewModels\Scales\Dialogs\NewWeightDialog.cs" />
     <Compile Include="ViewModels\Scales\Dialogs\UserAccessesDialog.cs" />
+    <Compile Include="ViewModels\Scales\Main\Accuracy\Chart.cs" />
     <Compile Include="ViewModels\Scales\Main\Accuracy\ReferenceValue.cs" />
     <Compile Include="ViewModels\Scales\Main\Accuracy\Tab.cs" />
     <Compile Include="ViewModels\Scales\Main\Accuracy\Tests.cs" />
@@ -168,6 +169,12 @@
     </Compile>
     <Compile Include="Views\Scales\Dialogs\UserAccessesDialog.xaml.cs">
       <DependentUpon>UserAccessesDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Scales\Main\Accuracy\Chart.xaml.cs">
+      <DependentUpon>Chart.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Scales\Main\Accuracy\ChartLegend.xaml.cs">
+      <DependentUpon>ChartLegend.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Scales\Main\Accuracy\ReferenceValue.xaml.cs">
       <DependentUpon>ReferenceValue.xaml</DependentUpon>
@@ -268,6 +275,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Scales\Dialogs\UserAccessesDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Scales\Main\Accuracy\Chart.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Scales\Main\Accuracy\ChartLegend.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -93,6 +93,9 @@
 
                         SelectedAccuracyReferenceValueMeasurement = SelectedCalibration.Accuracy.ReferenceValue.Measurements.First();
                         SelectedAccuracyTestMeasurement = SelectedCalibration.Accuracy.ReferenceValue.Measurements.First();
+                        AccuracyChartMeasurement = SelectedCalibration.Accuracy.ReferenceValue.Measurements.First();
+
+                        AccuracyChartLabels = new ObservableCollection<string>(AccuracyTests.Select(test => test.Number.ToString()));
 
                         PrintAccuracyDataGridStartTest = 1;
                         PrintAccuracyDataGridEndTest = AccuracyTests.Count;

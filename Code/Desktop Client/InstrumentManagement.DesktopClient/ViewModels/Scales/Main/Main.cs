@@ -192,8 +192,20 @@
                                 SelectedCalibration.Accuracy.ReferenceValue.Tests.Add(scaleAccuracyTestDialogViewModel.Test);
                                 AccuracyTests.Add(scaleAccuracyTestDialogViewModel.Test);
 
+                                AccuracyChartLabels.Add(scaleAccuracyTestDialogViewModel.Test.Number.ToString());
+
+                                foreach (ScaleAccuracyTestMeasurement measurement in scaleAccuracyTestDialogViewModel.Test.Measurements)
+                                {
+                                    measurement.ReferenceValueMeasurement.TestMeasurements.Add(measurement);
+
+                                    if (measurement.ReferenceValueMeasurement == AccuracyChartMeasurement)
+                                    {
+                                        AccuracyChartValues.Add(measurement.Result);
+                                    }
+                                }
+
                                 //TODO sredi cahrt
-                                
+
                                 PrintAccuracyDataGridEndTest++;
                                 break;
 
