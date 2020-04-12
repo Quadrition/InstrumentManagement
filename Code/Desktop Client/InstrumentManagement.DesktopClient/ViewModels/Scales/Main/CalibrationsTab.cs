@@ -62,7 +62,7 @@
                         RepeatabilityChartLabels = new ObservableCollection<string>(SelectedCalibration.Repeatability.ReferenceValue.Tests.Select(test => test.Date.ToString("MMM yy")));
                         RepeatabilityChartMapper = Mappers.Xy<double>().X((item, index) => index).Y(item => item).Fill(item => item > SelectedCalibration.Repeatability.ReferenceValue.MaxValidValue ? new SolidColorBrush(Color.FromRgb(238, 83, 80)) : null).Stroke(item => item > SelectedCalibration.Repeatability.ReferenceValue.MaxValidValue ? new SolidColorBrush(Color.FromRgb(238, 83, 80)) : null);
 
-                        RepeatabilityChartAxisXMaxValue = RepeatabilityTests.Count - 1;
+                        RepeatabilityChartAxisXMaxValue = RepeatabilityTests.Count;
 
                         PrintRepeatabilityDataGridStartTest = 1;
                         PrintRepeatabilityDataGridEndTest = RepeatabilityTests.Count;
@@ -71,6 +71,8 @@
                         {
                             RepeatabilityChartStartDate = DateTime.Now;
                             RepeatabilityChartEndDate = DateTime.Now;
+
+                            RepeatabilityChartAxisYMaxValue = 1.05 * SelectedCalibration.Repeatability.ReferenceValue.MaxValidValue;
                         }
                         else
                         {

@@ -61,7 +61,7 @@
             <TextBlock VerticalAlignment="Center" FontSize="15" Margin="0 0 25 0" FontWeight="Bold" Text="Korisnik:" />
             <TextBlock VerticalAlignment="Center" FontSize="15" Margin="0 0 25 0" Text="{Binding Test.Account.Username}" Grid.Column="1" />
         </StackPanel>
-        <Button Margin="5" Width="100" Grid.Row="5" x:Name="ConfirmButton" Command="{Binding ConfirmCommand}" MouseEnter="ConfirmButton_MouseEnter">
+        <Button Margin="5" Width="100" Grid.Row="3" x:Name="ConfirmButton" Command="{Binding ConfirmCommand}" MouseEnter="ConfirmButton_MouseEnter">
             <Button.Style>
                 <Style BasedOn="{StaticResource MaterialDesignRaisedAccentButton}" TargetType="Button">
                     <Setter Property="IsEnabled" Value="True"/>
@@ -74,9 +74,9 @@
             </Button.Style>
             Unesi
         </Button>
-        <Button Style="{StaticResource MaterialDesignRaisedAccentButton}" Margin="5" Width="100" Grid.Column="1" Grid.Row="5" Command="{Binding CancelCommand}">
+        <Button Style="{StaticResource MaterialDesignRaisedAccentButton}" Margin="5" Width="100" Grid.Column="1" Grid.Row="3" Command="{Binding CancelCommand}">
             Otkaži
         </Button>
-        <materialDesign:Snackbar MessageQueue="{Binding MessageQueue}" Grid.Row="6" Grid.ColumnSpan="2" />
+        <materialDesign:Snackbar MessageQueue="{Binding MessageQueue}" Grid.Row="4" Grid.ColumnSpan="2" />
     </Grid>
 </UserControl>
