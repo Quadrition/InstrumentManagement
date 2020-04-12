@@ -9,6 +9,7 @@
     using InstrumentManagement.Windows;
     using LiveCharts;
     using LiveCharts.Configurations;
+    using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
@@ -65,6 +66,17 @@
 
                         PrintRepeatabilityDataGridStartTest = 1;
                         PrintRepeatabilityDataGridEndTest = RepeatabilityTests.Count;
+
+                        if (RepeatabilityTests.Count == 0)
+                        {
+                            RepeatabilityChartStartDate = DateTime.Now;
+                            RepeatabilityChartEndDate = DateTime.Now;
+                        }
+                        else
+                        {
+                            RepeatabilityChartStartDate = SelectedCalibration.Repeatability.ReferenceValue.Tests.First().Date;
+                            RepeatabilityChartEndDate = SelectedCalibration.Repeatability.ReferenceValue.Tests.Last().Date;
+                        }
                     }
 
                     if (SelectedCalibration.Accuracy.ReferenceValue == null)

@@ -1,16 +1,13 @@
-﻿using InstrumentManagement.Windows;
-using LiveCharts;
-using LiveCharts.Configurations;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
-
-namespace InstrumentManagement.DesktopClient.ViewModels.Scales.Main
+﻿namespace InstrumentManagement.DesktopClient.ViewModels.Scales.Main
 {
+    using InstrumentManagement.Windows;
+    using LiveCharts;
+    using LiveCharts.Configurations;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Windows.Input;
+
     public partial class ScaleWindowViewModel
     {
         private ChartValues<double> repeatabilityChartValues;
@@ -153,8 +150,128 @@ namespace InstrumentManagement.DesktopClient.ViewModels.Scales.Main
 
         #endregion
 
+        #region Set Range Members
+
+        private DateTime repeatabilityChartStartDate;
+
         /// <summary>
-        /// Sets axis y max value for selected interval
+        /// Gets or sets a start date for setting chart range
+        /// </summary>
+        public DateTime RepeatabilityChartStartDate
+        {
+            get
+            {
+                return repeatabilityChartStartDate;
+            }
+            set
+            {
+                repeatabilityChartStartDate = value;
+                NotifyPropertyChanged(nameof(RepeatabilityChartStartDate));
+            }
+        }
+
+        private DateTime repeatabilityChartEndDate;
+
+        /// <summary>
+        /// Gets or sets an end date for setting chart range
+        /// </summary>
+        public DateTime RepeatabilityChartEndDate
+        {
+            get
+            {
+                return repeatabilityChartEndDate;
+            }
+            set
+            {
+                repeatabilityChartEndDate = value;
+                NotifyPropertyChanged(nameof(RepeatabilityChartEndDate));
+            }
+        }
+
+        /// <summary>
+        /// Gets an <see cref="ICommand"/> for setting date range on repeatability chart
+        /// </summary>
+        public ICommand SetDateRangeRepeatabilityChartCommand
+        {
+            get
+            {
+                return new ActionCommand(a => SetDateRangeRepeatabilityChart(), p => RepeatabilityTests != null && RepeatabilityTests.Count != 0);
+            }
+        }
+
+        /// <summary>
+        /// Sets a date range on repeatability chart
+        /// </summary>
+        private void SetDateRangeRepeatabilityChart()
+        {
+            RepeatabilityChartStartDate = new DateTime(RepeatabilityChartStartDate.Year, RepeatabilityChartStartDate.Month, 1);
+            RepeatabilityChartEndDate = new DateTime(RepeatabilityChartEndDate.Year, RepeatabilityChartEndDate.Month, DateTime.DaysInMonth(RepeatabilityChartEndDate.Year, RepeatabilityChartEndDate.Month));
+
+            if (RepeatabilityChartStartDate < RepeatabilityChartEndDate)
+            {
+                if (RepeatabilityChartStartDate > RepeatabilityTests.Last().Date)
+                {
+                    MessageQueue.Enqueue("Početni datum je veći od datuma poslednjeg testa");
+                }
+                else if (RepeatabilityChartEndDate < RepeatabilityTests.First().Date)
+                {
+                    MessageQueue.Enqueue("Krajnji datum je manji od datuma prvog testa");
+                }
+                else
+                {
+                    if (RepeatabilityChartStartDate < RepeatabilityTests.First().Date)
+                    {
+                        RepeatabilityChartAxisXMinValue = 0;
+                    }
+                    else
+                    {
+                        for (int i = 0; i < RepeatabilityChartLabels.Count; i++)
+                        {
+                            if (RepeatabilityChartLabels.ElementAt(i) == RepeatabilityChartStartDate.ToString("MMM yy"))
+                            {
+                                RepeatabilityChartAxisXMinValue = i;
+                                break;
+                            }
+
+                            if (i == RepeatabilityChartLabels.Count - 1)
+                            {
+                                RepeatabilityChartAxisXMinValue = 0;
+                            }
+                        }
+                    }
+
+                    if (RepeatabilityChartEndDate > RepeatabilityTests.Last().Date)
+                    {
+                        RepeatabilityChartAxisXMaxValue = RepeatabilityTests.Count;
+                    }
+                    else
+                    {
+                        for (int i = RepeatabilityChartLabels.Count - 1; i >= 0; i--)
+                        {
+                            if (RepeatabilityChartLabels.ElementAt(i) == RepeatabilityChartEndDate.ToString("MMM yy"))
+                            {
+                                RepeatabilityChartAxisXMaxValue = RepeatabilityChartAxisXMinValue == i ? i + 1 : i;
+                                break;
+                            }
+
+                            if (i == 0)
+                            {
+                                RepeatabilityChartAxisXMaxValue = RepeatabilityTests.Count;
+                            }
+                        }
+                    }
+                }
+            }
+            else
+            {
+                MessageQueue.Enqueue("Početni datum mora biti veći od krajnjeg");
+            }
+        }
+
+        #endregion
+
+        /// <summary>
+        /// Sets axis repeatability chart y max value for selected interval
         /// </summary>
         private void RepeatabilityChartSetAxisYMaxValue()
         {
