@@ -34,7 +34,7 @@
         {
             get
             {
-                return new ActionCommand(a => ShowNewScaleAccuracyTestDialog(), p => IsLastCalibration == true);
+                return new ActionCommand(a => ShowNewScaleAccuracyTestDialog(), p => IsLastCalibration == true && SelectedCalibration.Accuracy.ReferenceValue != null);
             }
         }
 

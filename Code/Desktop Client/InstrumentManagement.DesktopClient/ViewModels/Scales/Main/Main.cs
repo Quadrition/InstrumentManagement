@@ -10,7 +10,9 @@
     using InstrumentManagement.Windows;
     using InstrumentManagement.Windows.DialogHandler;
     using MaterialDesignThemes.Wpf;
+    using System;
     using System.Collections.ObjectModel;
+    using System.Diagnostics;
     using System.Linq;
     using System.Windows.Controls;
     using System.Windows.Input;
@@ -173,7 +175,9 @@
 
                                 RepeatabilityChartValues.Add(repeatabilityTestDialogViewModel.Test.StandardDeviation);
                                 RepeatabilityChartLabels.Add(repeatabilityTestDialogViewModel.Test.Date.ToString("MMM yy"));
-                                //TODO sredi chart
+
+                                RepeatabilityChartAxisXMaxValue++;
+
                                 PrintRepeatabilityDataGridEndTest++;
                                 break;
 

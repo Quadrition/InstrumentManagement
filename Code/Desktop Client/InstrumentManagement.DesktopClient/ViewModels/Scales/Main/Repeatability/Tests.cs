@@ -55,7 +55,7 @@
         {
             get
             {
-                return new ActionCommand(a => ShowNewScaleRepeatabilityTestDialog(), p => IsLastCalibration == true);
+                return new ActionCommand(a => ShowNewScaleRepeatabilityTestDialog(), p => IsLastCalibration == true && SelectedCalibration.Repeatability.ReferenceValue != null);
             }
         }
 
