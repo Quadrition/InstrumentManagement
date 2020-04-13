@@ -67,7 +67,7 @@
                 <lvc:Axis Title="Redni broj testa" Labels="{Binding AccuracyChartLabels}" MinValue="{Binding AccuracyChartAxisXMinValue, Mode=TwoWay}" MaxValue="{Binding AccuracyChartAxisXMaxValue, Mode=TwoWay}" />
             </lvc:CartesianChart.AxisX>
             <lvc:CartesianChart.AxisY>
-                <lvc:Axis MinValue="{Binding AccuracyChartAxisYMinValue, Mode=TwoWay}" Unit="{Binding SelectedRange.Graduate}" MaxValue="{Binding AccuracyChartAxisYMaxValue, Mode=TwoWay}" Title="Rezultat merenja">
+                <lvc:Axis MinValue="{Binding AccuracyChartAxisYMinValue, Mode=TwoWay}" MaxValue="{Binding AccuracyChartAxisYMaxValue, Mode=TwoWay}" Title="Rezultat merenja">
                     <lvc:Axis.Sections>
                         <lvc:AxisSection Value="{Binding AccuracyChartMeasurement.MinValidValue}" SectionWidth="{Binding AccuracyChartSectionWidth}" DataLabel="False">
                             <lvc:AxisSection.Fill>
@@ -81,8 +81,13 @@
                 </lvc:Axis>
             </lvc:CartesianChart.AxisY>
         </lvc:CartesianChart>
-        <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Bottom" ToolTipService.Placement="Top" ToolTip="Novi test" DockPanel.Dock="Right" Width="40" Height="40" Margin="10 10 5 10"  Command="{Binding ShowNewScaleAccuracyTestDialogCommand}">
-            <materialDesign:PackIcon Kind="Plus" Height="20" Width="20" />
-        </Button>
+        <StackPanel Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Bottom" Orientation="Horizontal">
+            <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" ToolTipService.Placement="Top" ToolTip="Novi test" DockPanel.Dock="Right" Width="40" Height="40" Margin="10 0 5 0"  Command="{Binding ShowNewScaleAccuracyTestDialogCommand}">
+                <materialDesign:PackIcon Kind="Plus" Height="20" Width="20" />
+            </Button>
+            <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" ToolTipService.Placement="Top" ToolTip="Novi test" DockPanel.Dock="Right" Width="40" Height="40" Margin="10 0 5 0"  Command="{Binding PrintAccuracyChartCommand}">
+                <materialDesign:PackIcon Kind="Printer" Height="20" Width="20" />
+            </Button>
+        </StackPanel>
     </Grid>
 </UserControl>

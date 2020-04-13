@@ -30,7 +30,7 @@
         <materialDesign:Transitioner SelectedIndex="{Binding Path=IsChecked, ElementName=AccuracyTestToggleButton, Converter={StaticResource BoolToIntegerConverter}}">
             <materialDesign:TransitionerSlide>
                 <materialDesign:TransitioningContent>
-                    <Grid Margin="20 0 100 25">
+                    <Grid Margin="20 0 0 25">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*" />
                             <RowDefinition Height="Auto" />

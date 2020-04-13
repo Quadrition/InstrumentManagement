@@ -1,6 +1,7 @@
 ﻿namespace InstrumentManagement.DesktopClient.ViewModels.Scales.Main
 {
     using InstrumentManagement.Data.Scales.Accuracy;
+    using InstrumentManagement.DesktopClient.Views.Scales.Main.Accuracy;
     using InstrumentManagement.Windows;
     using LiveCharts;
     using LiveCharts.Configurations;
@@ -382,6 +383,126 @@
         {
             AccuracyChartAxisXMaxValue = Math.Round(AccuracyChartAxisXMaxValue);
             AccuracyChartAxisXMinValue = Math.Round(AccuracyChartAxisXMinValue);
+        }
+
+        /// <summary>
+        /// Gets an <see cref="ICommand"/> for printing accuracy chart
+        /// </summary>
+        public ICommand PrintAccuracyChartCommand
+        {
+            get
+            {
+                return new ActionCommand(a => PrintAccuracyChart());
+            }
+        }
+
+        /// <summary>
+        /// Create accuracy chart for printing
+        /// </summary>
+        private CartesianChart CreateAccuracyChart()
+        {
+            var chartLegend = new ChartLegend();
+
+            chartLegend.ScaleManufacturerTextBlock.Text = Scale.Manufacturer;
+            chartLegend.ScaleTypeTextBlock.Text = string.IsNullOrEmpty(Scale.Type) ? null : "/" + Scale.Type;
+            chartLegend.ScaleSerialNumberTextBlock.Text = string.IsNullOrEmpty(Scale.SerialNumber) ? null : "/" + Scale.SerialNumber;
+            chartLegend.RangeUpperValueTextBlock.Text = Convert.ToString(SelectedRange.UpperValue);
+            chartLegend.RangeLowerValueTextBlock.Text = string.IsNullOrEmpty(Convert.ToString(SelectedRange.LowerValue)) ? null : "/" + Scale.Type;
+            chartLegend.RangeGraduateTextBlock.Text = string.IsNullOrEmpty(Convert.ToString(SelectedRange.Graduate)) ? null : "/" + Scale.Type;
+            chartLegend.CalibrationNumberTextBlock.Text = Convert.ToString(SelectedCalibration.Number);
+            chartLegend.VerificationNumberTextBlock.Text = SelectedCalibration.Verification.NumberOfVerification;
+            chartLegend.WeightsItemsControl.ItemsSource = AccuracyWeights;
+            chartLegend.MaxValueTextBlock.Text = Convert.ToString(AccuracyChartMeasurement.MaxValidValue);
+            chartLegend.MinValueTextBlock.Text = Convert.ToString(AccuracyChartMeasurement.MinValidValue);
+
+            var chart = new CartesianChart()
+            {
+                DisableAnimations = true,
+                LegendLocation = LegendLocation.Right,
+                ChartLegend = chartLegend,
+                Width = 1050,
+                Height = 550,
+                Background = new SolidColorBrush(Colors.White),
+                Series = new SeriesCollection
+                {
+                    new LineSeries
+                    {
+                        Values = new ChartValues<double>(AccuracyChartValues),
+                        Fill = new SolidColorBrush(Colors.Transparent),
+                        DataLabels = AccuracyChartDataLabelVisible,
+                        PointGeometrySize = 10,
+                        PointGeometry = DefaultGeometries.Square,
+                        Configuration = AccuracyChartMapper
+                    }
+                },
+                AxisX = new AxesCollection()
+                {
+                    new Axis()
+                    {
+                        Title = "Redni broj testa",
+                        Labels = new List<string>(AccuracyChartLabels),
+                        MinValue = AccuracyChartAxisXMinValue,
+                        MaxValue = AccuracyChartAxisXMaxValue
+                    }
+                },
+                AxisY = new AxesCollection()
+                {
+                    new Axis()
+                    {
+                        MinValue = AccuracyChartAxisYMinValue,
+                        MaxValue = AccuracyChartAxisYMaxValue,
+                        Title = "Standardna devijacija",
+                        Sections = new SectionsCollection()
+                        {
+                            new AxisSection()
+                            {
+                                Value = AccuracyChartMeasurement.MinValidValue,
+                                StrokeThickness = 1,
+                                DataLabel = false,
+                                Stroke = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF8585"))
+                            },
+                            new AxisSection()
+                            {
+                                Value = AccuracyChartMeasurement.MaxValidValue,
+                                StrokeThickness = 1,
+                                DataLabel = false,
+                                Stroke = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF8585"))
+                            }
+                        },
+                        Separator = new LiveCharts.Wpf.Separator()
+                        {
+                            Step = SelectedRange.Graduate
+                        }
+                    }
+                }
+            };
+
+            var viewbox = new Viewbox
+            {
+                Child = chart
+            };
+            viewbox.Measure(chart.RenderSize);
+            viewbox.Arrange(new Rect(new Point(0, 0), chart.RenderSize));
+            chart.Update(true, true); //force chart redraw
+            viewbox.UpdateLayout();
+            viewbox.Child = null;
+
+            return chart;
+        }
+
+        /// <summary>
+        /// Prints accuracy chart
+        /// </summary>
+        private void PrintAccuracyChart()
+        {
+            CartesianChart chart = CreateAccuracyChart();
+
+            PrintDialog dialog = new PrintDialog();
+
+            if (dialog.ShowDialog() == true)
+            {
+                dialog.PrintVisual(chart, "Grafički prikaz testa ponovljivosti vage");
+            }
         }
     }
 }
