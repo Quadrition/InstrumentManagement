@@ -204,8 +204,7 @@
                                     }
                                 }
 
-                                //TODO sredi cahrt
-
+                                AccuracyChartAxisXMaxValue++;
                                 PrintAccuracyDataGridEndTest++;
                                 break;
 

@@ -91,9 +91,12 @@
 
                         AccuracyTests = new ObservableCollection<ScaleAccuracyTest>(SelectedCalibration.Accuracy.ReferenceValue.Tests);
 
+
                         SelectedAccuracyReferenceValueMeasurement = SelectedCalibration.Accuracy.ReferenceValue.Measurements.First();
                         SelectedAccuracyTestMeasurement = SelectedCalibration.Accuracy.ReferenceValue.Measurements.First();
                         AccuracyChartMeasurement = SelectedCalibration.Accuracy.ReferenceValue.Measurements.First();
+
+                        AccuracyChartAxisXMaxValue = AccuracyTests.Count;
 
                         AccuracyChartLabels = new ObservableCollection<string>(AccuracyTests.Select(test => test.Number.ToString()));
 

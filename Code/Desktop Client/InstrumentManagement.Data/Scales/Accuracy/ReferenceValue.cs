@@ -86,6 +86,11 @@
         {
             get
             {
+                if (Measurements.Count == 0)
+                {
+                    return false;
+                }
+
                 foreach (ScaleAccuracyReferenceValueMeasurement measurement in Measurements)
                 {
                     if (!measurement.IsValid)

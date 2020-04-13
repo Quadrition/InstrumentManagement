@@ -35,6 +35,8 @@
                 {
                     AccuracyChartMapper = Mappers.Xy<double>().X((item, index) => index).Y(item => item).Fill(item => (item > value.MaxValidValue || item < value.MinValidValue) ? new SolidColorBrush(Color.FromRgb(238, 83, 80)) : null).Stroke(item => (item > value.MaxValidValue || item < value.MinValidValue) ? new SolidColorBrush(Color.FromRgb(238, 83, 80)) : null);
                     AccuracyChartValues = new ChartValues<double>(value.TestMeasurements.Select(test => test.Result));
+
+                    SetAccuracyChartSetAxisYValues();
                 }
             }
         }
@@ -93,6 +95,109 @@
             }
         }
 
+        #region Min/Max Values
+
+        private double accuracyChartAxisXMaxValue;
+
+        /// <summary>
+        /// Gets or sets a max value for chart axis x
+        /// </summary>
+        public double AccuracyChartAxisXMaxValue
+        {
+            get
+            {
+                return accuracyChartAxisXMaxValue;
+            }
+            set
+            {
+                if (value > AccuracyTests.Count)
+                {
+                    accuracyChartAxisXMaxValue = AccuracyTests.Count;
+                }
+                else if (value < 1)
+                {
+                    accuracyChartAxisXMaxValue = 1;
+                }
+                else
+                {
+                    accuracyChartAxisXMaxValue = value;
+                }
+
+                NotifyPropertyChanged(nameof(AccuracyChartAxisXMaxValue));
+
+                SetAccuracyChartSetAxisYValues();
+            }
+        }
+
+        private double accuracyChartAxisXMinValue;
+
+        /// <summary>
+        /// Gets or sets a min value for chart axis x
+        /// </summary>
+        public double AccuracyChartAxisXMinValue
+        {
+            get
+            {
+                return accuracyChartAxisXMinValue;
+            }
+            set
+            {
+                if (value < 0)
+                {
+                    accuracyChartAxisXMinValue = 0;
+                }
+                else if (value > AccuracyTests.Count - 1)
+                {
+                    accuracyChartAxisXMinValue = AccuracyTests.Count - 1;
+                }
+                else
+                {
+                    accuracyChartAxisXMinValue = value;
+                }
+
+                NotifyPropertyChanged(nameof(AccuracyChartAxisXMinValue));
+
+                SetAccuracyChartSetAxisYValues();
+            }
+        }
+
+        private double accuracyChartAxisYMaxValue;
+
+        /// <summary>
+        /// Gets or sets a max value for chart axis y
+        /// </summary>
+        public double AccuracyChartAxisYMaxValue
+        {
+            get
+            {
+                return accuracyChartAxisYMaxValue;
+            }
+            set
+            {
+                accuracyChartAxisYMaxValue = value;
+                NotifyPropertyChanged(nameof(AccuracyChartAxisYMaxValue));
+            }
+        }
+
+        private double accuracyChartAxisYMinValue;
+
+        /// <summary>
+        /// Gets or sets a min value for chart axis y
+        /// </summary>
+        public double AccuracyChartAxisYMinValue
+        {
+            get
+            {
+                return accuracyChartAxisYMinValue;
+            }
+            set
+            {
+                accuracyChartAxisYMinValue = value;
+                NotifyPropertyChanged(nameof(AccuracyChartAxisYMinValue));
+            }
+        }
+
+        #endregion
 
         /// <summary>
         /// Gets a width for valid section in accuracy chart
@@ -102,6 +207,26 @@
             get
             {
                 return AccuracyChartMeasurement.MaxValidValue - AccuracyChartMeasurement.MinValidValue;
+            }
+        }
+
+        /// <summary>
+        /// Sets axis accuracy chart y max value for selected interval
+        /// </summary>
+        private void SetAccuracyChartSetAxisYValues()
+        {
+            if (AccuracyChartValues.Count != 0 && AccuracyChartAxisXMaxValue != AccuracyChartAxisXMinValue)
+            {
+                IEnumerable<double> values = AccuracyChartValues.Skip(Convert.ToInt32(Math.Ceiling(AccuracyChartAxisXMinValue))).Take(Convert.ToInt32(Math.Floor(AccuracyChartAxisXMaxValue)));
+
+                double maxValue = values.Max();
+                double minValue = values.Min();
+
+                double maxValidValue = AccuracyChartMeasurement.MaxValidValue;
+                double minValidValue = AccuracyChartMeasurement.MinValidValue;
+
+                AccuracyChartAxisYMaxValue = (maxValue > maxValidValue ? maxValue : maxValidValue) + SelectedRange.Graduate;
+                AccuracyChartAxisYMinValue = (minValue < minValidValue ? minValue : minValidValue) - SelectedRange.Graduate;
             }
         }
 
@@ -121,6 +246,26 @@
                 accuracyChartDataLabelVisible = value;
                 NotifyPropertyChanged(nameof(AccuracyChartDataLabelVisible));
             }
+        }
+
+        /// <summary>
+        /// Gets an <see cref="ICommand"/> for round axis x values
+        /// </summary>
+        public ICommand AccuracyChartSetAxisXRoundCommand
+        {
+            get
+            {
+                return new ActionCommand(a => AccuracyChartSetAxisXRound());
+            }
+        }
+        //TODO add printing
+        /// <summary>
+        /// Rounds axis x values
+        /// </summary>
+        private void AccuracyChartSetAxisXRound()
+        {
+            AccuracyChartAxisXMaxValue = Math.Round(AccuracyChartAxisXMaxValue);
+            AccuracyChartAxisXMinValue = Math.Round(AccuracyChartAxisXMinValue);
         }
     }
 }

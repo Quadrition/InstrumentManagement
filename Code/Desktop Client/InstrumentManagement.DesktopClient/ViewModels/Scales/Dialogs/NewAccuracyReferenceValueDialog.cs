@@ -193,7 +193,7 @@
         {
             get
             {
-                return new ActionCommand(a => ConfirmDialog());
+                return new ActionCommand(a => ConfirmDialog(), p => Measurements.Count != 0);
             }
         }
 
