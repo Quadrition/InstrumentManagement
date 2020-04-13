@@ -7,6 +7,7 @@
              xmlns:system="clr-namespace:System;assembly=mscorlib"
              xmlns:converters="clr-namespace:InstrumentManagement.Windows.Converters;assembly=InstrumentManagement.Windows"
              xmlns:scales="clr-namespace:InstrumentManagement.Data.Scales;assembly=InstrumentManagement.Data"
+             xmlns:translations="clr-namespace:InstrumentManagement.DesktopClient.ViewModels.Scales.Translations"
              xmlns:validationRules="clr-namespace:InstrumentManagement.Windows.ValidationRules;assembly=InstrumentManagement.Windows"
              mc:Ignorable="d"
              Loaded="UserControl_Loaded">
@@ -17,6 +18,7 @@
                 <x:Type TypeName="scales:WeightUnit"/>
             </ObjectDataProvider.MethodParameters>
         </ObjectDataProvider>
+        <translations:WeightUnitConverter x:Key="WeightUnitConverter" />
     </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -58,7 +60,13 @@
                 </Binding.ValidationRules>
             </Binding>
         </TextBox>
-        <ComboBox Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="100" ItemsSource="{Binding Source={StaticResource WeightUnits}}" SelectedItem="{Binding NewScaleRange.WeightUnit}" materialDesign:HintAssist.Hint="Merna jedinica" Style="{StaticResource MaterialDesignFloatingHintComboBox}" />
+        <ComboBox Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="100" ItemsSource="{Binding Source={StaticResource WeightUnits}}" SelectedItem="{Binding NewScaleRange.WeightUnit}" materialDesign:HintAssist.Hint="Merna jedinica" Style="{StaticResource MaterialDesignFloatingHintComboBox}">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Converter={StaticResource WeightUnitConverter}}"/>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
 
         <Button Grid.Row="3" Width="80" Command="{Binding ConfirmCommand}" Margin="10">
             <Button.Style>

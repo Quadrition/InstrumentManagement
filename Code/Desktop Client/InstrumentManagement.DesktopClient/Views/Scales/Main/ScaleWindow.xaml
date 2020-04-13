@@ -7,8 +7,12 @@
         xmlns:repeatability="clr-namespace:InstrumentManagement.DesktopClient.Views.Scales.Main.Repeatability"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:accuracy="clr-namespace:InstrumentManagement.DesktopClient.Views.Scales.Main.Accuracy"
+        xmlns:translations="clr-namespace:InstrumentManagement.DesktopClient.ViewModels.Scales.Translations"
         mc:Ignorable="d"
-        Title="ScaleWindow" Height="720" Width="1280" WindowState="Maximized">
+        Title="Vaga" Height="720" Width="1280" WindowState="Maximized">
+    <Window.Resources>
+        <translations:WeightUnitConverter x:Key="WeightUnitConverter" />
+    </Window.Resources>
     <materialDesign:DialogHost IsOpen="{Binding IsDialogOpened}" DialogContent="{Binding DialogContent}" SnackbarMessageQueue="{Binding ElementName=ScaleSnackbar, Path=MessageQueue}">
         <Grid>
             <Grid.ColumnDefinitions>
@@ -78,7 +82,7 @@
                                             <GridViewColumn DisplayMemberBinding="{Binding UpperValue}" Header="Gornja granica" />
                                             <GridViewColumn DisplayMemberBinding="{Binding LowerValue}" Header="Donja granica" />
                                             <GridViewColumn DisplayMemberBinding="{Binding Graduate}" Header="Podeljak" />
-                                            <GridViewColumn DisplayMemberBinding="{Binding WeightUnit}" Header="Jedinica" />
+                                            <GridViewColumn DisplayMemberBinding="{Binding WeightUnit, Converter={StaticResource WeightUnitConverter}}" Header="Jedinica" />
                                         </GridView>
                                     </ListView.View>
                                 </ListView>

@@ -112,6 +112,8 @@
     <Compile Include="ViewModels\Scales\Main\Repeatability\ReferenceValue.cs" />
     <Compile Include="ViewModels\Scales\Main\Repeatability\Tab.cs" />
     <Compile Include="ViewModels\Scales\Main\Repeatability\Tests.cs" />
+    <Compile Include="ViewModels\Scales\Translations\TestPeriodicity.cs" />
+    <Compile Include="ViewModels\Scales\Translations\WeightUnit.cs" />
     <Compile Include="Views\Administration\AdministrationDialog.xaml.cs">
       <DependentUpon>AdministrationDialog.xaml</DependentUpon>
     </Compile>

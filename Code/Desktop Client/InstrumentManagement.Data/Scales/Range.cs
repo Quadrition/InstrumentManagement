@@ -6,7 +6,7 @@
     using InstrumentManagement.Windows;
     using System.Collections.Generic;
     using InstrumentManagement.Data.Scales.Calibration;
-
+    //TODO add kg
     /// <summary>
     /// Represents the units used for the weighting purposes
     /// </summary>

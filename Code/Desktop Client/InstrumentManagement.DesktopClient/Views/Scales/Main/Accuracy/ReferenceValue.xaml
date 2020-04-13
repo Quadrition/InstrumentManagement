@@ -5,9 +5,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:converters="clr-namespace:InstrumentManagement.Windows.Converters;assembly=InstrumentManagement.Windows"
+             xmlns:translations="clr-namespace:InstrumentManagement.DesktopClient.ViewModels.Scales.Translations"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
+        <translations:TestPeriodicityConverter x:Key="TestPeriodicityConverter" />
         <converters:NullToVisibilityConverter x:Key="NullToVisibilityConverter" />
     </UserControl.Resources>
     <ScrollViewer VerticalScrollBarVisibility="Auto">
@@ -28,7 +30,7 @@
                     <TextBlock Margin="0 15 0 0" VerticalAlignment="Center" Grid.Column="1" Style="{StaticResource MaterialDesignSubheadingTextBlock}" FontWeight="Bold">
                                                             Period testiranja:
                     </TextBlock>
-                    <TextBlock Margin="15 15 30 0" VerticalAlignment="Center" Grid.Column="2" Text="{Binding SelectedCalibration.Accuracy.ReferenceValue.TestPeriodicity}" />
+                    <TextBlock Margin="15 15 30 0" VerticalAlignment="Center" Grid.Column="2" Text="{Binding SelectedCalibration.Accuracy.ReferenceValue.TestPeriodicity, Converter={StaticResource TestPeriodicityConverter}}" />
 
                     <ListView Grid.Row="1" Grid.ColumnSpan="3" ItemsSource="{Binding SelectedCalibration.Accuracy.ReferenceValue.Measurements}" ScrollViewer.CanContentScroll="False" MinHeight="200" SelectionMode="Single" Margin="5 5 5 25" SelectedItem="{Binding SelectedAccuracyReferenceValueMeasurement}">
                         <ListView.View>

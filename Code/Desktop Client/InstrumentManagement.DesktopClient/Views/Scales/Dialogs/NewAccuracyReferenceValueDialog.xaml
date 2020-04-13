@@ -6,10 +6,12 @@
              xmlns:local="clr-namespace:InstrumentManagement.DesktopClient.Views.Scales.Dialogs"
              xmlns:converters="clr-namespace:InstrumentManagement.Windows.Converters;assembly=InstrumentManagement.Windows"
              xmlns:system="clr-namespace:System;assembly=mscorlib"
+             xmlns:translations="clr-namespace:InstrumentManagement.DesktopClient.ViewModels.Scales.Translations"
              xmlns:scalesAccuracy="clr-namespace:InstrumentManagement.Data.Scales.Accuracy;assembly=InstrumentManagement.Data"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d">
     <UserControl.Resources>
+        <translations:TestPeriodicityConverter x:Key="TestPeriodicityConverter" />
         <converters:InvertBooleanConverter x:Key="InvertBooleanConverter" />
         <converters:NullToVisibilityConverter x:Key="NullToVisibilityConverter" />
         <ObjectDataProvider x:Key="TestPeriodicity" MethodName="GetValues" ObjectType="{x:Type system:Enum}">
@@ -43,7 +45,13 @@
                 </StackPanel>
             </materialDesign:Card>
 
-            <ComboBox Margin="0 20 0 20" HorizontalAlignment="Center" Grid.Row="1" materialDesign:HintAssist.Hint="Period testiranja" ItemsSource="{Binding Source={StaticResource TestPeriodicity}}" SelectedItem="{Binding ReferenceValue.TestPeriodicity}" Width="200" Style="{StaticResource MaterialDesignFloatingHintComboBox}" />
+            <ComboBox Margin="0 20 0 20" HorizontalAlignment="Center" Grid.Row="1" materialDesign:HintAssist.Hint="Period testiranja" ItemsSource="{Binding Source={StaticResource TestPeriodicity}}" SelectedItem="{Binding ReferenceValue.TestPeriodicity}" Width="200" Style="{StaticResource MaterialDesignFloatingHintComboBox}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Converter={StaticResource TestPeriodicityConverter}}"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
 
             <Border BorderThickness="1" BorderBrush="{DynamicResource PrimaryHueMidBrush}" ClipToBounds="True" Grid.Row="2" Margin="10" >
                 <Grid>

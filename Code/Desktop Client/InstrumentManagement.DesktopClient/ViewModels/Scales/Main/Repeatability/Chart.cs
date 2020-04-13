@@ -323,7 +323,7 @@
                 return new ActionCommand(a => RepeatabilityChartSetAxisXRound());
             }
         }
-        //TODO add printing
+
         /// <summary>
         /// Rounds axis x values
         /// </summary>

@@ -375,7 +375,7 @@
                 return new ActionCommand(a => AccuracyChartSetAxisXRound());
             }
         }
-        //TODO add printing
+
         /// <summary>
         /// Rounds axis x values
         /// </summary>

@@ -51,7 +51,7 @@
 
             MessageQueue = new SnackbarMessageQueue();
         }
-        //TODO stavi za periodicity translate
+
         #region Measurements Members
 
         private ICollection<ScaleAccuracyReferenceValueMeasurement> measurements;

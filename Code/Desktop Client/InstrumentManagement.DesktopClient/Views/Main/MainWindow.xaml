@@ -6,7 +6,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:InstrumentManagement.DesktopClient.Views.Main"
         mc:Ignorable="d"
-        Title="MainWindow" Height="720" Width="1280" WindowState="Maximized">
+        Title="Praćenje mernih instrumenata" Height="720" Width="1280" WindowState="Maximized">
     <materialDesign:DialogHost IsOpen="{Binding IsDialogOpened}" DialogContent="{Binding DialogContent}" SnackbarMessageQueue="{Binding ElementName=MainWindowSnackBar, Path=MessageQueue}">
         <Grid>
             <Grid.ColumnDefinitions>
