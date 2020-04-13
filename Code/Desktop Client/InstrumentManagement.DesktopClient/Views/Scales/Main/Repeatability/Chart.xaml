@@ -28,7 +28,7 @@
                 Prikaži vrednosti
             </CheckBox>
         </DockPanel>
-        <lvc:CartesianChart Zoom="X" Grid.Row="1" LegendLocation="Right" Name="RepeatabilitChart" IsManipulationEnabled="False">
+        <lvc:CartesianChart Zoom="X" Grid.Row="1" LegendLocation="Right" Name="RepeatabilitChart">
             <lvc:CartesianChart.ChartLegend>
                 <local:ChartLegend />
             </lvc:CartesianChart.ChartLegend>
@@ -51,8 +51,13 @@
                 </lvc:Axis>
             </lvc:CartesianChart.AxisY>
         </lvc:CartesianChart>
-        <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Bottom" ToolTipService.Placement="Top" ToolTip="Novi test" DockPanel.Dock="Right" Width="40" Height="40" Margin="10 10 5 10"  Command="{Binding ShowNewScaleRepeatabilityTestDialogCommand}">
-            <materialDesign:PackIcon Kind="Plus" Height="20" Width="20" />
-        </Button>
+        <StackPanel Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Bottom" Orientation="Horizontal">
+            <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" ToolTipService.Placement="Top" ToolTip="Novi test" DockPanel.Dock="Right" Width="40" Height="40" Margin="10 0 5 0"  Command="{Binding ShowNewScaleRepeatabilityTestDialogCommand}">
+                <materialDesign:PackIcon Kind="Plus" Height="20" Width="20" />
+            </Button>
+            <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" ToolTipService.Placement="Top" ToolTip="Novi test" DockPanel.Dock="Right" Width="40" Height="40" Margin="10 0 5 0"  Command="{Binding PrintRepeatabilityChartCommand}">
+                <materialDesign:PackIcon Kind="Printer" Height="20" Width="20" />
+            </Button>
+        </StackPanel>
     </Grid>
 </UserControl>

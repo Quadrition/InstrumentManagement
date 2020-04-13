@@ -1,12 +1,18 @@
 ﻿namespace InstrumentManagement.DesktopClient.ViewModels.Scales.Main
 {
+    using InstrumentManagement.DesktopClient.Views.Scales.Main.Repeatability;
     using InstrumentManagement.Windows;
     using LiveCharts;
     using LiveCharts.Configurations;
+    using LiveCharts.Wpf;
     using System;
     using System.Collections.Generic;
+    using System.Drawing.Printing;
     using System.Linq;
+    using System.Windows;
+    using System.Windows.Controls;
     using System.Windows.Input;
+    using System.Windows.Media;
 
     public partial class ScaleWindowViewModel
     {
@@ -325,6 +331,115 @@
         {
             RepeatabilityChartAxisXMaxValue = Math.Round(RepeatabilityChartAxisXMaxValue);
             RepeatabilityChartAxisXMinValue = Math.Round(RepeatabilityChartAxisXMinValue);
+        }
+
+        /// <summary>
+        /// Gets an <see cref="ICommand"/> for printing repeatability chart
+        /// </summary>
+        public ICommand PrintRepeatabilityChartCommand
+        {
+            get
+            {
+                return new ActionCommand(a => PrintRepeatabilityChart());
+            }
+        }
+
+        /// <summary>
+        /// Create repeatability chart for printing
+        /// </summary>
+        private CartesianChart CreateRepeatabilityChart()
+        {
+            var chartLegend = new ChartLegend();
+             
+            chartLegend.ScaleManufacturerTextBlock.Text = Scale.Manufacturer;
+            chartLegend.ScaleTypeTextBlock.Text = string.IsNullOrEmpty(Scale.Type) ? null : "/" + Scale.Type;
+            chartLegend.ScaleSerialNumberTextBlock.Text = string.IsNullOrEmpty(Scale.SerialNumber) ? null : "/" + Scale.SerialNumber;
+            chartLegend.RangeUpperValueTextBlock.Text = Convert.ToString(SelectedRange.UpperValue);
+            chartLegend.RangeLowerValueTextBlock.Text = string.IsNullOrEmpty(Convert.ToString(SelectedRange.LowerValue)) ? null : "/" + Scale.Type;
+            chartLegend.RangeGraduateTextBlock.Text = string.IsNullOrEmpty(Convert.ToString(SelectedRange.Graduate)) ? null : "/" + Scale.Type;
+            chartLegend.CalibrationNumberTextBlock.Text = Convert.ToString(SelectedCalibration.Number);
+            chartLegend.VerificationNumberTextBlock.Text = SelectedCalibration.Verification.NumberOfVerification;
+            chartLegend.WeightsItemsControl.ItemsSource = RepeatabilityWeights;
+            chartLegend.MaxValueTextBlock.Text = Convert.ToString(SelectedCalibration.Repeatability.ReferenceValue.MaxValidValue);
+
+            var chart = new CartesianChart()
+            {
+                DisableAnimations = true,
+                LegendLocation = LegendLocation.Right,
+                ChartLegend = chartLegend,
+                Width = 1050,
+                Height = 550,
+                Background = new SolidColorBrush(Colors.White),
+                Series = new SeriesCollection
+                {
+                    new LineSeries
+                    {
+                        Values = new ChartValues<double>(RepeatabilityChartValues),
+                        Fill = new SolidColorBrush(Colors.Transparent),
+                        DataLabels = RepeatabilityChartDataLabelVisible,
+                        PointForeground = new SolidColorBrush(Colors.White),
+                        PointGeometrySize = 10,
+                        PointGeometry = DefaultGeometries.Square,
+                        Configuration = RepeatabilityChartMapper
+                    }
+                },
+                AxisX = new AxesCollection()
+                {
+                    new Axis()
+                    {
+                        Title = "Datum",
+                        Labels = new List<string>(RepeatabilityChartLabels),
+                        MinValue = RepeatabilityChartAxisXMinValue,
+                        MaxValue = RepeatabilityChartAxisXMaxValue
+                    }
+                },
+                AxisY = new AxesCollection()
+                {
+                    new Axis()
+                    {
+                        MinValue = 0,
+                        MaxValue = RepeatabilityChartAxisYMaxValue,
+                        Title = "Standardna devijacija",
+                        Sections = new SectionsCollection()
+                        {
+                            new AxisSection()
+                            {
+                                Value = SelectedCalibration.Repeatability.ReferenceValue.MaxValidValue,
+                                StrokeThickness = 1,
+                                DataLabel = false,
+                                Stroke = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF8585"))
+                            }
+                        }
+                    }
+                }
+            };
+
+            var viewbox = new Viewbox
+            {
+                Child = chart
+            };
+            viewbox.Measure(chart.RenderSize);
+            viewbox.Arrange(new Rect(new Point(0, 0), chart.RenderSize));
+            chart.Update(true, true); //force chart redraw
+            viewbox.UpdateLayout();
+            viewbox.Child = null;
+
+            return chart;
+        }
+
+        /// <summary>
+        /// Prints repeatability chart
+        /// </summary>
+        private void PrintRepeatabilityChart()
+        {
+            CartesianChart chart = CreateRepeatabilityChart();
+
+            PrintDialog dialog = new PrintDialog();
+
+            if (dialog.ShowDialog() == true)
+            {
+                dialog.PrintVisual(chart, "Grafički prikaz testa ponovljivosti vage");
+            }
         }
     }
 }

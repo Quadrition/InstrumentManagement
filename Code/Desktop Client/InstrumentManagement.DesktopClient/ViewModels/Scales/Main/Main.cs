@@ -103,7 +103,9 @@
                 transitionerSelectedIndex = value;
                 NotifyPropertyChanged(nameof(TransitionerSelectedIndex));
 
-                //TODO close pop-ups
+                IsPopupRepeatabilityDataGridPrintingOpen = false;
+                IsPopupAccuracyDataGridPrintingOpen = false;
+                IsPopupAccuracySinglePointDataGridPrintingOpen = false;
             }
         }
 

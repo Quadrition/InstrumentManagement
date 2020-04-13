@@ -64,64 +64,6 @@
         /// </summary>
         private void ShowNewScaleRepeatabilityTestDialog()
         {
-            //for (int i = 0; i < 20; i++)
-            //{
-            //    RepTest test = new RepTest()
-            //    {
-            //        Account = Account,
-            //        Date = DateTime.Now,
-            //        Number = (short)RepeatabilityTests.Count,
-            //        ReferenceValue = SelectedCalibration.Repeatability.ReferenceValue,
-            //        Status = true,
-            //        Measurements = new HashSet<RepTest.Measurement>()
-            //    {
-            //        new RepTest.Measurement()
-            //        {
-            //            Result = 200.02f
-            //        },
-            //        new RepTest.Measurement()
-            //        {
-            //            Result = 200.02f
-            //        },
-            //        new RepTest.Measurement()
-            //        {
-            //            Result = 200.02f
-            //        },
-            //        new RepTest.Measurement()
-            //        {
-            //            Result = 200.02f
-            //        },
-            //        new RepTest.Measurement()
-            //        {
-            //            Result = 200.02f
-            //        },
-            //        new RepTest.Measurement()
-            //        {
-            //            Result = 200.02f
-            //        },
-            //        new RepTest.Measurement()
-            //        {
-            //            Result = 200.02f
-            //        },
-            //        new RepTest.Measurement()
-            //        {
-            //            Result = 200.02f
-            //        },
-            //        new RepTest.Measurement()
-            //        {
-            //            Result = 200.02f
-            //        },
-            //        new RepTest.Measurement()
-            //        {
-            //            Result = 200.02f
-            //        },
-            //    }
-            //    };
-            //    SelectedCalibration.Repeatability.ReferenceValue.Tests.Add(test);
-            //    RepeatabilityTests.Add(test);
-            //}
-            //TODO skloni ovo
-
             DialogViewModel = new NewRepeatabilityTestDialogViewModel(SelectedCalibration.Repeatability.ReferenceValue, Account, this);
 
             DialogContent = new Views.Scales.Dialogs.NewRepeatabilityTestDialog()

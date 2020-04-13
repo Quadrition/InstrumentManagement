@@ -34,7 +34,8 @@
                 transitionerAccuracySelectedIndex = value;
                 NotifyPropertyChanged(nameof(TransitionerAccuracySelectedIndex));
 
-                //TODO popups close
+                IsPopupAccuracyDataGridPrintingOpen = false;
+                IsPopupAccuracySinglePointDataGridPrintingOpen = false;
             }
         }
 
