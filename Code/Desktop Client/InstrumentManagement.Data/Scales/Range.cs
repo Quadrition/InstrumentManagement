@@ -113,19 +113,15 @@
         /// <returns>True if the property is valid, otherwise false</returns>
         protected override string OnValidate(string propertyName)
         {
-            if (propertyName == "UpperValue" || propertyName == "LowerValue")
+            if (propertyName == "UpperValue")
             {
-                if (propertyName == "UpperValue" && UpperValue == 0)
+                if (UpperValue == 0)
                 {
                     return "Gornja granica ne može biti 0";
                 }
-
-                if (UpperValue <= LowerValue + Graduate)
-                {
-                    return "Gornja granica mora biti veća od donje granice";
-                }
             }
-            else if (propertyName == "Graduate")
+
+            if (propertyName == "Graduate")
             {
                 if (Graduate == 0)
                 {

@@ -87,6 +87,12 @@
 
         public void ConfirmDialog()
         {
+            if (NewScaleRange.UpperValue <= NewScaleRange.LowerValue)
+            {
+                MessageQueue.Enqueue("Gornja granica mora biti veća od donje granice");
+                return;
+            }
+
             ScaleRange scaleRange = Ranges.SingleOrDefault(p => p.UpperValue == NewScaleRange.UpperValue);
 
             if (scaleRange != null)
