@@ -199,6 +199,117 @@
 
         #endregion
 
+        #region Set Range Members
+
+        private short accuracyChartStartNumber;
+
+        public short AccuracyChartStartNumber
+        {
+            get
+            {
+                return accuracyChartStartNumber;
+            }
+            set
+            {
+                accuracyChartStartNumber = value;
+                NotifyPropertyChanged(nameof(AccuracyChartStartNumber));
+            }
+        }
+
+        private short accuracyChartEndNumber;
+
+        public short AccuracyChartEndNumber
+        {
+            get
+            {
+                return accuracyChartEndNumber;
+            }
+            set
+            {
+                accuracyChartEndNumber = value;
+                NotifyPropertyChanged(nameof(AccuracyChartEndNumber));
+            }
+        }
+
+        /// <summary>
+        /// Gets an <see cref="ICommand"/> for setting date range on accuracy chart
+        /// </summary>
+        public ICommand SetNumberRangeAccuracyChartCommand
+        {
+            get
+            {
+                return new ActionCommand(a => SetNumberRangeAccuracyChart(), p => AccuracyTests != null && AccuracyTests.Count != 0);
+            }
+        }
+
+        /// <summary>
+        /// Sets a date range on repeatability chart
+        /// </summary>
+        private void SetNumberRangeAccuracyChart()
+        {
+            if (AccuracyChartStartNumber < AccuracyChartEndNumber)
+            {
+                if (AccuracyChartStartNumber > AccuracyTests.Last().Number)
+                {
+                    MessageQueue.Enqueue("Početni broj testa je veći od broja poslednjeg testa");
+                }
+                else if (AccuracyChartEndNumber < AccuracyTests.First().Number)
+                {
+                    MessageQueue.Enqueue("Krajnji broj testa je manji od broja prvog testa");
+                }
+                else
+                {
+                    if (AccuracyChartStartNumber < AccuracyTests.First().Number)
+                    {
+                        AccuracyChartAxisXMinValue = 0;
+                    }
+                    else
+                    {
+                        for (int i = 0; i < AccuracyChartLabels.Count; i++)
+                        {
+                            if (Convert.ToInt32(AccuracyChartLabels.ElementAt(i)) == AccuracyChartStartNumber)
+                            {
+                                AccuracyChartAxisXMinValue = i;
+                                break;
+                            }
+
+                            if (i == AccuracyChartLabels.Count - 1)
+                            {
+                                AccuracyChartAxisXMinValue = 0;
+                            }
+                        }
+                    }
+
+                    if (AccuracyChartEndNumber > AccuracyTests.Last().Number)
+                    {
+                        AccuracyChartAxisXMaxValue = AccuracyTests.Count;
+                    }
+                    else
+                    {
+                        for (int i = AccuracyChartLabels.Count - 1; i >= 0; i--)
+                        {
+                            if (Convert.ToInt32(AccuracyChartLabels.ElementAt(i)) == AccuracyChartEndNumber)
+                            {
+                                AccuracyChartAxisXMaxValue = AccuracyChartAxisXMinValue == i ? i + 1 : i;
+                                break;
+                            }
+
+                            if (i == AccuracyChartLabels.Count - 1)
+                            {
+                                AccuracyChartAxisXMaxValue = AccuracyTests.Count;
+                            }
+                        }
+                    }
+                }
+            }
+            else
+            {
+                MessageQueue.Enqueue("Početni broj testa mora biti veći od krajnjeg");
+            }
+        }
+
+        #endregion
+
         /// <summary>
         /// Gets a width for valid section in accuracy chart
         /// </summary>

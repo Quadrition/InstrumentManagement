@@ -98,6 +98,12 @@
 
                         AccuracyChartLabels = new ObservableCollection<string>(AccuracyTests.Select(test => test.Number.ToString()));
 
+                        if (AccuracyTests.Count != 0)
+                        {
+                            AccuracyChartStartNumber = AccuracyTests.First().Number;
+                            AccuracyChartEndNumber = AccuracyTests.Last().Number;
+                        }
+
                         PrintAccuracyDataGridStartTest = 1;
                         PrintAccuracyDataGridEndTest = AccuracyTests.Count;
                     }
