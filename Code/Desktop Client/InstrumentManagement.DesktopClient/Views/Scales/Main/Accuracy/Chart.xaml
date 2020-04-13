@@ -14,7 +14,7 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <DockPanel LastChildFill="False">
-            <ComboBox materialDesign:HintAssist.Hint="Tačka provere" DockPanel.Dock="Left" Style="{StaticResource MaterialDesignFloatingHintComboBox}" ItemsSource="{Binding SelectedCalibration.Accuracy.ReferenceValue.Measurements}" DisplayMemberPath="CheckPoint" SelectedItem="{Binding AccuracyChartMeasurement}" HorizontalAlignment="Left" Margin="20 5 0 15" />
+            <ComboBox materialDesign:HintAssist.Hint="Tačka provere" DockPanel.Dock="Left" Style="{StaticResource MaterialDesignFloatingHintComboBox}" ItemsSource="{Binding SelectedCalibration.Accuracy.ReferenceValue.Measurements}" DisplayMemberPath="CheckPoint" SelectedItem="{Binding AccuracyChartMeasurement}" HorizontalAlignment="Left" Margin="20 0 0 0" />
             <StackPanel DockPanel.Dock="Left" Orientation="Horizontal">
                 <TextBlock Margin="75 0 5 0" VerticalAlignment="Center" Grid.Column="2" Style="{StaticResource MaterialDesignSubheadingTextBlock}" Text="Period:" />
                 <TextBox Margin="20" Grid.Row="1" x:Name="AccuracyChartStartNumber" materialDesign:ValidationAssist.OnlyShowOnFocus="True" HorizontalAlignment="Center" VerticalAlignment="Center" Width="50" materialDesign:HintAssist.Hint="Od" Style="{StaticResource MaterialDesignFloatingHintTextBox}">
@@ -24,7 +24,7 @@
                         </Binding.ValidationRules>
                     </Binding>
                 </TextBox>
-                <TextBox Margin="20" x:Name="AccuracyChartEndNumber" Grid.ColumnSpan="1" materialDesign:ValidationAssist.OnlyShowOnFocus="True" HorizontalAlignment="Center" VerticalAlignment="Center" Width="50" materialDesign:HintAssist.Hint="Do" Style="{StaticResource MaterialDesignFloatingHintTextBox}">
+                <TextBox Margin="20 0 20 0" x:Name="AccuracyChartEndNumber" Grid.ColumnSpan="1" materialDesign:ValidationAssist.OnlyShowOnFocus="True" HorizontalAlignment="Center" VerticalAlignment="Center" Width="50" materialDesign:HintAssist.Hint="Do" Style="{StaticResource MaterialDesignFloatingHintTextBox}">
                     <Binding Path="AccuracyChartEndNumber" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
                         <Binding.ValidationRules>
                             <validationRules:IntegerValidationRule />
@@ -56,7 +56,7 @@
                 Prikaži vrednosti
             </CheckBox>
         </DockPanel>
-        <lvc:CartesianChart Zoom="X" Grid.Row="1" LegendLocation="Right" Name="AccuracChart">
+        <lvc:CartesianChart Zoom="X" Grid.Row="1" LegendLocation="Right" Name="AccuracyChart">
             <lvc:CartesianChart.ChartLegend>
                 <local:ChartLegend />
             </lvc:CartesianChart.ChartLegend>
@@ -75,6 +75,9 @@
                             </lvc:AxisSection.Fill>
                         </lvc:AxisSection>
                     </lvc:Axis.Sections>
+                    <lvc:Axis.Separator>
+                        <lvc:Separator Step="{Binding SelectedRange.Graduate}" />
+                    </lvc:Axis.Separator>
                 </lvc:Axis>
             </lvc:CartesianChart.AxisY>
         </lvc:CartesianChart>

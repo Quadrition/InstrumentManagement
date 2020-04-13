@@ -71,8 +71,6 @@
                         {
                             RepeatabilityChartStartDate = DateTime.Now;
                             RepeatabilityChartEndDate = DateTime.Now;
-
-                            RepeatabilityChartAxisYMaxValue = 1.05 * SelectedCalibration.Repeatability.ReferenceValue.MaxValidValue;
                         }
                         else
                         {

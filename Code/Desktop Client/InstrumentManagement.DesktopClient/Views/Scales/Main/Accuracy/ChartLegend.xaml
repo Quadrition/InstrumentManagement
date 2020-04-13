@@ -44,7 +44,7 @@
         <StackPanel Grid.Row="7" Orientation="Horizontal" Margin="0 5 0 5">
             <TextBlock Margin="5" VerticalAlignment="Top" Text="Tegovi:" Style="{StaticResource MaterialDesignBody2TextBlock}" />
             <StackPanel>
-                <ItemsControl ItemsSource="{Binding RepeatabilityWeights}" Name="WeightsItemsControl">
+                <ItemsControl ItemsSource="{Binding AccuracyWeights}" Name="WeightsItemsControl">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">

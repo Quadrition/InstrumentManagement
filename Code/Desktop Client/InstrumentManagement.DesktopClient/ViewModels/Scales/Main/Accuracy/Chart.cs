@@ -215,6 +215,9 @@
         /// </summary>
         private void SetAccuracyChartSetAxisYValues()
         {
+            double maxValidValue = AccuracyChartMeasurement.MaxValidValue;
+            double minValidValue = AccuracyChartMeasurement.MinValidValue;
+
             if (AccuracyChartValues.Count != 0 && AccuracyChartAxisXMaxValue != AccuracyChartAxisXMinValue)
             {
                 IEnumerable<double> values = AccuracyChartValues.Skip(Convert.ToInt32(Math.Ceiling(AccuracyChartAxisXMinValue))).Take(Convert.ToInt32(Math.Floor(AccuracyChartAxisXMaxValue)));
@@ -222,11 +225,13 @@
                 double maxValue = values.Max();
                 double minValue = values.Min();
 
-                double maxValidValue = AccuracyChartMeasurement.MaxValidValue;
-                double minValidValue = AccuracyChartMeasurement.MinValidValue;
-
                 AccuracyChartAxisYMaxValue = (maxValue > maxValidValue ? maxValue : maxValidValue) + SelectedRange.Graduate;
                 AccuracyChartAxisYMinValue = (minValue < minValidValue ? minValue : minValidValue) - SelectedRange.Graduate;
+            }
+            else
+            {
+                AccuracyChartAxisYMaxValue = maxValidValue + SelectedRange.Graduate;
+                AccuracyChartAxisYMinValue = minValidValue - SelectedRange.Graduate;
             }
         }
 

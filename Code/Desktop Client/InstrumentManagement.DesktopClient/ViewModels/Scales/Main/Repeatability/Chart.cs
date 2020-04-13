@@ -275,12 +275,17 @@
         /// </summary>
         private void RepeatabilityChartSetAxisYMaxValue()
         {
+            double maxValidValue = SelectedCalibration.Repeatability.ReferenceValue.MaxValidValue;
+
             if (RepeatabilityChartValues.Count != 0)
             {
                 double maxValue = RepeatabilityChartValues.Skip(Convert.ToInt32(Math.Ceiling(RepeatabilityChartAxisXMinValue))).Take(Convert.ToInt32(Math.Floor(RepeatabilityChartAxisXMaxValue))).Max();
-                double maxValidValue = SelectedCalibration.Repeatability.ReferenceValue.MaxValidValue;
 
                 RepeatabilityChartAxisYMaxValue = 1.05 * (maxValue > maxValidValue ? maxValue : maxValidValue);
+            }
+            else
+            {
+                RepeatabilityChartAxisYMaxValue = maxValidValue;
             }
         }
 
