@@ -1,5 +1,6 @@
 ﻿namespace InstrumentManagement.DesktopClient.ViewModels.Scales.Main
 {
+    using InstrumentManagement.Data.Accounts;
     using InstrumentManagement.Data.Scales;
     using InstrumentManagement.DesktopClient.ViewModels.Scales.Dialogs;
     using InstrumentManagement.Windows;
@@ -51,7 +52,7 @@
         {
             get
             {
-                return new ActionCommand(a => ShowNewScaleRepeatabilityWeightDialog(), p => IsLastCalibration == true);
+                return new ActionCommand(a => ShowNewScaleRepeatabilityWeightDialog(), p => IsLastCalibration == true && Account is Administrator);
             }
         }
 
@@ -77,7 +78,7 @@
         {
             get
             {
-                return new ActionCommand(a => RemoveScaleRepeatabilityWeightDialog(), p => SelectedRepeatabilityWeight != null && IsLastCalibration == true);
+                return new ActionCommand(a => RemoveScaleRepeatabilityWeightDialog(), p => SelectedRepeatabilityWeight != null && IsLastCalibration == true && Account is Administrator);
             }
         }
 

@@ -10,9 +10,7 @@
     using InstrumentManagement.Windows;
     using InstrumentManagement.Windows.DialogHandler;
     using MaterialDesignThemes.Wpf;
-    using System;
     using System.Collections.ObjectModel;
-    using System.Diagnostics;
     using System.Linq;
     using System.Windows.Controls;
     using System.Windows.Input;

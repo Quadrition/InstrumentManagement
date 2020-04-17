@@ -1,5 +1,6 @@
 ﻿namespace InstrumentManagement.DesktopClient.ViewModels.Scales.Main
 {
+    using InstrumentManagement.Data.Accounts;
     using InstrumentManagement.Data.Scales;
     using InstrumentManagement.Data.Scales.Accuracy;
     using InstrumentManagement.DesktopClient.ViewModels.Scales.Dialogs;
@@ -76,7 +77,7 @@
         {
             get
             {
-                return new ActionCommand(a => ShowNewScaleAccuracyWeightDialog(), p => IsLastCalibration == true);
+                return new ActionCommand(a => ShowNewScaleAccuracyWeightDialog(), p => IsLastCalibration == true && Account is Administrator);
             }
         }
 
@@ -102,7 +103,7 @@
         {
             get
             {
-                return new ActionCommand(a => RemoveScaleAccuracyWeightDialog(), p => SelectedAccuracyWeight != null && IsLastCalibration == true);
+                return new ActionCommand(a => RemoveScaleAccuracyWeightDialog(), p => SelectedAccuracyWeight != null && IsLastCalibration == true && Account is Administrator);
             }
         }
 
