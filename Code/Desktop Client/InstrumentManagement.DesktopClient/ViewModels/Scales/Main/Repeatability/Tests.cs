@@ -1,5 +1,6 @@
 ﻿namespace InstrumentManagement.DesktopClient.ViewModels.Scales.Main
 {
+    using InstrumentManagement.Data.Accounts;
     using InstrumentManagement.Data.Scales.Repeatability;
     using InstrumentManagement.DesktopClient.ViewModels.Scales.Dialogs;
     using InstrumentManagement.Windows;
@@ -74,8 +75,34 @@
             IsDialogOpened = true;
         }
 
+        /// <summary>
+        /// Gets an <see cref="ICommand"/> for opening a <see cref="Views.Scales.Dialogs.EditRepeatabilityTestDialog"/>
+        /// </summary>
+        public ICommand ShowEditScaleRepeatabilityTestDialogCommand
+        {
+            get
+            {
+                return new ActionCommand(a => ShowEditScaleRepeatabilityTestDialog(), p => IsLastCalibration == true && Account is Administrator && SelectedRepeatabilityTest != null);
+            }
+        }
+
+        /// <summary>
+        /// Opens a <see cref="Views.Scales.Dialogs.EditRepeatabilityTestDialog"/>
+        /// </summary>
+        private void ShowEditScaleRepeatabilityTestDialog()
+        {
+            DialogViewModel = new EditRepeatabilityTestDialogViewModel(SelectedRepeatabilityTest, Account, this);
+
+            DialogContent = new Views.Scales.Dialogs.EditRepeatabilityTestDialog()
+            {
+                DataContext = DialogViewModel
+            };
+
+            IsDialogOpened = true;
+        }
+
         private bool isRepeatabilityPopupDataGridPrintingOpen;
-        //TODO add test edit
+
         /// <summary>
         /// Gets or sets if popup for data grid repeatability printing is opened
         /// </summary>

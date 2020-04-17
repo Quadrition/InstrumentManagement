@@ -34,6 +34,9 @@
             <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" ToolTipService.Placement="Top" ToolTip="Novi test" Width="40" Height="40" Margin="0 -50 10 0"  Command="{Binding ShowNewScaleRepeatabilityTestDialogCommand}">
                 <materialDesign:PackIcon Kind="Plus" Height="20" Width="20" />
             </Button>
+            <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" ToolTipService.Placement="Top" ToolTip="Novi test" Width="40" Height="40" Margin="0 -50 10 0"  Command="{Binding ShowEditScaleRepeatabilityTestDialogCommand}">
+                <materialDesign:PackIcon Kind="Edit" Height="20" Width="20" />
+            </Button>
             <materialDesign:PopupBox PlacementMode="TopAndAlignLeftEdges" IsPopupOpen="{Binding IsPopupRepeatabilityDataGridPrintingOpen}" StaysOpen="True">
                 <materialDesign:PopupBox.ToggleContent>
                     <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" ToolTipService.Placement="Top" ToolTip="Štampa" Width="40" Height="40" Margin="0 -50 55 0" Command="{Binding OpenPopupRepeatabilityDataGridPrinting}">

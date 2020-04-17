@@ -23,7 +23,7 @@
     public partial class ScaleWindowViewModel : ViewModel, IDialogHostViewModel
     {
         private readonly BusinessContext context;
-
+        //TODO proveri ko sta moze da uradi
         private Scale scale;
 
         /// <summary>
@@ -225,6 +225,11 @@
                                 {
                                     throw new System.Exception();
                                 }
+                                break;
+
+                            case EditRepeatabilityTestDialogViewModel editRepeatabilityTestDialogViewModel:
+                                RepeatabilityTests = new ObservableCollection<ScaleRepeatabilityTest>(SelectedCalibration.Repeatability.ReferenceValue.Tests);
+                                RepeatabilityChartValues = new LiveCharts.ChartValues<double>(SelectedCalibration.Repeatability.ReferenceValue.Tests.Select(test => test.StandardDeviation));
                                 break;
                         }
 
