@@ -1,5 +1,6 @@
 ﻿namespace InstrumentManagement.DesktopClient.ViewModels.Scales.Dialogs
 {
+    using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
@@ -68,9 +69,29 @@
 
             Measurements = new ObservableCollection<ScaleAccuracyTestMeasurement>(test.Measurements);
 
+            Date = test.Date;
+
             DialogHostViewModel = dialogHostViewModel;
 
             MessageQueue = new SnackbarMessageQueue();
+        }
+
+        private DateTime date;
+
+        /// <summary>
+        /// Gets or sets a <see cref="DateTime"/> for the test
+        /// </summary>
+        public DateTime Date
+        {
+            get
+            {
+                return date;
+            }
+            set
+            {
+                date = value;
+                NotifyPropertyChanged(nameof(Date));
+            }
         }
 
         private ICollection<ScaleAccuracyTestMeasurement> measurements;
@@ -113,6 +134,7 @@
             {
                 Test.Measurements.ElementAt(i).Result = Measurements.ElementAt(i).Result;
             }
+            Test.Date = Date;
 
             Test.CalculateResults();
 

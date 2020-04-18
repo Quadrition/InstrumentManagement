@@ -90,6 +90,7 @@
             set
             {
                 date = value;
+                NotifyPropertyChanged(nameof(Date));
             }
         }
 
