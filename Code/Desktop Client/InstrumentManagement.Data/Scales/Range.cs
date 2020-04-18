@@ -6,14 +6,15 @@
     using InstrumentManagement.Windows;
     using System.Collections.Generic;
     using InstrumentManagement.Data.Scales.Calibration;
-    //TODO add kg
+
     /// <summary>
     /// Represents the units used for the weighting purposes
     /// </summary>
     public enum WeightUnit
     {
         gram = 0,
-        milligram = 1
+        milligram = 1,
+        kilogram = 2
     }
 
     /// <summary>

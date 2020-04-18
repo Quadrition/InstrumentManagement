@@ -22,6 +22,9 @@
                 case WeightUnit.milligram:
                     return "Miligram";
 
+                case WeightUnit.kilogram:
+                    return "Kilogram";
+
                 default:
                     return value;
             }

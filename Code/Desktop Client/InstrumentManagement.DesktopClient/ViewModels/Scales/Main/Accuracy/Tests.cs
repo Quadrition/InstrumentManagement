@@ -27,7 +27,7 @@
                 NotifyPropertyChanged(nameof(AccuracyTests));
             }
         }
-        //TODO add test edit
+
         /// <summary>
         /// Gets a command for opening a <see cref="Views.Scales.Dialogs.NewAccuracyTestDialog"/>
         /// </summary>
