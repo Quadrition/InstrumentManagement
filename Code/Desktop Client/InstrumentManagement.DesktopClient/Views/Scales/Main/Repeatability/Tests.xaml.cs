@@ -1,9 +1,9 @@
-﻿using InstrumentManagement.DesktopClient.ViewModels.Scales.Main;
-using System.Windows;
-using System.Windows.Controls;
-
-namespace InstrumentManagement.DesktopClient.Views.Scales.Main.Repeatability
+﻿namespace InstrumentManagement.DesktopClient.Views.Scales.Main.Repeatability
 {
+    using InstrumentManagement.DesktopClient.ViewModels.Scales.Main;
+    using System.Windows;
+    using System.Windows.Controls;
+
     /// <summary>
     /// Interaction logic for Tests.xaml
     /// </summary>

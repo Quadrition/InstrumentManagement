@@ -1,8 +1,8 @@
-﻿using System.Windows;
-using System.Windows.Controls;
-
-namespace InstrumentManagement.DesktopClient.Views.Scales.Dialogs
+﻿namespace InstrumentManagement.DesktopClient.Views.Scales.Dialogs
 {
+    using System.Windows;
+    using System.Windows.Controls;
+
     /// <summary>
     /// Interaction logic for NewCalibrationAccuracyMeasurementDialog.xaml
     /// </summary>
