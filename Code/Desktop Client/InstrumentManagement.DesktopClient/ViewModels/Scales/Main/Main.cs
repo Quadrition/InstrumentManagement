@@ -226,13 +226,17 @@
                                 break;
 
                             case EditRepeatabilityTestDialogViewModel editRepeatabilityTestDialogViewModel:
-                                RepeatabilityTests = new ObservableCollection<ScaleRepeatabilityTest>(SelectedCalibration.Repeatability.ReferenceValue.Tests);
-                                RepeatabilityChartValues = new LiveCharts.ChartValues<double>(SelectedCalibration.Repeatability.ReferenceValue.Tests.Select(test => test.StandardDeviation));
+                                (RepeatabilityTests as ObservableCollection<ScaleRepeatabilityTest>).RemoveAt(editRepeatabilityTestDialogViewModel.Test.Number - 1);
+                                (RepeatabilityTests as ObservableCollection<ScaleRepeatabilityTest>).Insert(editRepeatabilityTestDialogViewModel.Test.Number - 1, editRepeatabilityTestDialogViewModel.Test);
+                                RepeatabilityChartValues.RemoveAt(editRepeatabilityTestDialogViewModel.Test.Number - 1);
+                                RepeatabilityChartValues.Insert(editRepeatabilityTestDialogViewModel.Test.Number - 1, editRepeatabilityTestDialogViewModel.Test.StandardDeviation);
                                 break;
 
                             case EditAccuracyTestDialogViewModel editAccuracyTestDialogViewModel:
-                                AccuracyTests = new ObservableCollection<ScaleAccuracyTest>(SelectedCalibration.Accuracy.ReferenceValue.Tests);
-                                AccuracyChartValues = new LiveCharts.ChartValues<double>(AccuracyChartMeasurement.TestMeasurements.Select(test => test.Result));
+                                (AccuracyTests as ObservableCollection<ScaleAccuracyTest>).RemoveAt(editAccuracyTestDialogViewModel.Test.Number - 1);
+                                (AccuracyTests as ObservableCollection<ScaleAccuracyTest>).Insert(editAccuracyTestDialogViewModel.Test.Number - 1, editAccuracyTestDialogViewModel.Test);
+                                AccuracyChartValues.RemoveAt(editAccuracyTestDialogViewModel.Test.Number - 1);
+                                AccuracyChartValues.Insert(editAccuracyTestDialogViewModel.Test.Number - 1, editAccuracyTestDialogViewModel.Test.Measurements.Single(measurement => measurement.ReferenceValueMeasurement == AccuracyChartMeasurement).Result);
                                 break;
                         }
 

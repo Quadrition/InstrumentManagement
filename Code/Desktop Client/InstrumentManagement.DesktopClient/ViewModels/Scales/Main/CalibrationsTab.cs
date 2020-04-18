@@ -42,7 +42,6 @@
                 #region Change Calibration actions
 
                 TransitionerSelectedIndex = 0;
-                //TODO proveri kad menjas opsege pa sta se desi
 
                 if (value != null)
                 {

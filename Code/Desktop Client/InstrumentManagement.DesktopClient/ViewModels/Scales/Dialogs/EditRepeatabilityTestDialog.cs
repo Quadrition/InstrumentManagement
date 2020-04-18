@@ -69,9 +69,28 @@
 
             Measurements = new ObservableCollection<ScaleRepeatabilityTestMeasurement>(test.Measurements);
 
+            Date = test.Date;
+
             DialogHostViewModel = baseViewModel;
 
             MessageQueue = new SnackbarMessageQueue();
+        }
+
+        private DateTime date;
+
+        /// <summary>
+        /// Gets or sets a <see cref="DateTime"/> for the test
+        /// </summary>
+        public DateTime Date
+        {
+            get
+            {
+                return date;
+            }
+            set
+            {
+                date = value;
+            }
         }
 
         private ICollection<ScaleRepeatabilityTestMeasurement> measurements;
@@ -116,6 +135,7 @@
             {
                 Test.Measurements.ElementAt(i).Result = Measurements.ElementAt(i).Result;
             }
+            Test.Date = date;
 
             Test.CalculateResults();
 
