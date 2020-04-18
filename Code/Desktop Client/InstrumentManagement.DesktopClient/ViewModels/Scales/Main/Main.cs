@@ -21,7 +21,7 @@
     public partial class ScaleWindowViewModel : ViewModel, IDialogHostViewModel
     {
         private readonly BusinessContext context;
-        //TODO proveri ko sta moze da uradi
+
         private Scale scale;
 
         /// <summary>
@@ -228,6 +228,11 @@
                             case EditRepeatabilityTestDialogViewModel editRepeatabilityTestDialogViewModel:
                                 RepeatabilityTests = new ObservableCollection<ScaleRepeatabilityTest>(SelectedCalibration.Repeatability.ReferenceValue.Tests);
                                 RepeatabilityChartValues = new LiveCharts.ChartValues<double>(SelectedCalibration.Repeatability.ReferenceValue.Tests.Select(test => test.StandardDeviation));
+                                break;
+
+                            case EditAccuracyTestDialogViewModel editAccuracyTestDialogViewModel:
+                                AccuracyTests = new ObservableCollection<ScaleAccuracyTest>(SelectedCalibration.Accuracy.ReferenceValue.Tests);
+                                AccuracyChartValues = new LiveCharts.ChartValues<double>(AccuracyChartMeasurement.TestMeasurements.Select(test => test.Result));
                                 break;
                         }
 

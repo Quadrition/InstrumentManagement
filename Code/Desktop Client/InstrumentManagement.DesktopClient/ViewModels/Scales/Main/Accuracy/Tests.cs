@@ -1,5 +1,6 @@
 ﻿namespace InstrumentManagement.DesktopClient.ViewModels.Scales.Main
 {
+    using InstrumentManagement.Data.Accounts;
     using InstrumentManagement.Data.Scales.Accuracy;
     using InstrumentManagement.DesktopClient.ViewModels.Scales.Dialogs;
     using InstrumentManagement.Windows;
@@ -35,6 +36,24 @@
             get
             {
                 return new ActionCommand(a => ShowNewScaleAccuracyTestDialog(), p => IsLastCalibration == true && SelectedCalibration.Accuracy.ReferenceValue != null);
+            }
+        }
+
+        private ScaleAccuracyTest selectedAccuracyTest;
+
+        /// <summary>
+        /// Gets or sets a selected <see cref="ScaleAccuracyTest"/> from the <see cref="AccuracyTests"/>
+        /// </summary>
+        public ScaleAccuracyTest SelectedAccuracyTest
+        {
+            get
+            {
+                return selectedAccuracyTest;
+            }
+            set
+            {
+                selectedAccuracyTest = value;
+                NotifyPropertyChanged(nameof(SelectedAccuracyTest));
             }
         }
 
@@ -115,6 +134,32 @@
                 selectedAccuracyTestMeasurement = value;
                 NotifyPropertyChanged(nameof(selectedAccuracyTestMeasurement));
             }
+        }
+
+        /// <summary>
+        /// Gets an <see cref="ICommand"/> for opening a <see cref="Views.Scales.Dialogs.EditAccuracyTestDialog"/>
+        /// </summary>
+        public ICommand ShowEditScaleAccuracyTestDialogCommand
+        {
+            get
+            {
+                return new ActionCommand(a => ShowEditScaleAccuracyTestDialog(), p => IsLastCalibration == true && Account is Administrator && SelectedAccuracyTest != null);
+            }
+        }
+
+        /// <summary>
+        /// Opens a <see cref="Views.Scales.Dialogs.EditAccuracyTestDialog"/>
+        /// </summary>
+        private void ShowEditScaleAccuracyTestDialog()
+        {
+            DialogViewModel = new EditAccuracyTestDialogViewModel(SelectedAccuracyTest, Account, this);
+
+            DialogContent = new Views.Scales.Dialogs.EditAccuracyTestDialog()
+            {
+                DataContext = DialogViewModel
+            };
+
+            IsDialogOpened = true;
         }
 
         private bool isAccuracyPopupDataGridPrintingOpen;

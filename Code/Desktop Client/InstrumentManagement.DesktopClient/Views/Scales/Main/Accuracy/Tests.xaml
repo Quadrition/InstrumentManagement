@@ -35,7 +35,7 @@
                             <RowDefinition Height="*" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
-                        <DataGrid ItemsSource="{Binding AccuracyTests}" IsReadOnly="True" Margin="0 0 50 0" ScrollViewer.CanContentScroll="False" Name="AccuracyDataGrid" AutoGenerateColumns="False" RowDetailsVisibilityMode="{Binding AccuracyTestsGridRowDetailsVisibility}">
+                        <DataGrid ItemsSource="{Binding AccuracyTests}" IsReadOnly="True" Margin="0 0 50 0" ScrollViewer.CanContentScroll="False" Name="AccuracyDataGrid" AutoGenerateColumns="False" SelectedItem="{Binding SelectedAccuracyTest}" RowDetailsVisibilityMode="{Binding AccuracyTestsGridRowDetailsVisibility}">
                             <DataGrid.Columns>
                                 <DataGridTemplateColumn>
                                     <DataGridTemplateColumn.CellTemplate>
@@ -99,6 +99,9 @@
                         <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Right">
                             <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" ToolTipService.Placement="Top" ToolTip="Novi test" Width="40" Height="40" Margin="0 -50 10 0"  Command="{Binding ShowNewScaleAccuracyTestDialogCommand}">
                                 <materialDesign:PackIcon Kind="Plus" Height="20" Width="20" />
+                            </Button>
+                            <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" ToolTipService.Placement="Top" ToolTip="Novi test" Width="40" Height="40" Margin="0 -50 10 0"  Command="{Binding ShowEditScaleAccuracyTestDialogCommand}">
+                                <materialDesign:PackIcon Kind="Edit" Height="20" Width="20" />
                             </Button>
                             <materialDesign:PopupBox PlacementMode="TopAndAlignLeftEdges" IsPopupOpen="{Binding IsPopupAccuracyDataGridPrintingOpen}" StaysOpen="True">
                                 <materialDesign:PopupBox.ToggleContent>

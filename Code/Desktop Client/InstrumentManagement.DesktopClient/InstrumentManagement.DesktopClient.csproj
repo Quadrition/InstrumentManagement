@@ -92,6 +92,7 @@
     <Compile Include="ViewModels\Main\NewScaleDialog.cs" />
     <Compile Include="ViewModels\Main\NewScaleRangeDialog.cs" />
     <Compile Include="ViewModels\Main\ScalesTab.cs" />
+    <Compile Include="ViewModels\Scales\Dialogs\EditAccuracyTestDialog.cs" />
     <Compile Include="ViewModels\Scales\Dialogs\EditRepeatabilityTestDialog.cs" />
     <Compile Include="ViewModels\Scales\Dialogs\EditScaleDialog.cs" />
     <Compile Include="ViewModels\Scales\Dialogs\NewAccuracyReferenceValueDialog.cs" />
@@ -142,6 +143,9 @@
     </Compile>
     <Compile Include="Views\Main\ScalesTab.xaml.cs">
       <DependentUpon>ScalesTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Scales\Dialogs\EditAccuracyTestDialog.xaml.cs">
+      <DependentUpon>EditAccuracyTestDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Scales\Dialogs\EditRepeatabilityTestDialog.xaml.cs">
       <DependentUpon>EditRepeatabilityTestDialog.xaml</DependentUpon>
@@ -241,6 +245,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Main\ScalesTab.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Scales\Dialogs\EditAccuracyTestDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -1,6 +1,5 @@
 ﻿namespace InstrumentManagement.DesktopClient.ViewModels.Scales.Dialogs
 {
-    using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
@@ -12,12 +11,10 @@
     using MaterialDesignThemes.Wpf;
 
     /// <summary>
-    /// A <see cref="ViewModel"/> containing all functionalities for the <see cref="Views.Scales.Dialogs.NewAccuracyTestDialog"/>
+    /// A <see cref="ViewModel"/> containing all functionalities for the <see cref="Views.Scales.Dialogs.EditAccuracyTestDialog"/>
     /// </summary>
-    public class NewAccuracyTestDialogViewModel : ViewModel, IDialogViewModel
+    public class EditAccuracyTestDialogViewModel : ViewModel, IDialogViewModel
     {
-        private bool potentialErrors;
-
         private ScaleAccuracyTest test;
 
         /// <summary>
@@ -60,36 +57,20 @@
         public SnackbarMessageQueue MessageQueue { get; set; }
 
         /// <summary>
-        /// Initializes a new instance of <see cref="NewAccuracyTestDialogViewModel"/> class
+        /// Initializes a new instance of <see cref="EditAccuracyTestDialogViewModel"/> class
         /// </summary>
         /// <param name="account">An <see cref="Account"/> which did the <see cref="Test"/></param>
-        /// <param name="referenceValue"> A <see cref="ScaleAccuracyReferenceValue"/> to which the <see cref="Test"/> belongs</param>
-        /// <param name="dialogHostViewModel">A <see cref="IDialogHostViewModel"/> from which the <see cref="NewAccuracyTestDialogViewModel"/> is opened</param>
-        public NewAccuracyTestDialogViewModel(ScaleAccuracyReferenceValue referenceValue, Account account, IDialogHostViewModel dialogHostViewModel)
+        /// <param name="referenceValue"> A <see cref="ScaleAccuracyTest"/> which needs to be edited</param>
+        /// <param name="dialogHostViewModel">A <see cref="IDialogHostViewModel"/> from which the <see cref="EditAccuracyTestDialogViewModel"/> is opened</param>
+        public EditAccuracyTestDialogViewModel(ScaleAccuracyTest test, Account account, IDialogHostViewModel dialogHostViewModel)
         {
-            Measurements = new ObservableCollection<ScaleAccuracyTestMeasurement>();
+            Test = test;
 
-            foreach (ScaleAccuracyReferenceValueMeasurement accuracyMeasurement in referenceValue.Measurements)
-            {
-                Measurements.Add(new ScaleAccuracyTestMeasurement()
-                {
-                    ReferenceValueMeasurement = accuracyMeasurement,
-                });
-            }
-
-            Test = new ScaleAccuracyTest()
-            {
-                Account = account,
-                ReferenceValue = referenceValue,
-                Number = (short)(referenceValue.Tests.Count + 1),
-                Date = DateTime.Now
-            };
+            Measurements = new ObservableCollection<ScaleAccuracyTestMeasurement>(test.Measurements);
 
             DialogHostViewModel = dialogHostViewModel;
 
             MessageQueue = new SnackbarMessageQueue();
-
-            potentialErrors = true;
         }
 
         private ICollection<ScaleAccuracyTestMeasurement> measurements;
@@ -110,15 +91,6 @@
             }
         }
 
-        /// <summary>
-        /// Confirms that user checked results
-        /// </summary>
-        void ConfirmResults()
-        {
-            potentialErrors = false;
-            ConfirmDialog();
-        }
-
         #region IDialogHostViewModel Members
 
         public ICommand ConfirmCommand
@@ -137,18 +109,9 @@
                 return;
             }
 
-            Test.Measurements = new HashSet<ScaleAccuracyTestMeasurement>(Measurements);
-
-            if (potentialErrors)
+            for (int i = 0; i < Measurements.Count; i++)
             {
-                foreach (ScaleAccuracyTestMeasurement measurement in Test.Measurements)
-                {
-                    if (Math.Abs(measurement.Result - measurement.ReferenceValueMeasurement.Results.Select(result => result.Result).Average()) > 2 * ScaleAccuracyReferenceValue.Coefficient * measurement.ReferenceValueMeasurement.AccuracyReferenceValue.Accuracy.Calibration.Repeatability.ReferenceValue.ReferenceValue)
-                    {
-                        MessageQueue.Enqueue("Da li ste sigurni u tačnost unetih rezultata?", "Da", () => ConfirmResults());
-                        return;
-                    }
-                }
+                Test.Measurements.ElementAt(i).Result = Measurements.ElementAt(i).Result;
             }
 
             Test.CalculateResults();
