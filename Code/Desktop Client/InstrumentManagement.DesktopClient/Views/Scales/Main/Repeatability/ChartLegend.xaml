@@ -41,20 +41,18 @@
         </StackPanel>
         <Separator Grid.Row="6" Margin="10 2 10 2" />
         <StackPanel Grid.Row="7" Orientation="Horizontal" Margin="0 5 0 5">
-            <TextBlock Margin="5" VerticalAlignment="Top" Text="Tegovi:" Style="{StaticResource MaterialDesignBody2TextBlock}" />
-            <StackPanel>
-                <ItemsControl ItemsSource="{Binding RepeatabilityWeights}" Name="WeightsItemsControl">
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock VerticalAlignment="Center" Text="{Binding Manufacturer}" Style="{StaticResource MaterialDesignBody1TextBlock}" />
-                                <TextBlock VerticalAlignment="Center" Text="{Binding SerialNumber, StringFormat=/{0}}" Style="{StaticResource MaterialDesignBody1TextBlock}" />
-                                <TextBlock VerticalAlignment="Center" Text="{Binding NominalMass, StringFormat=/{0}}" Style="{StaticResource MaterialDesignBody1TextBlock}" />
-                            </StackPanel>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-            </StackPanel>
+            <TextBlock VerticalAlignment="Center" Margin="0 0 10 0" Text="Tegovi:" Style="{StaticResource MaterialDesignBody2TextBlock}" />
+            <ItemsControl ItemsSource="{Binding RepeatabilityWeights}" Name="WeightsItemsControl">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock VerticalAlignment="Center" Text="{Binding Manufacturer}" Style="{StaticResource MaterialDesignBody1TextBlock}" />
+                            <TextBlock VerticalAlignment="Center" Text="{Binding SerialNumber, StringFormat=/{0}}" Style="{StaticResource MaterialDesignBody1TextBlock}" />
+                            <TextBlock VerticalAlignment="Center" Text="{Binding NominalMass, StringFormat=/{0}}" Style="{StaticResource MaterialDesignBody1TextBlock}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
         </StackPanel>
         <Separator Grid.Row="8" Margin="10 2 10 2" />
         <StackPanel Grid.Row="9" Orientation="Horizontal">
