@@ -177,6 +177,9 @@
     <Compile Include="Views\Scales\Dialogs\NewWeightDialog.xaml.cs">
       <DependentUpon>NewWeightDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Scales\Dialogs\ProgressIndicator.xaml.cs">
+      <DependentUpon>ProgressIndicator.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Scales\Dialogs\UserAccessesDialog.xaml.cs">
       <DependentUpon>UserAccessesDialog.xaml</DependentUpon>
     </Compile>
@@ -289,6 +292,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Scales\Dialogs\NewWeightDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Scales\Dialogs\ProgressIndicator.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

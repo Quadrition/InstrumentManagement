@@ -12,7 +12,9 @@
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.ComponentModel;
     using System.Linq;
+    using System.Threading;
     using System.Windows.Input;
     using System.Windows.Media;
 
@@ -39,77 +41,96 @@
                 selectedCalibration = value;
                 NotifyPropertyChanged(nameof(SelectedCalibration));
 
-                #region Change Calibration actions
-
                 TransitionerSelectedIndex = 0;
 
                 if (value != null)
                 {
-                    if (SelectedCalibration.Repeatability.ReferenceValue == null)
-                    {
-                        TransitionerRepeatabilitySelectedIndex = 0;
-                    }
-                    else
-                    {
-                        TransitionerRepeatabilitySelectedIndex = 2;
+                    DialogContent = new Views.Scales.Dialogs.ProgressIndicator();
+                    IsDialogOpened = true;
 
-                        RepeatabilityWeights = new ObservableCollection<ScaleWeight>(SelectedCalibration.Repeatability.ReferenceValue.Weights);
+                    worker.RunWorkerAsync();
+                }
+            }
+        }
 
-                        RepeatabilityTests = new ObservableCollection<ScaleRepeatabilityTest>(SelectedCalibration.Repeatability.ReferenceValue.Tests);
+        /// <summary>
+        /// Contains work for changing calibration
+        /// </summary>
+        private void ChangeCalibration(object sender, DoWorkEventArgs e)
+        {
+            if (SelectedCalibration.Repeatability.ReferenceValue == null)
+            {
+                TransitionerRepeatabilitySelectedIndex = 0;
+            }
+            else
+            {
+                TransitionerRepeatabilitySelectedIndex = 2;
 
-                        RepeatabilityChartValues = new ChartValues<double>(SelectedCalibration.Repeatability.ReferenceValue.Tests.Select(test => test.StandardDeviation));
-                        RepeatabilityChartLabels = new ObservableCollection<string>(SelectedCalibration.Repeatability.ReferenceValue.Tests.Select(test => test.Date.ToString("MMM yy")));
-                        RepeatabilityChartMapper = Mappers.Xy<double>().X((item, index) => index).Y(item => item).Fill(item => item > SelectedCalibration.Repeatability.ReferenceValue.MaxValidValue ? new SolidColorBrush(Color.FromRgb(238, 83, 80)) : null).Stroke(item => item > SelectedCalibration.Repeatability.ReferenceValue.MaxValidValue ? new SolidColorBrush(Color.FromRgb(238, 83, 80)) : null);
+                RepeatabilityWeights = new ObservableCollection<ScaleWeight>(SelectedCalibration.Repeatability.ReferenceValue.Weights);
 
-                        RepeatabilityChartAxisXMaxValue = RepeatabilityTests.Count;
+                RepeatabilityTests = new ObservableCollection<ScaleRepeatabilityTest>(SelectedCalibration.Repeatability.ReferenceValue.Tests);
 
-                        PrintRepeatabilityDataGridStartTest = 1;
-                        PrintRepeatabilityDataGridEndTest = RepeatabilityTests.Count;
+                RepeatabilityChartValues = new ChartValues<double>(SelectedCalibration.Repeatability.ReferenceValue.Tests.Select(test => test.StandardDeviation));
+                RepeatabilityChartLabels = new ObservableCollection<string>(SelectedCalibration.Repeatability.ReferenceValue.Tests.Select(test => test.Date.ToString("MMM yy")));
+                RepeatabilityChartMapper = Mappers.Xy<double>().X((item, index) => index).Y(item => item).Fill(item => item > SelectedCalibration.Repeatability.ReferenceValue.MaxValidValue ? new SolidColorBrush(Color.FromRgb(238, 83, 80)) : null).Stroke(item => item > SelectedCalibration.Repeatability.ReferenceValue.MaxValidValue ? new SolidColorBrush(Color.FromRgb(238, 83, 80)) : null);
 
-                        if (RepeatabilityTests.Count == 0)
-                        {
-                            RepeatabilityChartStartDate = DateTime.Now;
-                            RepeatabilityChartEndDate = DateTime.Now;
-                        }
-                        else
-                        {
-                            RepeatabilityChartStartDate = SelectedCalibration.Repeatability.ReferenceValue.Tests.First().Date;
-                            RepeatabilityChartEndDate = SelectedCalibration.Repeatability.ReferenceValue.Tests.Last().Date;
-                        }
-                    }
+                RepeatabilityChartAxisXMaxValue = RepeatabilityTests.Count;
 
-                    if (SelectedCalibration.Accuracy.ReferenceValue == null)
-                    {
-                        TransitionerAccuracySelectedIndex = 0;
-                    }
-                    else
-                    {
-                        TransitionerAccuracySelectedIndex = 2;
+                PrintRepeatabilityDataGridStartTest = 1;
+                PrintRepeatabilityDataGridEndTest = RepeatabilityTests.Count;
 
-                        AccuracyTests = new ObservableCollection<ScaleAccuracyTest>(SelectedCalibration.Accuracy.ReferenceValue.Tests);
-
-
-                        SelectedAccuracyReferenceValueMeasurement = SelectedCalibration.Accuracy.ReferenceValue.Measurements.First();
-                        SelectedAccuracyTestMeasurement = SelectedCalibration.Accuracy.ReferenceValue.Measurements.First();
-                        AccuracyChartMeasurement = SelectedCalibration.Accuracy.ReferenceValue.Measurements.First();
-
-                        AccuracyChartAxisXMaxValue = AccuracyTests.Count;
-
-                        AccuracyChartLabels = new ObservableCollection<string>(AccuracyTests.Select(test => test.Number.ToString()));
-
-                        if (AccuracyTests.Count != 0)
-                        {
-                            AccuracyChartStartNumber = AccuracyTests.First().Number;
-                            AccuracyChartEndNumber = AccuracyTests.Last().Number;
-                        }
-
-                        PrintAccuracyDataGridStartTest = 1;
-                        PrintAccuracyDataGridEndTest = AccuracyTests.Count;
-                    }
+                if (RepeatabilityTests.Count == 0)
+                {
+                    RepeatabilityChartStartDate = DateTime.Now;
+                    RepeatabilityChartEndDate = DateTime.Now;
+                }
+                else
+                {
+                    RepeatabilityChartStartDate = SelectedCalibration.Repeatability.ReferenceValue.Tests.First().Date;
+                    RepeatabilityChartEndDate = SelectedCalibration.Repeatability.ReferenceValue.Tests.Last().Date;
                 }
 
-                #endregion
+                Thread.Sleep(2000);
             }
+
+            if (SelectedCalibration.Accuracy.ReferenceValue == null)
+            {
+                TransitionerAccuracySelectedIndex = 0;
+            }
+            else
+            {
+                TransitionerAccuracySelectedIndex = 2;
+
+                AccuracyTests = new ObservableCollection<ScaleAccuracyTest>(SelectedCalibration.Accuracy.ReferenceValue.Tests);
+
+
+                SelectedAccuracyReferenceValueMeasurement = SelectedCalibration.Accuracy.ReferenceValue.Measurements.First();
+                SelectedAccuracyTestMeasurement = SelectedCalibration.Accuracy.ReferenceValue.Measurements.First();
+                AccuracyChartMeasurement = SelectedCalibration.Accuracy.ReferenceValue.Measurements.First();
+
+                AccuracyChartAxisXMaxValue = AccuracyTests.Count;
+
+                AccuracyChartLabels = new ObservableCollection<string>(AccuracyTests.Select(test => test.Number.ToString()));
+
+                if (AccuracyTests.Count != 0)
+                {
+                    AccuracyChartStartNumber = AccuracyTests.First().Number;
+                    AccuracyChartEndNumber = AccuracyTests.Last().Number;
+                }
+
+                PrintAccuracyDataGridStartTest = 1;
+                PrintAccuracyDataGridEndTest = AccuracyTests.Count;
+            }
+        }
+
+        /// <summary>
+        /// Closes progress indicator after calibration change is finished
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CalibrationChangeCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            IsDialogOpened = false;
         }
 
         /// <summary>

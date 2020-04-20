@@ -11,6 +11,7 @@
     using InstrumentManagement.Windows.DialogHandler;
     using MaterialDesignThemes.Wpf;
     using System.Collections.ObjectModel;
+    using System.ComponentModel;
     using System.Linq;
     using System.Windows.Controls;
     using System.Windows.Input;
@@ -21,6 +22,8 @@
     public partial class ScaleWindowViewModel : ViewModel, IDialogHostViewModel
     {
         private readonly BusinessContext context;
+
+        private BackgroundWorker worker;
 
         private Scale scale;
 
@@ -121,11 +124,17 @@
 
             MessageQueue = new SnackbarMessageQueue();
 
+            worker = new BackgroundWorker();
+            worker.DoWork += ChangeCalibration;
+            worker.RunWorkerCompleted += CalibrationChangeCompleted;
+
             Calibrations = new ObservableCollection<ScaleCalibration>(SelectedRange.Calibrations);
             SelectedCalibration = SelectedRange.Calibrations.LastOrDefault();
 
             Account = account;
         }
+
+        
 
         #region IDialogHostViewModel Members
 
