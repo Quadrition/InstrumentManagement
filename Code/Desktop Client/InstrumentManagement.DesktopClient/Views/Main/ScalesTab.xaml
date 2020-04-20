@@ -100,7 +100,8 @@
                                             <RowDefinition Height="*"/>
                                         </Grid.RowDefinitions>
 
-                                        <Image Grid.RowSpan="7" Margin="0 0 50 0" MaxHeight="150" MaxWidth="150" Source="C:\Users\Petar\Desktop\fins.png"  />
+                                        <!--<Image Grid.RowSpan="7" Margin="0 0 50 0" MaxHeight="150" MaxWidth="150" Source="C:\Users\Petar\Desktop\fins.png"  />-->
+                                        <materialDesign:PackIcon Grid.RowSpan="7" Height="150" Width="150" Kind="Scale" VerticalAlignment="Center" />
                                         <TextBlock Style="{StaticResource MaterialDesignBody2TextBlock}" Grid.Column="1" VerticalAlignment="Center" Margin="20 7 10 7" FontWeight="Bold" Text="Proizvođač:" />
                                         <TextBlock Style="{StaticResource MaterialDesignBody2TextBlock}" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" Margin="20 7 10 7" FontWeight="Bold" Text="Tip:" />
                                         <TextBlock Style="{StaticResource MaterialDesignBody2TextBlock}" Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" Margin="20 7 10 7" FontWeight="Bold" Text="Serijski broj:" />

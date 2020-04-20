@@ -89,8 +89,6 @@
                     RepeatabilityChartStartDate = SelectedCalibration.Repeatability.ReferenceValue.Tests.First().Date;
                     RepeatabilityChartEndDate = SelectedCalibration.Repeatability.ReferenceValue.Tests.Last().Date;
                 }
-
-                Thread.Sleep(2000);
             }
 
             if (SelectedCalibration.Accuracy.ReferenceValue == null)
@@ -130,7 +128,8 @@
         /// <param name="e"></param>
         private void CalibrationChangeCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            IsDialogOpened = false;
+            if (IsDialogOpened)
+                IsDialogOpened = false;
         }
 
         /// <summary>
