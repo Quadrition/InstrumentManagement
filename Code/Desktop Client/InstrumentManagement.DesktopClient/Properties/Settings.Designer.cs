@@ -22,5 +22,17 @@ namespace InstrumentManagement.DesktopClient.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ApplicationInfo {
+            get {
+                return ((string)(this["ApplicationInfo"]));
+            }
+            set {
+                this["ApplicationInfo"] = value;
+            }
+        }
     }
 }

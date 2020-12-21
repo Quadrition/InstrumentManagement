@@ -70,6 +70,8 @@
                     Password = "admin"
                 });
             }
+
+            Info = Properties.Settings.Default.ApplicationInfo;
         }
 
         #region IDialogHostViewModel Members
@@ -102,6 +104,8 @@
 
                             case EditInfoDialogViewModel editMainWindowInfoDialogViewModel:
                                 Info = editMainWindowInfoDialogViewModel.Info;
+                                Properties.Settings.Default.ApplicationInfo = Info;
+                                Properties.Settings.Default.Save();
                                 break;
 
                             case NewScaleDialogViewModel newScaleDialogViewModel:
