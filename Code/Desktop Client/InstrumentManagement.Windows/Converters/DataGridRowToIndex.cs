@@ -6,6 +6,9 @@
     using System.Windows.Data;
     using System.Windows.Markup;
 
+    /// <summary>
+    /// Converter that converts a data grid row to it's index value
+    /// </summary>
     public class DataGridRowToIndexConverter : MarkupExtension, IValueConverter
     {
         static DataGridRowToIndexConverter converter;

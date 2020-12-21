@@ -4,6 +4,9 @@
     using System;
     using System.Globalization;
 
+    /// <summary>
+    /// Converter that converts a boolean value to serbian language
+    /// </summary>
     public class BoolTranslationConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)

@@ -4,6 +4,9 @@
     using System.Globalization;
     using System.Windows.Controls;
 
+    /// <summary>
+    /// Custom rule which checks if user input is float value or empty
+    /// </summary>
     public class EmptyFloatValidationRule : ValidationRule
     {
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)

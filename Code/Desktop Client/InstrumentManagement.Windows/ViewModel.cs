@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-
-namespace InstrumentManagement.Windows
+﻿namespace InstrumentManagement.Windows
 {
+    using System;
+    using System.Collections.ObjectModel;
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+    using System.Linq;
+
     /// <summary>
     /// Base class for a ViewModel in the MVVM pattern.
     /// </summary>
