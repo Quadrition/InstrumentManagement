@@ -16,7 +16,7 @@
     <materialDesign:DialogHost IsOpen="{Binding IsDialogOpened}" DialogContent="{Binding DialogContent}" SnackbarMessageQueue="{Binding ElementName=ScaleSnackbar, Path=MessageQueue}">
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="4*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
@@ -25,7 +25,7 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <Image Source="{Binding Scale.LocationOfImage}" Margin="10" />
+            <!-- <Image Source="{Binding Scale.LocationOfImage}" /> -->
 
             <materialDesign:Card Background="{StaticResource PrimaryHueDarkBrush}" Margin="5" Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                 <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">

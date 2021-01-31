@@ -19,7 +19,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="5*"/>
             </Grid.RowDefinitions>
-            <Menu IsMainMenu="True" Margin="10">
+            <Menu IsMainMenu="True" Margin="10" Background="White">
                 <MenuItem Header="Fajl" Icon="{materialDesign:PackIcon Kind=File}">
                     <MenuItem Header="Promeni logo" Icon="{materialDesign:PackIcon Kind=Image}"/>
                 </MenuItem>
